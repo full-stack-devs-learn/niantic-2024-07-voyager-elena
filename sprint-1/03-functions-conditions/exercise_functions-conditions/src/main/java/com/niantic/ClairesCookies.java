@@ -1,9 +1,8 @@
 package com.niantic;
 
-public class ClairesCookies
-{
-    @SuppressWarnings("unused") 
-    private final double TaxRate = .0575;
+public class ClairesCookies {
+    @SuppressWarnings("unused")
+    private final double TAX_RATE = .0575;
 
     /*
      * Claire's cookies cost $12.95 a dozen.
@@ -19,9 +18,9 @@ public class ClairesCookies
      * calculateSubtotal(2) -> 25.90
      * calculateSubtotal(5) -> 64.75
      */
-    public double calculateSubtotal(int quantity)
-    {
-        return 0;
+    public double calculateSubtotal(int quantity) {
+        double basePricePerDozen = 12.95;
+        return basePricePerDozen * quantity;
     }
 
     /*
@@ -41,9 +40,8 @@ public class ClairesCookies
      * calculateTotal(2) -> 27.39
      * calculateTotal(5) -> 68.47
      */
-    public double calculateTotal(int quantity)
-    {
-        return 0;
+    public double calculateTotal(int quantity) {
+        return calculateSubtotal(quantity) * (1 + TAX_RATE);
     }
 
     /*
@@ -73,9 +71,22 @@ public class ClairesCookies
      * calculateQuickOrder(3,1,0) -> 55.84
      * calculateQuickOrder(2,0,2) -> 61.12
      */
-    public double calculateQuickOrder(int snickerDozen, int chocolateDozen, int frostedDozen)
-    {
-        return 0;
+    public double calculateQuickOrder(int snickerDozen, int chocolateDozen, int frostedDozen) {
+        double snickerDoodlesPrice = 12.95;
+        double chocolateChipPrice = 13.95;
+        double frostedChocolateChipPrice = 15.95;
+
+        double snickerDoodlesSubtotal = snickerDoodlesPrice * snickerDozen;
+        double chocolateChipSubtotal = chocolateChipPrice * chocolateDozen;
+        double frostedChocolateChipSubtotal = frostedChocolateChipPrice * frostedDozen;
+
+        double orderSubtotal = snickerDoodlesSubtotal +
+                chocolateChipSubtotal +
+                frostedChocolateChipSubtotal;
+
+        double orderTotal = orderSubtotal * (1 + TAX_RATE);
+
+        return orderTotal;
     }
 
 
@@ -101,9 +112,25 @@ public class ClairesCookies
      * calculateCustomOrder (3, false, true) -> 47.43
      * calculateCustomOrder (5, true, false) -> 73.76
      */
-    public double calculateCustomOrder (int quantity, boolean hasChocolateChips, boolean hasFrosting)
-    {
-        return 0;
+    public double calculateCustomOrder(int quantity, boolean hasChocolateChips, boolean hasFrosting) {
+        double chocolateChipsPrice = 1.00;
+        double frostingPrice = 2.00;
+
+        double baseSubtotal = calculateSubtotal(quantity);
+        double additionalCost = 0;
+
+        if (hasChocolateChips) {
+            additionalCost += quantity * chocolateChipsPrice;
+        }
+
+        if (hasFrosting) {
+            additionalCost += quantity * frostingPrice;
+        }
+
+        double orderSubtotal = baseSubtotal + additionalCost;
+        double orderTotal = orderSubtotal * (1 + TAX_RATE);
+
+        return orderTotal;
     }
 
 }

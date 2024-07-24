@@ -1,7 +1,6 @@
 package com.niantic;
 
-public class BackyardBasketball
-{
+public class BackyardBasketball {
     /*
      * Teams that play in the backyard league want to be able
      * to calculate their winning percentage.
@@ -22,11 +21,11 @@ public class BackyardBasketball
      * calculateWinningPercentage(5, 10) -> 33
      *
      */
-    public int calculateWinningPercentage(int gamesWon, int gamesLost)
-    {
-        return 0;
+    public int calculateWinningPercentage(int gamesWon, int gamesLost) {
+        int gamesTotal = gamesWon + gamesLost;
+        int winningPercentage = (int) Math.round((double) gamesWon / gamesTotal * 100);
+        return winningPercentage;
     }
-
 
     /*
      * The calculatePointsScored function should calculate
@@ -41,9 +40,17 @@ public class BackyardBasketball
      * calculatePointsScored(67, 15, false) -> 20
      *
      */
-    public int calculatePointsScored(int shotPercentage, int shotsTaken, boolean isThree)
-    {
-        return 0;
+    public int calculatePointsScored(int shotPercentage, int shotsTaken, boolean isThree) {
+        int successfulShots = (int) Math.round(shotsTaken * shotPercentage / 100.00);
+        int pointsPerShot = 2;
+
+        if (isThree) {
+            pointsPerShot = 3;
+        }
+
+        int pointsScored = successfulShots * pointsPerShot;
+
+        return pointsScored;
     }
 
 
@@ -67,8 +74,24 @@ public class BackyardBasketball
      * calculateShotsRequired(67, 24, false) -> 18     *
      *
      */
-    public int calculateShotsRequired(int shotPercentage, int desiredScore, boolean isThree)
-    {
-        return 0;
+    public int calculateShotsRequired(int shotPercentage, int desiredScore, boolean isThree) {
+        int pointsPerShot = 2;
+        int neededScore;
+
+        if (isThree) {
+            pointsPerShot = 3;
+        }
+
+        // make neededScore divisible by pointsPerShort
+        if (desiredScore % pointsPerShot == 0) {
+            neededScore = desiredScore;
+        } else {
+            neededScore = desiredScore + (pointsPerShot - desiredScore % pointsPerShot);
+        }
+
+        double averagePointsPerShot = pointsPerShot * shotPercentage / 100.0;
+        int shotsRequired = (int) Math.round(neededScore / averagePointsPerShot);
+
+        return shotsRequired;
     }
 }

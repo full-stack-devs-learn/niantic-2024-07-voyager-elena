@@ -1,7 +1,9 @@
 package com.niantic;
 
-public class ElliotsYardCare
-{
+public class ElliotsYardCare {
+    private final double costPer1000Trimming = 3.00;
+    private final double costPer1000NoTrimming = 2.50;
+
     /*
      * Elliot has gas and material costs to operate his business.
      *
@@ -19,9 +21,13 @@ public class ElliotsYardCare
      * calculateCost(100, 50, true) -> 15.00
      * calculateCost(75, 75, false) -> 16.88
      */
-    public double  calculateCost(int width, int length, boolean  isTrimming)
-    {
-        return 0;
+    private int calculateArea (int width, int length) {
+        return width * length;
+    }
+
+    public double calculateCost(int width, int length, boolean isTrimming) {
+        int area = calculateArea(width, length);
+        return isTrimming ? costPer1000Trimming * area / 1000 : costPer1000NoTrimming * area / 1000;
     }
 
     /*
@@ -39,9 +45,8 @@ public class ElliotsYardCare
      * calculateProfit(75, 75, true, 50) -> 33.12
      * calculateProfit(150, 100, true, 75) -> 30
      */
-    public double  calculateProfit(int width, int length, boolean  isTrimming, int amountCharged)
-    {
-        return 0;
+    public double calculateProfit(int width, int length, boolean isTrimming, int amountCharged) {
+        return amountCharged - calculateCost(width, length, isTrimming);
     }
 
     /*
@@ -60,9 +65,13 @@ public class ElliotsYardCare
      * calculateTime(75, 75, true) -> 4.22
      * calculateTime(100, 75, true) -> 5.62
      */
-    public double calculateTime(int width, int length, boolean  isTrimming)
-    {
-        return 0;
+    public double calculateTime(int width, int length, boolean isTrimming) {
+        double timeSpend1000NoTrimming = 0.5;
+        double timeSpend1000Trimming = 0.75;
+
+        int area = calculateArea(width, length);
+
+        return isTrimming ? timeSpend1000Trimming * area / 1000 : timeSpend1000NoTrimming * area / 1000;
     }
 
     /*
@@ -91,8 +100,26 @@ public class ElliotsYardCare
      * calculatePrice(75, 75, true) -> 75
      * calculatePrice(100, 75, true) -> 100
      */
-    public double  calculatePrice(int width, int length, boolean  isTrimming)
-    {
-        return 0;
+    public double calculatePrice(int width, int length, boolean isTrimming) {
+        double desiredProfitPerHour = 10;
+        double minimumPrice = 25;
+        double priceStep = 25;
+
+        double totalCost = calculateCost(width, length, isTrimming);
+        double timeSpend = calculateTime(width, length, isTrimming);
+        double desiredTotalProfit = desiredProfitPerHour * timeSpend;
+        double price = desiredTotalProfit + totalCost;
+
+        if (price < minimumPrice) {
+            price = minimumPrice;
+        } else {
+            // round up to nearest number that is divisible by $25
+            if (price % priceStep > 0) {
+                price = Math.ceil(price / priceStep) * priceStep;
+            }
+        }
+
+
+        return price;
     }
 }
