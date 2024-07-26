@@ -6,6 +6,7 @@ import org.junit.jupiter.params.provider.CsvSource;
 
 import java.util.Arrays;
 import java.util.concurrent.atomic.AtomicInteger;
+import java.util.stream.IntStream;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -76,6 +77,7 @@ class ExercisesTest
     {
         // arrange
         int expectedSize = 50;
+        int[] expectedArray = IntStream.range(1, 51).toArray();
 
         // act
         int[] actual = exercises.oneToFifty();
@@ -87,6 +89,7 @@ class ExercisesTest
         assertEquals(expectedSize,actual.length, "Because the function should have created the correct array size");
         assertEquals(1, actual[0], "Because the array should start with 1");
         assertEquals(50, actual[49], "Because the array should end with 50");
+        assertArrayEquals(expectedArray, actual);
 
     }
 
@@ -95,6 +98,8 @@ class ExercisesTest
     void test04_evenNumbers_ShouldReturn_AllEvenNumbers_From1to200()
     {
         // arrange
+        int[] expectedArray = IntStream.range(2, 201).filter(num -> num % 2 == 0).toArray();
+
         // act
         var actual = exercises.evenNumbers();
 
@@ -105,7 +110,8 @@ class ExercisesTest
         assertEquals(100, actual.length, "Because there should be 100 even numbers in the given range (1 - 200)");
         assertEquals(2, actual[0], "Because the array should start with 2");
         assertEquals(200, actual[99], "Because the array should end with 2000");
-
+        // found typo here :) Array should end with 200, not 2000
+        assertArrayEquals(expectedArray, actual);
     }
 
     @ParameterizedTest
