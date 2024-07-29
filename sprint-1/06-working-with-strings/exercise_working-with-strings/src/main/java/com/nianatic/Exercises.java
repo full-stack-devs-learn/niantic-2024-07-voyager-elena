@@ -1,7 +1,10 @@
 package com.nianatic;
 
-public class Exercises
-{
+import java.util.Arrays;
+
+public class Exercises {
+    private String customerCloseTag;
+
     /*
      * In this function you need to convert a word
      * either to all upper case letters or all
@@ -16,9 +19,8 @@ public class Exercises
      * changeCase("PARTY", true) => PARTY
      *
      */
-    public String changeCase(String word, boolean toUpperCase)
-    {
-        return null;
+    public String changeCase(String word, boolean toUpperCase) {
+        return toUpperCase ? word.toUpperCase() : word.toLowerCase();
     }
 
     /*
@@ -47,9 +49,10 @@ public class Exercises
      * createHtml("Bold text", "strong") => <strong>Bold text</strong>
      *
      */
-    public String createHtml(String content, String elementName)
-    {
-        return null;
+    public String createHtml(String content, String elementName) {
+        String openTag = "<" + elementName + ">";
+        String closeTag = "</" + elementName + ">";
+        return openTag + content + closeTag;
     }
 
     /*
@@ -69,9 +72,11 @@ public class Exercises
      * moreHtml("", "p") => <p />
      *
      */
-    public String moreHtml(String content, String elementName)
-    {
-        return null;
+    public String moreHtml(String content, String elementName) {
+        if (content.length() == 0) {
+            return "<" + elementName + " />";
+        }
+        return createHtml(content, elementName);
     }
 
     /*
@@ -92,9 +97,18 @@ public class Exercises
      * createXml(1, "Belinda Carter") => <customer><id>1</id><name>Belinda Carter</name></customer>
      *
      */
-    public String createXml(int id, String name)
-    {
-        return  null;
+    public String createXml(int id, String name) {
+        String customerOpenTag = "<customer>";
+        String customerCloseTag = "</customer>";
+        String idOpenTag = "<id>";
+        String idCloseTag = "</id>";
+        String nameOpenTag = "<name>";
+        String nameCloseTag = "</name>";
+
+        return customerOpenTag +
+                idOpenTag + id + idCloseTag +
+                nameOpenTag + name + nameCloseTag +
+                customerCloseTag;
     }
 
     /*
@@ -129,9 +143,24 @@ public class Exercises
      *                                      </customer>
      *
      */
-    public String formattedXml(int id, String name)
-    {
-        return null;
+    public String formattedXml(int id, String name) {
+        String customerOpenTag = "<customer>";
+        String customerCloseTag = "</customer>";
+        String idOpenTag = "<id>";
+        String idCloseTag = "</id>";
+        String nameOpenTag = "<name>";
+        String nameCloseTag = "</name>";
+        String indent = "  ";
+        String newLine = "\n";
+
+        String resultSting = customerOpenTag + newLine +
+                indent + idOpenTag + id + idCloseTag + newLine +
+                indent + nameOpenTag + name + nameCloseTag + newLine +
+                customerCloseTag;
+
+//        System.out.println(resultSting);
+
+        return (resultSting);
     }
 
     /*
@@ -153,9 +182,19 @@ public class Exercises
      * formatFullName("Glen", "Carter", "Williamson", "Jr") => Glen Carter Williamson, Jr
      *
      */
-    public String formatFullName(String firstName, String middleName, String lastName, String suffix)
-    {
-        return  null;
+    public String formatFullName(String firstName, String middleName, String lastName, String suffix) {
+        String fullName = firstName;
+
+        if (!middleName.isEmpty()) {
+            fullName += " " + middleName;
+        }
+        fullName += " " + lastName;
+        if (!suffix.isEmpty()) {
+            fullName += ", " + suffix;
+        }
+
+        return fullName;
+
     }
 
     /*
@@ -184,8 +223,27 @@ public class Exercises
      * createUserName("Glen Williamson, III") => glen.williamson
      *
      */
-    public String createUserName(String fullName)
-    {
-        return null;
+    public String createUserName(String fullName) {
+        // return "Hello";
+
+        // to lower case
+        fullName = fullName.toLowerCase();
+
+        // remove suffix
+        String fullNameWithoutSuffix = fullName.split(", ")[0];
+        String[] nameArray = fullNameWithoutSuffix.split(" ");
+
+        System.out.println(Arrays.toString(nameArray));
+
+        String firstName = nameArray[0];
+        String lastName = nameArray[nameArray.length - 1];
+
+        if (nameArray.length == 3) {
+            // we have middle name
+            char middleNameFirstLetter = nameArray[1].charAt(0);
+            return firstName + '.' + middleNameFirstLetter + "." + lastName;
+        }
+
+        return firstName + '.' + lastName;
     }
 }

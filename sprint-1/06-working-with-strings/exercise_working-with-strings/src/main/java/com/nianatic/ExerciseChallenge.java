@@ -1,7 +1,6 @@
 package com.nianatic;
 
-public class ExerciseChallenge
-{
+public class ExerciseChallenge {
     /*
      * Your companies website displays the name
      * of each of your employees. But the name
@@ -24,9 +23,27 @@ public class ExerciseChallenge
      * reformatName("Miguel Bennett Jr., MBA")  => Bennett, Miguel, Jr., MBA
      *
      */
-    public String reformatName(String fullName)
-    {
-        return null;
+    public String reformatName(String fullName) {
+        String[] nameArray = fullName.split(" ");
+        String firstName = nameArray[0];
+        String lastName = nameArray[1];
+
+        String formattedName = lastName;
+        if (formattedName.endsWith(",")) {
+            formattedName += " " + firstName;
+        } else {
+            formattedName += ", " + firstName;
+        }
+
+        for (int i = 2; i < nameArray.length; i++) {
+            if (formattedName.endsWith(",")) {
+                formattedName += " " + nameArray[i];
+            } else {
+                formattedName += ", " + nameArray[i];
+            }
+        }
+
+        return formattedName;
     }
 
     /*
@@ -48,9 +65,18 @@ public class ExerciseChallenge
      * createJSON(1, "Belinda Carter") => { "id": 1, "name": "Belinda Carter"}
      *
      */
-    public String createJSON(int id, String name)
-    {
-        return  null;
+    public String createJSON(int id, String name) {
+        String openCurlyBrace = "{ ";
+        String closeCurlyBrace = " }";
+        String idKey = "\"id\": ";
+        String idValue = "" + id;
+        String nameKey = "\"name\": ";
+        String nameValue = "\"" + name + "\"";
+
+        return openCurlyBrace +
+                idKey + idValue + ", " +
+                nameKey + nameValue +
+                closeCurlyBrace;
     }
 
 }
