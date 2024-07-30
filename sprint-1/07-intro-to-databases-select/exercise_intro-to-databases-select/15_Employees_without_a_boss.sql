@@ -6,3 +6,8 @@ USE northwind;
 
 -- Expected: 1 row
 
+SELECT CONCAT(first_name, ' ', last_Name) as name
+	, title
+	-- , reports_to
+FROM employees
+WHERE reports_to IS NULL;

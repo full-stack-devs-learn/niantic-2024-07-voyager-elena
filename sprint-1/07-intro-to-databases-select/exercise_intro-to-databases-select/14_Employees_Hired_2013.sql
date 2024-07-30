@@ -6,3 +6,8 @@ USE northwind;
 
 -- Expected: 3 rows
 
+SELECT CONCAT(first_name, ' ', last_Name) as name
+	, title
+  --   , hire_date
+FROM employees
+WHERE YEAR(hire_date) = 2013;
