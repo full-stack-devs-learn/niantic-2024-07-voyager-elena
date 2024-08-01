@@ -56,11 +56,11 @@ SET @postal_code = '10013';
 SET @country = 'USA';
 
 -- order info
-SET @product_id1 = 10;
-SET @product_id2 = 20;
-SET @product_id3 = 30;
-SET @product_id4 = 40;
-SET @product_id5 = 50;
+SET @product_name1 = 'Ikura';
+SET @product_name2 = 'Bowflex Adjustable Dumbbells';
+SET @product_name3 = 'Nord-Ost Matjeshering';
+SET @product_name4 = 'Boston Crab Meat';
+SET @product_name5 = 'Valkoinen suklaa';
 
 SET @order_date = CURDATE();
 SET @quantity1 = 1;
@@ -69,12 +69,32 @@ SET @quantity3 = 3;
 SET @quantity4 = 4;
 SET @quantity5 = 5;
 
+-- get products ids
+SELECT @product_id1 := product_id
+FROM products
+WHERE product_name = @product_name1;
 
+SELECT @product_id2 := product_id
+FROM products
+WHERE product_name = @product_name2;
+
+SELECT @product_id3 := product_id
+FROM products
+WHERE product_name = @product_name3;
+
+SELECT @product_id4 := product_id
+FROM products
+WHERE product_name = @product_name4;
+
+SELECT @product_id5 := product_id
+FROM products
+WHERE product_name = @product_name5;
+
+-- get products prices
 SELECT @unit_price1 := unit_price
 FROM products
 WHERE product_id = @product_id1;
 
--- is there a difference bewteen the way above and this way of getting price1?
 -- SET @unit_price1 = (SELECT unit_price
 -- FROM products
 -- WHERE product_id = @product_id1);
