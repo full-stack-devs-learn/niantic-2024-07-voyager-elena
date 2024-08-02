@@ -5,5 +5,7 @@
 
 SET @category_name = 'Education';
 
+USE budget;
+
 INSERT INTO categories (category_name)
 VALUES (@category_name);

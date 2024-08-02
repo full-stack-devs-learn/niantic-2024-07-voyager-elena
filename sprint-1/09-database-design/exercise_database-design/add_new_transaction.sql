@@ -18,6 +18,8 @@ SET @notes = 'Breakfast with friends';
 SET @amount = '25.95';
 
 
+USE budget;
+
 -- get user_id
 SELECT @user_id := user_id
 FROM users
