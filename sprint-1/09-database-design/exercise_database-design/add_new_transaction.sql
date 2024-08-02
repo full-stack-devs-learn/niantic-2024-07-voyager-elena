@@ -54,7 +54,7 @@ VALUES
 );
 
 
--- I tryed to implement some logic here...
+-- I tried to implement some logic here...
 -- if there is such vendor in the database = we found vendor_id 
 -- then we can add new transaction
 -- the code below is not working, it look like we need procedures to use IF statements in MySQL :(
