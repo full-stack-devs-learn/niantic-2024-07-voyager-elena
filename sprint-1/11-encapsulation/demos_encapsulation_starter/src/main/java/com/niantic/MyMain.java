@@ -1,11 +1,11 @@
 package com.niantic;
 
-import com.niantic.northwind_models.Category;
+import com.niantic.northwind_models.MyCategory;
 
 public class MyMain {
     public static void main(String[] args) {
-        Category cat = new Category();
-        Category category = new Category(1, "Beverages", "Anything related to drinks");
+        MyCategory cat = new MyCategory();
+        MyCategory category = new MyCategory(1, "Beverages", "Anything related to drinks");
 //        category.setId(1);
 //        category.setName("Beverages");
 //        category.setDescription("Anything related to drinks");
