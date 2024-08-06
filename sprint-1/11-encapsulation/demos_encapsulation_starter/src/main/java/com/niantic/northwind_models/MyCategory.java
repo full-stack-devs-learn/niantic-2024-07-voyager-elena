@@ -1,13 +1,13 @@
 package com.niantic.northwind_models;
 
-public class MyCategory {
+public class Category {
     private int id;
     private String name;
     private String description;
 
-    public MyCategory () {}
+    public Category () {}
 
-    public MyCategory(int id, String name, String description) {
+    public Category(int id, String name, String description) {
         this.id = id;
         this.name = name;
         this.description = description;
