@@ -31,16 +31,17 @@ public class CategoryDao {
                 SELECT category_id
                     , category_name
                     , description
-                FROM categories
+                FROM categories;
                 """;
 
         SqlRowSet row = jdbcTemplate.queryForRowSet(sql);
 
         while (row.next()) {
-            int categoryId = row.getInt("category_id");
-            String categoryName = row.getString("category_name");
-            String description = row.getString("description");
-            categories.add(new Category(categoryId, categoryName, description));
+            categories.add(new Category(
+                    row.getInt("category_id"),
+                    row.getString("category_name"),
+                    row.getString("description")
+            ));
         }
 
         return categories;
