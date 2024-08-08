@@ -5,7 +5,7 @@ import java.util.ArrayList;
 public class SubCategory {
     private int subCategoryId;
     private int categoryId;
-    private String name;
+    private String subCategoryName;
     private String description;
 
     private ArrayList<Transaction> transactions;
@@ -13,10 +13,10 @@ public class SubCategory {
     public SubCategory() {
     }
 
-    public SubCategory(int subCategoryId, int categoryId, String name, String description) {
+    public SubCategory(int subCategoryId, int categoryId, String subCategoryName, String description) {
         this.subCategoryId = subCategoryId;
         this.categoryId = categoryId;
-        this.name = name;
+        this.subCategoryName = subCategoryName;
         this.description = description;
     }
 
@@ -36,12 +36,12 @@ public class SubCategory {
         this.categoryId = categoryId;
     }
 
-    public String getName() {
-        return name;
+    public String getSubCategoryName() {
+        return subCategoryName;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setSubCategoryName(String subCategoryName) {
+        this.subCategoryName = subCategoryName;
     }
 
     public String getDescription() {
