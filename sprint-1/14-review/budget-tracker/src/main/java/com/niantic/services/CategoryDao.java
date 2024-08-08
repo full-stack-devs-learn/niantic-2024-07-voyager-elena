@@ -28,7 +28,9 @@ public class CategoryDao {
         ArrayList<Category> categories = new ArrayList<>();
 
         String sql = """
-                SELECT category_id, category_name, description
+                SELECT category_id
+                    , category_name
+                    , description
                 FROM categories
                 """;
 
