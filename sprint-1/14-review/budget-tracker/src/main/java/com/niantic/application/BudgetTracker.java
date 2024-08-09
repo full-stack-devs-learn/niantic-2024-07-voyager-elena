@@ -141,24 +141,12 @@ public class BudgetTracker {
         if (user != null) {
             System.out.println("User ID: " + user.getUserId());
             ArrayList<Transaction> transactions = TRANSACTION_DAO.getTransactionsByUser(user.getUserId());
-            displayTransactionsByUserReport(transactions, userName);
+            displayTransactionsReport(transactions, "made by " + userName);
         } else {
-            System.out.println("Sorry, user  " + userName + " was not found");
+            System.out.println("Sorry, user " + userName + " was not found");
         }
 
         waitForUser();
-    }
-
-    private void displayTransactionsByUserReport(ArrayList<Transaction> transactions, String userName) {
-        if (transactions.isEmpty()) {
-            System.out.println("Sorry, there are no transactions made by  " + userName);
-            return;
-        }
-        System.out.println(transactions.size() + " transactions were found");
-        System.out.println("-".repeat(50));
-        System.out.printf("%-10s %15s        %s\n", "Date", "Amount($)", "Notes");
-        System.out.println("-".repeat(50));
-        transactions.forEach(System.out::println);
     }
 
     private void getTransactionsByMonth() {
@@ -170,20 +158,8 @@ public class BudgetTracker {
         int monthNumber = getMonthNumber(monthName);
         System.out.println("Month Number: " + monthNumber);
         ArrayList<Transaction> transactions = TRANSACTION_DAO.getTransactionsByMonth(monthNumber);
-        displayTransactionsByMonthReport(transactions, monthName);
+        displayTransactionsReport(transactions, "in " + monthName);
         waitForUser();
-    }
-
-    private void displayTransactionsByMonthReport(ArrayList<Transaction> transactions, String monthName) {
-        if (transactions.isEmpty()) {
-            System.out.println("Sorry, there are no transactions in  " + monthName);
-            return;
-        }
-        System.out.println(transactions.size() + " transactions were found");
-        System.out.println("-".repeat(50));
-        System.out.printf("%-10s %15s        %s\n", "Date", "Amount($)", "Notes");
-        System.out.println("-".repeat(50));
-        transactions.forEach(System.out::println);
     }
 
     private void getTransactionsByYear() {
@@ -193,13 +169,13 @@ public class BudgetTracker {
         System.out.println("-".repeat(50));
         int year = getUserInteger("Please enter year: ");
         ArrayList<Transaction> transactions = TRANSACTION_DAO.getTransactionsByYear(year);
-        displayTransactionsByYearReport(transactions, year);
+        displayTransactionsReport(transactions, "in " + year);
         waitForUser();
     }
 
-    private void displayTransactionsByYearReport(ArrayList<Transaction> transactions, int year) {
+    private void displayTransactionsReport(ArrayList<Transaction> transactions, String message) {
         if (transactions.isEmpty()) {
-            System.out.println("Sorry, there are no transactions in " + year);
+            System.out.println("Sorry, there are no transactions " + message);
             return;
         }
         System.out.println(transactions.size() + " transactions were found");
