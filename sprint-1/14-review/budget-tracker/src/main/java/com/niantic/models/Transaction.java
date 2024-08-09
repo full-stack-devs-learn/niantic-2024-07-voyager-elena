@@ -22,6 +22,7 @@ public class Transaction {
         this.vendorId = vendorId;
         this.date = date;
         this.amount = amount;
+        this.notes = notes;
     }
 
     public int getTransactionId() {
@@ -78,5 +79,10 @@ public class Transaction {
 
     public void setNotes(String notes) {
         this.notes = notes;
+    }
+
+    @Override
+    public String toString() {
+        return String.format("%-10s %15s        %s", date.toString(), amount, notes);
     }
 }
