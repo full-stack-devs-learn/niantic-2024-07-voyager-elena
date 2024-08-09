@@ -1,8 +1,10 @@
 package com.niantic.application;
 
+import com.niantic.models.SubCategory;
 import com.niantic.models.Transaction;
 import com.niantic.models.User;
 import com.niantic.services.CategoryDao;
+import com.niantic.services.SubCategoryDao;
 import com.niantic.services.TransactionDao;
 import com.niantic.services.UserDao;
 
@@ -13,6 +15,7 @@ import java.util.Scanner;
 public class BudgetTracker {
     private final Scanner USER_INPUT = new Scanner(System.in);
     private final CategoryDao CATEGORY_DAO = new CategoryDao();
+    private final SubCategoryDao SUBCATEGORY_DAO = new SubCategoryDao();
     private final UserDao USER_DAO = new UserDao();
     private final TransactionDao TRANSACTION_DAO = new TransactionDao();
 
@@ -95,7 +98,7 @@ public class BudgetTracker {
                     break;
                 case 4:
                     // Transactions By Sub Category
-                    System.out.println("Transactions By Sub Category");
+                    getTransactionsBySubCategory();
                     break;
                 case 5:
                     // Transactions By Category
@@ -165,11 +168,37 @@ public class BudgetTracker {
     private void getTransactionsByYear() {
         System.out.println();
         System.out.println("-".repeat(50));
-        System.out.println("Transactions By Yaer");
+        System.out.println("Transactions By Year");
         System.out.println("-".repeat(50));
         int year = getUserInteger("Please enter year: ");
         ArrayList<Transaction> transactions = TRANSACTION_DAO.getTransactionsByYear(year);
         displayTransactionsReport(transactions, "in " + year);
+        waitForUser();
+    }
+
+    private void getTransactionsBySubCategory() {
+        System.out.println();
+        System.out.println("-".repeat(50));
+        System.out.println("Transactions By Sub Category");
+        System.out.println("-".repeat(50));
+        String subCategoryName = getUserString("Please enter sub category name: ");
+        // I tried to do something with that string to avoid false negative results when user
+        // types sub category in wrong case, let say in all capital letters
+        // But then I figured out that 'By default, MySQL uses a case-insensitive collation for string comparisons.
+        // This means that when MySQL compares two strings, it considers ‘A’ and ‘a’ to be the same...'
+        // (source https://www.geeksforgeeks.org/how-to-search-case-insensitive-in-a-column-using-like-wildcard-in-mysql)
+        SubCategory subCategory = SUBCATEGORY_DAO.getSubCategoryByName(subCategoryName);
+
+        if (subCategory != null) {
+            // I know that user does not need that information, about sub category id
+            // I left that print statement for testing purposes 
+            System.out.println("Sub Category ID: " + subCategory.getSubCategoryId());
+            ArrayList<Transaction> transactions = TRANSACTION_DAO.getTransactionsBySubCategory(subCategory.getSubCategoryId());
+            displayTransactionsReport(transactions, "in " + subCategoryName + " sub category");
+        } else {
+            System.out.println("Sorry, sub category " + subCategoryName + " was not found");
+        }
+
         waitForUser();
     }
 
