@@ -1,0 +1,75 @@
+@font-face {
+    font-family: PapaSans-Regular;
+    src: url('../assets/fonts/PapaSans-Regular.woff2');
+    font-weight: 400;
+}
+
+@font-face {
+    font-family: PapaSans-Italic;
+    src: url('../assets/fonts/PapaSans-Italic.woff2');
+    font-weight: 400;
+}
+
+@font-face {
+    font-family: PapaSans-Bold;
+    src: url('../assets/fonts/PapaSans-Bold.woff2');
+    font-weight: 700;
+}
+
+@font-face {
+    font-family: PapaSans-MediumCondensed;
+    src: url('../assets/fonts/PapaSans-MediumCondensed.woff2');
+    font-weight: 700;
+}
+
+:root {
+    --color-white: #ffffff;
+    --color-red: #E60000;
+    --color-green: #2d5d2a;
+    --color-light: #d1d1d1;
+    --color-gray-light: #f3f3f3;
+    --color-gray: #333333;
+    --color-black: #000000;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: PapaSans-Regular;
+    font-size: 16px;
+    line-height: 22px;
+    background-color: var(--color-white);
+    color: var(--color-black);
+}
+
+*,
+*::after,
+*::before {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+
+a {
+    text-decoration: none;
+    color: unset;
+}
+
+h1 {
+    font-family: PapaSans-MediumCondensed;
+    text-transform: uppercase;
+    font-size: 30px;
+}
+
+/* -------------------- Header -------------------- */
+
+
+
+/* -------------------- Footer -------------------- */
+
+
+/* ---------- Styles for smaller screens ----------*/
+
