@@ -91,7 +91,7 @@ public class BudgetTracker {
                     break;
                 case 3:
                     // Transactions By Year
-                    System.out.println("Transactions By Year");
+                    getTransactionsByYear();
                     break;
                 case 4:
                     // Transactions By Sub Category
@@ -177,6 +177,29 @@ public class BudgetTracker {
     private void displayTransactionsByMonthReport(ArrayList<Transaction> transactions, String monthName) {
         if (transactions.isEmpty()) {
             System.out.println("Sorry, there are no transactions in  " + monthName);
+            return;
+        }
+        System.out.println(transactions.size() + " transactions were found");
+        System.out.println("-".repeat(50));
+        System.out.printf("%-10s %15s        %s\n", "Date", "Amount($)", "Notes");
+        System.out.println("-".repeat(50));
+        transactions.forEach(System.out::println);
+    }
+
+    private void getTransactionsByYear() {
+        System.out.println();
+        System.out.println("-".repeat(50));
+        System.out.println("Transactions By Yaer");
+        System.out.println("-".repeat(50));
+        int year = getUserInteger("Please enter year: ");
+        ArrayList<Transaction> transactions = TRANSACTION_DAO.getTransactionsByYear(year);
+        displayTransactionsByYearReport(transactions, year);
+        waitForUser();
+    }
+
+    private void displayTransactionsByYearReport(ArrayList<Transaction> transactions, int year) {
+        if (transactions.isEmpty()) {
+            System.out.println("Sorry, there are no transactions in " + year);
             return;
         }
         System.out.println(transactions.size() + " transactions were found");
