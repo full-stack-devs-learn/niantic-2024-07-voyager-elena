@@ -6,6 +6,7 @@ import com.niantic.services.CategoryDao;
 import com.niantic.services.TransactionDao;
 import com.niantic.services.UserDao;
 
+import java.time.Month;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -86,7 +87,7 @@ public class BudgetTracker {
                     break;
                 case 2:
                     // Transactions By Month
-                    System.out.println("Transactions By Month");
+                    getTransactionsByMonth();
                     break;
                 case 3:
                     // Transactions By Year
@@ -160,6 +161,30 @@ public class BudgetTracker {
         transactions.forEach(System.out::println);
     }
 
+    private void getTransactionsByMonth() {
+        System.out.println();
+        System.out.println("-".repeat(50));
+        System.out.println("Transactions By Month");
+        System.out.println("-".repeat(50));
+        String monthName = getUserString("Please enter month: ");
+        int monthNumber = getMonthNumber(monthName);
+        System.out.println("Month Number: " + monthNumber);
+        ArrayList<Transaction> transactions = TRANSACTION_DAO.getTransactionsByMonth(monthNumber);
+        displayTransactionsByMonthReport(transactions, monthName);
+        waitForUser();
+    }
+
+    private void displayTransactionsByMonthReport(ArrayList<Transaction> transactions, String monthName) {
+        if (transactions.isEmpty()) {
+            System.out.println("Sorry, there are no transactions in  " + monthName);
+            return;
+        }
+        System.out.println(transactions.size() + " transactions were found");
+        System.out.println("-".repeat(50));
+        System.out.printf("%-10s %15s        %s\n", "Date", "Amount($)", "Notes");
+        System.out.println("-".repeat(50));
+        transactions.forEach(System.out::println);
+    }
 
     // </editor-fold>
 
@@ -184,13 +209,21 @@ public class BudgetTracker {
 
     private String getUserString(String message) {
         System.out.print(message);
-        return USER_INPUT.nextLine();
+        return USER_INPUT.nextLine().strip();
     }
 
     private void waitForUser() {
         System.out.println();
         System.out.println("Press ENTER to continue...");
         USER_INPUT.nextLine();
+    }
+
+    //    private void getMonthNum(String monthName) {
+//        monthName = monthName.toLowerCase();
+//        String[] months = {"january", "february", "march", "april", "may", "june", "july", "august", "september", "october", "november", "december" };
+//    }
+    private int getMonthNumber(String monthName) {
+        return Month.valueOf(monthName.toUpperCase()).getValue();
     }
 
 }
