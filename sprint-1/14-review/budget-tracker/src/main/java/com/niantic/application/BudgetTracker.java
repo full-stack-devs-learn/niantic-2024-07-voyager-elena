@@ -1,5 +1,6 @@
 package com.niantic.application;
 
+import com.niantic.models.Category;
 import com.niantic.models.SubCategory;
 import com.niantic.models.Transaction;
 import com.niantic.models.User;
@@ -102,7 +103,7 @@ public class BudgetTracker {
                     break;
                 case 5:
                     // Transactions By Category
-                    System.out.println("Transactions By Category");
+                    getTransactionsByCategory();
                     break;
                 case 0:
                     // go back to home screen
@@ -191,12 +192,33 @@ public class BudgetTracker {
 
         if (subCategory != null) {
             // I know that user does not need that information, about sub category id
-            // I left that print statement for testing purposes 
+            // I left this print statement for testing purposes
             System.out.println("Sub Category ID: " + subCategory.getSubCategoryId());
             ArrayList<Transaction> transactions = TRANSACTION_DAO.getTransactionsBySubCategory(subCategory.getSubCategoryId());
             displayTransactionsReport(transactions, "in " + subCategoryName + " sub category");
         } else {
             System.out.println("Sorry, sub category " + subCategoryName + " was not found");
+        }
+
+        waitForUser();
+    }
+
+    private void getTransactionsByCategory() {
+        System.out.println();
+        System.out.println("-".repeat(50));
+        System.out.println("Transactions By Category");
+        System.out.println("-".repeat(50));
+        String categoryName = getUserString("Please enter category name: ");
+        Category category = CATEGORY_DAO.getCategoryByName(categoryName);
+
+        if (category != null) {
+            // I know that user does not need that information, about category id
+            // I left this print statement for testing purposes
+            System.out.println("Category ID: " + category.getCategoryId());
+            ArrayList<Transaction> transactions = TRANSACTION_DAO.getTransactionsByCategory(category.getCategoryId());
+            displayTransactionsReport(transactions, "in " + categoryName + " category");
+        } else {
+            System.out.println("Sorry, category " + categoryName + " was not found");
         }
 
         waitForUser();
