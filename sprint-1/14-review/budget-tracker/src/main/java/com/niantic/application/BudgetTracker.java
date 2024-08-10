@@ -1,13 +1,7 @@
 package com.niantic.application;
 
-import com.niantic.models.Category;
-import com.niantic.models.SubCategory;
-import com.niantic.models.Transaction;
-import com.niantic.models.User;
-import com.niantic.services.CategoryDao;
-import com.niantic.services.SubCategoryDao;
-import com.niantic.services.TransactionDao;
-import com.niantic.services.UserDao;
+import com.niantic.models.*;
+import com.niantic.services.*;
 
 import java.time.Month;
 import java.util.ArrayList;
@@ -19,6 +13,7 @@ public class BudgetTracker {
     private final SubCategoryDao SUBCATEGORY_DAO = new SubCategoryDao();
     private final UserDao USER_DAO = new UserDao();
     private final TransactionDao TRANSACTION_DAO = new TransactionDao();
+    private final VendorDao VENDOR_DAO = new VendorDao();
 
 
     // <editor-fold desc="Main Menu - Budget Tracker">
@@ -105,6 +100,10 @@ public class BudgetTracker {
                     // Transactions By Category
                     getTransactionsByCategory();
                     break;
+                case 6:
+                    // Transactions By Vendor
+                    getTransactionsByVendor();
+                    break;
                 case 0:
                     // go back to home screen
                     return;
@@ -128,6 +127,7 @@ public class BudgetTracker {
         System.out.println("3) Transactions By Year");
         System.out.println("4) Transactions By Sub Category");
         System.out.println("5) Transactions By Category");
+        System.out.println("6) Transactions By Vendor");
         System.out.println("0) Back to Main Menu");
         System.out.println();
 
@@ -224,6 +224,27 @@ public class BudgetTracker {
         waitForUser();
     }
 
+    private void getTransactionsByVendor() {
+        System.out.println();
+        System.out.println("-".repeat(50));
+        System.out.println("Transactions By Vendor");
+        System.out.println("-".repeat(50));
+        String vendorName = getUserString("Please enter vendor name: ");
+        Vendor vendor = VENDOR_DAO.getVendorByName(vendorName);
+
+        if (vendor != null) {
+            // I know that user does not need that information, about vendor id
+            // I left this print statement for testing purposes
+            System.out.println("Vendor ID: " + vendor.getVendorId());
+            ArrayList<Transaction> transactions = TRANSACTION_DAO.getTransactionsByVendor(vendor.getVendorId());
+            displayTransactionsReport(transactions, "for " + vendorName + " vendor");
+        } else {
+            System.out.println("Sorry, vendor " + vendorName + " was not found");
+        }
+
+        waitForUser();
+    }
+
     private void displayTransactionsReport(ArrayList<Transaction> transactions, String message) {
         if (transactions.isEmpty()) {
             System.out.println("Sorry, there are no transactions " + message);
@@ -268,10 +289,6 @@ public class BudgetTracker {
         USER_INPUT.nextLine();
     }
 
-    //    private void getMonthNum(String monthName) {
-//        monthName = monthName.toLowerCase();
-//        String[] months = {"january", "february", "march", "april", "may", "june", "july", "august", "september", "october", "november", "december" };
-//    }
     private int getMonthNumber(String monthName) {
         return Month.valueOf(monthName.toUpperCase()).getValue();
     }
