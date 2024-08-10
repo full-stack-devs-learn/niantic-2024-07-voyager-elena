@@ -199,5 +199,37 @@ public class TransactionDao {
         return transactions;
     }
 
+    public Transaction getTransactionById(int transactionId) {
+        String sql = """
+                SELECT transaction_id
+                    , user_id
+                    , sub_category_id
+                    , vendor_id
+                    , transaction_date
+                    , amount
+                    , notes
+                FROM transactions
+                WHERE transaction_id = ?;
+                """;
+
+        SqlRowSet row = jdbcTemplate.queryForRowSet(sql, transactionId);
+
+        if (row.next()) {
+            Date date = row.getDate("transaction_date");
+            LocalDate transactionDate = date != null ? date.toLocalDate() : null;
+            return new Transaction(
+                    row.getInt("transaction_id"),
+                    row.getInt("user_id"),
+                    row.getInt("sub_category_id"),
+                    row.getInt("vendor_id"),
+                    transactionDate,
+                    row.getBigDecimal("amount"),
+                    row.getString("notes")
+            );
+        }
+
+        return null;
+    }
+
 
 }
