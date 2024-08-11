@@ -311,5 +311,10 @@ public class TransactionDao {
         );
     }
 
+    public void deleteTransaction(int transactionId) {
+        String sql = "DELETE FROM transactions WHERE transaction_id = ?;";
 
+        jdbcTemplate.update(sql, transactionId);
+    }
+    
 }
