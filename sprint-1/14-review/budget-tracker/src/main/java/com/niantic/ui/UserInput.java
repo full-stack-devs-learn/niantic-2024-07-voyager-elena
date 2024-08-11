@@ -62,7 +62,7 @@ public class UserInput {
             System.out.println("Sorry, there are no transactions " + message);
             return;
         }
-        System.out.println(transactions.size() + " transactions were found");
+        System.out.println(transactions.size() + (transactions.size() == 1 ? " transaction was" : " transactions were") +" found");
         System.out.println("-".repeat(50));
         System.out.printf("%-10s %15s        %s\n", "Date", "Amount($)", "Notes");
         System.out.println("-".repeat(50));
@@ -124,11 +124,20 @@ public class UserInput {
         System.out.println("Invalid selection, please select from the available options.");
     }
 
+
+    public void printNotFoundMsg(String dataType, String dataName) {
+        System.out.println("Sorry, " + dataType + " " + dataName + " was not found");
+    }
+
+    public void printNotFoundMsgAddTransaction(String dataType, String dataName) {
+        printNotFoundMsg(dataType, dataName);
+        System.out.println("To add a new transaction for " + dataName + " you must add this " + dataType + " first");
+    }
+
     public void waitForUser() {
         System.out.println();
         System.out.println("Press ENTER to continue...");
         USER_INPUT.nextLine();
     }
-
 
 }

@@ -104,7 +104,7 @@ public class BudgetTracker {
             ArrayList<Transaction> transactions = TRANSACTION_DAO.getTransactionsByUser(user.getUserId());
             USER_INPUT.displayTransactionsReport(transactions, "made by " + userName);
         } else {
-            System.out.println("Sorry, user " + userName + " was not found");
+            USER_INPUT.printNotFoundMsg("user", userName);
         }
 
         USER_INPUT.waitForUser();
@@ -145,7 +145,7 @@ public class BudgetTracker {
             ArrayList<Transaction> transactions = TRANSACTION_DAO.getTransactionsBySubCategory(subCategory.getSubCategoryId());
             USER_INPUT.displayTransactionsReport(transactions, "in " + subCategoryName + " sub category");
         } else {
-            System.out.println("Sorry, sub category " + subCategoryName + " was not found");
+            USER_INPUT.printNotFoundMsg("sub category", subCategoryName);
         }
 
         USER_INPUT.waitForUser();
@@ -161,7 +161,7 @@ public class BudgetTracker {
             ArrayList<Transaction> transactions = TRANSACTION_DAO.getTransactionsByCategory(category.getCategoryId());
             USER_INPUT.displayTransactionsReport(transactions, "in " + categoryName + " category");
         } else {
-            System.out.println("Sorry, category " + categoryName + " was not found");
+            USER_INPUT.printNotFoundMsg("category", categoryName);
         }
 
         USER_INPUT.waitForUser();
@@ -177,7 +177,7 @@ public class BudgetTracker {
             ArrayList<Transaction> transactions = TRANSACTION_DAO.getTransactionsByVendor(vendor.getVendorId());
             USER_INPUT.displayTransactionsReport(transactions, "for " + vendorName + " vendor");
         } else {
-            System.out.println("Sorry, vendor " + vendorName + " was not found");
+            USER_INPUT.printNotFoundMsg("vendor", vendorName);
         }
 
         USER_INPUT.waitForUser();
@@ -196,8 +196,7 @@ public class BudgetTracker {
         String userName = USER_INPUT.getUserString("Please enter user name");
         User user = USER_DAO.getUserByName(userName);
         if (user == null) {
-            System.out.println("Sorry, user " + userName + " was not found");
-            System.out.println("To add a new transaction for this user you must to add this user first");
+            USER_INPUT.printNotFoundMsgAddTransaction("user", userName);
             return;
         }
         newTransaction.setUserId(user.getUserId());
@@ -205,8 +204,7 @@ public class BudgetTracker {
         String vendorName = USER_INPUT.getUserString("Please enter vendor name");
         Vendor vendor = VENDOR_DAO.getVendorByName(vendorName);
         if (vendor == null) {
-            System.out.println("Sorry, vendor " + vendorName + " was not found");
-            System.out.println("To add a new transaction for this vendor you must to add this vendor first");
+            USER_INPUT.printNotFoundMsgAddTransaction("vendor", vendorName);
             return;
         }
         newTransaction.setVendorId(vendor.getVendorId());
@@ -214,8 +212,7 @@ public class BudgetTracker {
         String subCategoryName = USER_INPUT.getUserString("Sub Category");
         SubCategory subCategory = SUBCATEGORY_DAO.getSubCategoryByName(subCategoryName);
         if (subCategory == null) {
-            System.out.println("Sorry, sub category " + subCategoryName + " was not found");
-            System.out.println("To add a new transaction for this subcategory you must to add this sub category first");
+            USER_INPUT.printNotFoundMsgAddTransaction("sub category", subCategoryName);
             return;
         }
         newTransaction.setSubCategoryId(subCategory.getSubCategoryId());
