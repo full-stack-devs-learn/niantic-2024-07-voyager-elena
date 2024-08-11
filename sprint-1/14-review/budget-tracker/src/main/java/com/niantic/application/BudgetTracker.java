@@ -28,7 +28,7 @@ public class BudgetTracker {
                     displayReportsMenu();
                     break;
                 case 3:
-                    System.out.println("add user");
+                    addUser();
                     break;
                 case 4:
                     System.out.println("add category");
@@ -227,6 +227,36 @@ public class BudgetTracker {
         } catch (Exception e) {
             System.out.println("Something went wrong");
             System.out.println("Transaction was not added");
+        }
+    }
+
+    private void addUser() {
+        USER_INPUT.printAddNewDataHeader("User");
+        String userName = USER_INPUT.getUserString("User name");
+        String firstName = USER_INPUT.getUserString("First name");
+        String lastName = USER_INPUT.getUserString("Last name");
+        String phone = USER_INPUT.getUserString("Phone");
+        String email = USER_INPUT.getUserString("Email");
+
+
+        User user = USER_DAO.getUserByName(userName);
+        if (user != null) {
+            // user with userName already exists
+            System.out.println("User with user name " + userName + " already exists");
+            String addNewUser = USER_INPUT.getUserString("Are you sure you want to add new user with the same user name? (Y/N)");
+            if (addNewUser.equalsIgnoreCase("n")) {
+                System.out.println("New user was not added");
+                return;
+            }
+        }
+
+        User newUser = new User(-1, userName, firstName, lastName, phone, email);
+        try {
+            USER_DAO.addUser(newUser);
+            System.out.println("added!");
+        } catch (Exception e) {
+            System.out.println("Something went wrong");
+            System.out.println("New user was not added");
         }
     }
 

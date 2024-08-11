@@ -148,6 +148,7 @@ public class UserDao {
                     , last_name
                     , phone
                     , email
+                    )
                 VALUES (?,?,?,?,?);
                 """;
 
