@@ -218,15 +218,13 @@ public class BudgetTracker {
         newTransaction.setSubCategoryId(subCategory.getSubCategoryId());
         try {
             TRANSACTION_DAO.addTransaction(newTransaction);
-            System.out.println();
-            System.out.println("Transaction was successfully added");
+            USER_INPUT.printSuccessfullyAddedMsg("transaction");
             // I planned to print new transaction details here
             // but do not know how to correctly get new transaction
             // I can print data that user entered, but do not think it is a good idea
             // System.out.println("New Transaction Details");
         } catch (Exception e) {
-            System.out.println("Something went wrong");
-            System.out.println("Transaction was not added");
+            USER_INPUT.printWasNotAddedMsg("transaction");
         }
     }
 
@@ -253,10 +251,9 @@ public class BudgetTracker {
         User newUser = new User(-1, userName, firstName, lastName, phone, email);
         try {
             USER_DAO.addUser(newUser);
-            System.out.println("added!");
+            USER_INPUT.printSuccessfullyAddedMsg("user");
         } catch (Exception e) {
-            System.out.println("Something went wrong");
-            System.out.println("New user was not added");
+            USER_INPUT.printWasNotAddedMsg("user");
         }
     }
 

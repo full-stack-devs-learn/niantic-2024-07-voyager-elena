@@ -62,7 +62,7 @@ public class UserInput {
             System.out.println("Sorry, there are no transactions " + message);
             return;
         }
-        System.out.println(transactions.size() + (transactions.size() == 1 ? " transaction was" : " transactions were") +" found");
+        System.out.println(transactions.size() + (transactions.size() == 1 ? " transaction was" : " transactions were") + " found");
         System.out.println("-".repeat(50));
         System.out.printf("%-10s %15s        %s\n", "Date", "Amount($)", "Notes");
         System.out.println("-".repeat(50));
@@ -132,6 +132,17 @@ public class UserInput {
     public void printNotFoundMsgAddTransaction(String dataType, String dataName) {
         printNotFoundMsg(dataType, dataName);
         System.out.println("To add a new transaction for " + dataName + " you must add this " + dataType + " first");
+    }
+
+    public void printSuccessfullyAddedMsg(String dataType) {
+        System.out.println();
+        System.out.println("New " + dataType + " was successfully added");
+    }
+
+    public void printWasNotAddedMsg(String dataType) {
+        System.out.println();
+        System.out.println("Something went wrong");
+        System.out.println("New " + dataType + " was not added");
     }
 
     public void waitForUser() {
