@@ -288,5 +288,28 @@ public class TransactionDao {
 
     }
 
+    public void updateTransaction(Transaction transaction) {
+        String sql = """
+                UPDATE transactions
+                SET user_id = ?
+                    , sub_category_id = ?
+                    , vendor_id = ?
+                    , transaction_date = ?
+                    , amount = ?
+                    , notes = ?
+                WHERE transaction_id = ?;
+                """;
+
+        jdbcTemplate.update(sql,
+                transaction.getUserId(),
+                transaction.getSubCategoryId(),
+                transaction.getVendorId(),
+                transaction.getDate(),
+                transaction.getAmount(),
+                transaction.getNotes(),
+                transaction.getTransactionId()
+        );
+    }
+
 
 }
