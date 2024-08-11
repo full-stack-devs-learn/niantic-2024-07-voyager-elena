@@ -22,7 +22,7 @@ public class BudgetTracker {
             int choice = USER_INPUT.homeScreenSelection();
             switch (choice) {
                 case 1:
-                    System.out.println("add transaction");
+                    addTransaction();
                     break;
                 case 2:
                     displayReportsMenu();
@@ -96,7 +96,7 @@ public class BudgetTracker {
 
     private void getTransactionsByUser() {
         USER_INPUT.printTransactionReportHeader("Transactions By User");
-        String userName = USER_INPUT.getUserString("Please enter user name: ");
+        String userName = USER_INPUT.getUserString("Please enter user name");
         User user = USER_DAO.getUserByName(userName);
 
         if (user != null) {
@@ -112,7 +112,7 @@ public class BudgetTracker {
 
     private void getTransactionsByMonth() {
         USER_INPUT.printTransactionReportHeader("Transactions By Month");
-        String monthName = USER_INPUT.getUserString("Please enter month: ");
+        String monthName = USER_INPUT.getUserString("Please enter month");
         int monthNumber = DateConverter.getMonthNumber(monthName);
         System.out.println("Month Number: " + monthNumber);
         ArrayList<Transaction> transactions = TRANSACTION_DAO.getTransactionsByMonth(monthNumber);
@@ -130,7 +130,7 @@ public class BudgetTracker {
 
     private void getTransactionsBySubCategory() {
         USER_INPUT.printTransactionReportHeader("Transactions By Sub Category");
-        String subCategoryName = USER_INPUT.getUserString("Please enter sub category name: ");
+        String subCategoryName = USER_INPUT.getUserString("Please enter sub category name");
         // I tried to do something with that string to avoid false negative results when user
         // types sub category in wrong case, let say in all capital letters
         // But then I figured out that 'By default, MySQL uses a case-insensitive collation for string comparisons.
@@ -153,7 +153,7 @@ public class BudgetTracker {
 
     private void getTransactionsByCategory() {
         USER_INPUT.printTransactionReportHeader("Transactions By Category");
-        String categoryName = USER_INPUT.getUserString("Please enter category name: ");
+        String categoryName = USER_INPUT.getUserString("Please enter category name");
         Category category = CATEGORY_DAO.getCategoryByName(categoryName);
 
         if (category != null) {
@@ -169,7 +169,7 @@ public class BudgetTracker {
 
     private void getTransactionsByVendor() {
         USER_INPUT.printTransactionReportHeader("Transactions By Vendor");
-        String vendorName = USER_INPUT.getUserString("Please enter vendor name: ");
+        String vendorName = USER_INPUT.getUserString("Please enter vendor name");
         Vendor vendor = VENDOR_DAO.getVendorByName(vendorName);
 
         if (vendor != null) {
@@ -184,5 +184,54 @@ public class BudgetTracker {
     }
 
     // </editor-fold>
+
+    private void addTransaction() {
+        USER_INPUT.printAddNewDataHeader("Transaction");
+        Transaction newTransaction = new Transaction();
+
+        newTransaction.setAmount(USER_INPUT.getUserBigDecimal("Amount"));
+        newTransaction.setDate(USER_INPUT.getUserDate("Date"));
+        newTransaction.setNotes(USER_INPUT.getUserString("Notes"));
+
+        String userName = USER_INPUT.getUserString("Please enter user name");
+        User user = USER_DAO.getUserByName(userName);
+        if (user == null) {
+            System.out.println("Sorry, user " + userName + " was not found");
+            System.out.println("To add a new transaction for this user you must to add this user first");
+            return;
+        }
+        newTransaction.setUserId(user.getUserId());
+
+        String vendorName = USER_INPUT.getUserString("Please enter vendor name");
+        Vendor vendor = VENDOR_DAO.getVendorByName(vendorName);
+        if (vendor == null) {
+            System.out.println("Sorry, vendor " + vendorName + " was not found");
+            System.out.println("To add a new transaction for this vendor you must to add this vendor first");
+            return;
+        }
+        newTransaction.setVendorId(vendor.getVendorId());
+
+        String subCategoryName = USER_INPUT.getUserString("Sub Category");
+        SubCategory subCategory = SUBCATEGORY_DAO.getSubCategoryByName(subCategoryName);
+        if (subCategory == null) {
+            System.out.println("Sorry, sub category " + subCategoryName + " was not found");
+            System.out.println("To add a new transaction for this subcategory you must to add this sub category first");
+            return;
+        }
+        newTransaction.setSubCategoryId(subCategory.getSubCategoryId());
+        try {
+            TRANSACTION_DAO.addTransaction(newTransaction);
+            System.out.println();
+            System.out.println("Transaction was successfully added");
+            // I planned to print new transaction details here
+            // but do not know how to correctly get new transaction
+            // I can print data that user entered, but do not think it is a good idea
+            // System.out.println("New Transaction Details");
+        } catch (Exception e) {
+            System.out.println("Something went wrong");
+            System.out.println("Transaction was not added");
+        }
+    }
+
 
 }

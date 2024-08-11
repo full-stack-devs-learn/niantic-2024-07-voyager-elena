@@ -2,6 +2,8 @@ package com.niantic.ui;
 
 import com.niantic.models.Transaction;
 
+import java.math.BigDecimal;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -67,6 +69,15 @@ public class UserInput {
         transactions.forEach(System.out::println);
     }
 
+    public void printAddNewDataHeader(String dataType) {
+        System.out.println();
+        System.out.println("-".repeat(35));
+        System.out.println("Add " + dataType);
+        System.out.println("-".repeat(35));
+        System.out.println("Enter " + dataType + " Information ");
+        System.out.println();
+    }
+
     public int getUserInteger(String message) {
         int number = -1;
 
@@ -82,13 +93,35 @@ public class UserInput {
         return number;
     }
 
-    public void printInvalidSelectionMessage() {
-        System.out.println("Invalid selection, please select from the available options.");
+    public String getUserString(String message) {
+        System.out.print(message + ": ");
+        return USER_INPUT.nextLine().strip();
     }
 
-    public String getUserString(String message) {
-        System.out.print(message);
-        return USER_INPUT.nextLine().strip();
+    public BigDecimal getUserBigDecimal(String message) {
+        while (true) {
+            System.out.print(message + ": ");
+            try {
+                return new BigDecimal(USER_INPUT.nextLine());
+            } catch (Exception e) {
+                System.out.println("Invalid input! Please try again");
+            }
+        }
+    }
+
+    public LocalDate getUserDate(String message) {
+        while (true) {
+            System.out.print(message + "(YYYY-MM-DD): ");
+            try {
+                return LocalDate.parse(USER_INPUT.nextLine());
+            } catch (Exception e) {
+                System.out.println("Invalid input! Please enter your date in format YYYY-MM-DD");
+            }
+        }
+    }
+
+    public void printInvalidSelectionMessage() {
+        System.out.println("Invalid selection, please select from the available options.");
     }
 
     public void waitForUser() {

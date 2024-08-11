@@ -265,5 +265,28 @@ public class TransactionDao {
         return null;
     }
 
+    public void addTransaction(Transaction transaction) {
+        String sql = """
+                INSERT INTO transactions
+                    (user_id
+                    , sub_category_id
+                    , vendor_id
+                    , transaction_date
+                    , amount
+                    , notes)
+                VALUES (?,?,?,?,?,?);
+                """;
+
+        jdbcTemplate.update(sql,
+                transaction.getUserId(),
+                transaction.getSubCategoryId(),
+                transaction.getVendorId(),
+                transaction.getDate(),
+                transaction.getAmount(),
+                transaction.getNotes()
+        );
+
+    }
+
 
 }
