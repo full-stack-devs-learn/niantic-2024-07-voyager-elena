@@ -31,7 +31,7 @@ public class BudgetTracker {
                     addUser();
                     break;
                 case 4:
-                    System.out.println("add category");
+                    addCategory();
                     break;
                 case 5:
                     System.out.println("add sub category");
@@ -255,6 +255,31 @@ public class BudgetTracker {
         } catch (Exception e) {
             USER_INPUT.printWasNotAddedMsg("user");
         }
+    }
+
+    private void addCategory() {
+        USER_INPUT.printAddNewDataHeader("Category");
+        String categoryName = USER_INPUT.getUserString("Category Name");
+        String categoryDescription = USER_INPUT.getUserString("Description");
+
+        Category category = CATEGORY_DAO.getCategoryByName(categoryName);
+        if (category != null) {
+            System.out.println("Category " + categoryName + " already exists");
+            String addNewUser = USER_INPUT.getUserString("Are you sure you want to add new category with this category name? (Y/N)");
+            if (addNewUser.equalsIgnoreCase("n")) {
+                System.out.println("New category was not added");
+                return;
+            }
+        }
+
+        Category newCategory = new Category(-1, categoryName, categoryDescription);
+        try {
+            CATEGORY_DAO.addCategory(newCategory);
+            USER_INPUT.printSuccessfullyAddedMsg("category");
+        } catch (Exception e) {
+            USER_INPUT.printWasNotAddedMsg("category");
+        }
+
     }
 
 
