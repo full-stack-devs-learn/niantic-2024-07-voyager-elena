@@ -16,7 +16,8 @@
     <header class="header">
         <div class="header__top">
             <div class="container">
-                <a href="#"><img class="header__logo" src="../assets/icons/papa-johns-logo.svg" alt="Papa Johns Logo"></a>
+                <a href="#"><img class="header__logo" src="../assets/icons/papa-johns-logo.svg"
+                        alt="Papa Johns Logo"></a>
                 <nav class="header__top-nav">
                     <ul class="header__nav-list">
                         <li><a href="#" class="top-nav-link">
@@ -33,12 +34,12 @@
                         </li>
                         <li>
                             <a href="#" class="top-nav-link">
-                                <div>Log in</div>
+                                <div>Log&nbsp;in</div>
                                 <div class="icon down-arrow"></div>
                             </a>
                         </li>
                         <li>
-                            <a href="#" class="top-nav-link button-green button-round" id="signup-btn">Sign up</a>
+                            <a href="#" class="top-nav-link button-green button-round" id="signup-btn">Sign&nbsp;up</a>
                         </li>
                     </ul>
                 </nav>
@@ -48,13 +49,21 @@
             <div class="header__bottom">
                 <nav class="header__bottom-nav">
                     <ul class="header__nav-list">
-                        <li class="bottom-nav-link"><a href="./menu.html">Menu</a></li>
-                        <li class="bottom-nav-link"><a href="./deals.html">Deals</a></li>
-                        <li class="bottom-nav-link"><a href="./rewards.html">papa rewards</a></li>
+                        <li><a href="./menu.html" class="bottom-nav-link">Menu</a></li>
+                        <li><a href="./deals.html" class="bottom-nav-link">Deals</a></li>
+                        <li><a href="./rewards.html" class="bottom-nav-link">papa&nbsp;rewards</a></li>
                     </ul>
                 </nav>
                 <div class="header__promo-cart">
-                    Promo
+                    <form class="promo-code-form">
+                        <input class="promo-textbox" name="promo-code" type="text" placeholder="Enter a promo code"
+                            value="" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false">
+                        <input type="submit" value="apply" class="button-green">
+                    </form>
+                    <a href="./cart.html" class="header__cart">
+                        <div class="icon cart"></div>
+                        <div class="order-total"><span>$</span><span>0.00</span></div>
+                    </a>
                 </div>
             </div>
         </div>
@@ -62,7 +71,7 @@
     </header>
 
     <main class="main">
-        <section class="section hero">
+        <section class="hero">
             <h1>Home page</h1>
         </section>
 
