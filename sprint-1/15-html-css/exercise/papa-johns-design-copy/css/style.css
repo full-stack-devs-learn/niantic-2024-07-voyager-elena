@@ -44,6 +44,12 @@ body {
     color: var(--color-black);
 }
 
+.container {
+    width: 100%;
+    max-width: 1600px;
+    margin: 0 auto;
+}
+
 *,
 *::after,
 *::before {
@@ -51,7 +57,6 @@ body {
     padding: 0;
     box-sizing: border-box;
 }
-
 
 a {
     text-decoration: none;
@@ -64,12 +69,92 @@ h1 {
     font-size: 30px;
 }
 
+.icon {
+    background-size: 25px auto;
+    width: 25px;
+    height: 25px;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
 /* -------------------- Header -------------------- */
 
+.header {
+    width: 100%;
+}
+
+.header__top {
+    border-bottom: 1px solid var(--color-light);
+    padding: 10px 20px;
+    width: 100%;
+}
+
+.header__top>div {
+    display: flex;
+    justify-content: space-between;
+}
+
+.header__logo {
+    width: 135px;
+}
+
+.header__nav-list {
+    display: flex;
+    justify-content: center;
+    list-style: none;
+    align-items: center;
+}
+
+.top-nav-link {
+    font-family: PapaSans-MediumCondensed, sans-serif;
+    text-transform: uppercase;
+    font-size: 20px;
+    padding: 10px;
+}
+
+.top-nav-link>a {
+    display: flex;
+    align-items: center;
+    column-gap: 8px;
+}
+
+.tracker {
+    background-image: url(../assets/icons/tracker-icon.svg);
+}
+
+
+.header__bottom {
+    display: flex;
+    justify-content: space-between;
+    padding: 0 8px;
+    width: 100%;
+}
+
+.bottom-nav-link {
+    font-family: PapaSans-MediumCondensed, sans-serif;
+    text-transform: uppercase;
+    font-size: 30px;
+    border-bottom: 4px solid transparent;
+}
+
+.bottom-nav-link:hover {
+    border-bottom-color: var(--color-green);
+}
+
+.bottom-nav-link>a{
+    display: inline-block;
+    padding: 24px 15px;
+}
+
+/* -------------------- Hero Section-------------------- */
+
+.hero {
+    height: 400px;
+    background-color: var(--color-green);
+}
 
 
 /* -------------------- Footer -------------------- */
 
 
 /* ---------- Styles for smaller screens ----------*/
-
