@@ -132,17 +132,26 @@ public class UserInput {
     public void printNotFoundMsgAddTransaction(String dataType, String dataName) {
         printNotFoundMsg(dataType, dataName);
         System.out.println("To add a new transaction for " + dataName + " you must add this " + dataType + " first");
+        waitForUser();
+    }
+
+    public void printNotFoundMsgAddSubCategory(String categoryName) {
+        printNotFoundMsg("category", categoryName);
+        System.out.println("To add a new subcategory in the " + categoryName + " category you must add this category first");
+        waitForUser();
     }
 
     public void printSuccessfullyAddedMsg(String dataType) {
         System.out.println();
         System.out.println("New " + dataType + " was successfully added");
+        waitForUser();
     }
 
     public void printWasNotAddedMsg(String dataType) {
         System.out.println();
         System.out.println("Something went wrong");
         System.out.println("New " + dataType + " was not added");
+        waitForUser();
     }
 
     public void waitForUser() {
@@ -150,5 +159,6 @@ public class UserInput {
         System.out.println("Press ENTER to continue...");
         USER_INPUT.nextLine();
     }
+
 
 }

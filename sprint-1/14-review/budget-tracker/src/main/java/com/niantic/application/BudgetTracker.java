@@ -34,7 +34,7 @@ public class BudgetTracker {
                     addCategory();
                     break;
                 case 5:
-                    System.out.println("add sub category");
+                    addSubCategory();
                     break;
                 case 6:
                     System.out.println("add vendor");
@@ -280,6 +280,37 @@ public class BudgetTracker {
             USER_INPUT.printWasNotAddedMsg("category");
         }
 
+    }
+
+    private void addSubCategory() {
+        USER_INPUT.printAddNewDataHeader("Sub Category");
+        String categoryName = USER_INPUT.getUserString("Category Name");
+        Category category = CATEGORY_DAO.getCategoryByName(categoryName);
+        if (category == null) {
+            USER_INPUT.printNotFoundMsgAddSubCategory(categoryName);
+            return;
+        }
+
+        String subCategoryName = USER_INPUT.getUserString("Sub Category Name");
+        String subCategoryDescription = USER_INPUT.getUserString("Description");
+
+        SubCategory subCategory = SUBCATEGORY_DAO.getSubCategoryByName(subCategoryName);
+        if (subCategory != null) {
+            System.out.println("Sub category " + subCategoryName + " already exists");
+            String addNewUser = USER_INPUT.getUserString("Are you sure you want to add new sub category with this sub category name? (Y/N)");
+            if (addNewUser.equalsIgnoreCase("n")) {
+                System.out.println("New sub category was not added");
+                return;
+            }
+        }
+
+        SubCategory newSubCategory = new SubCategory(-1, category.getCategoryId(), subCategoryName, subCategoryDescription);
+        try {
+            SUBCATEGORY_DAO.addSubCategory(newSubCategory);
+            USER_INPUT.printSuccessfullyAddedMsg("sub category");
+        } catch (Exception e) {
+            USER_INPUT.printWasNotAddedMsg("sub category");
+        }
     }
 
 
