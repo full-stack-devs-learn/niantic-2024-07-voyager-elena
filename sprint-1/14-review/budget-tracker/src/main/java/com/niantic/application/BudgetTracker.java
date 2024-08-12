@@ -37,7 +37,7 @@ public class BudgetTracker {
                     addSubCategory();
                     break;
                 case 6:
-                    System.out.println("add vendor");
+                    addVendor();
                     break;
                 case 0:
                     System.out.println();
@@ -244,6 +244,7 @@ public class BudgetTracker {
             String addNewUser = USER_INPUT.getUserString("Are you sure you want to add new user with the same user name? (Y/N)");
             if (addNewUser.equalsIgnoreCase("n")) {
                 System.out.println("New user was not added");
+                USER_INPUT.waitForUser();
                 return;
             }
         }
@@ -265,9 +266,10 @@ public class BudgetTracker {
         Category category = CATEGORY_DAO.getCategoryByName(categoryName);
         if (category != null) {
             System.out.println("Category " + categoryName + " already exists");
-            String addNewUser = USER_INPUT.getUserString("Are you sure you want to add new category with this category name? (Y/N)");
-            if (addNewUser.equalsIgnoreCase("n")) {
+            String addNewCategory = USER_INPUT.getUserString("Are you sure you want to add new category with this category name? (Y/N)");
+            if (addNewCategory.equalsIgnoreCase("n")) {
                 System.out.println("New category was not added");
+                USER_INPUT.waitForUser();
                 return;
             }
         }
@@ -297,9 +299,10 @@ public class BudgetTracker {
         SubCategory subCategory = SUBCATEGORY_DAO.getSubCategoryByName(subCategoryName);
         if (subCategory != null) {
             System.out.println("Sub category " + subCategoryName + " already exists");
-            String addNewUser = USER_INPUT.getUserString("Are you sure you want to add new sub category with this sub category name? (Y/N)");
-            if (addNewUser.equalsIgnoreCase("n")) {
+            String addNewSubCategory = USER_INPUT.getUserString("Are you sure you want to add new sub category with this sub category name? (Y/N)");
+            if (addNewSubCategory.equalsIgnoreCase("n")) {
                 System.out.println("New sub category was not added");
+                USER_INPUT.waitForUser();
                 return;
             }
         }
@@ -310,6 +313,32 @@ public class BudgetTracker {
             USER_INPUT.printSuccessfullyAddedMsg("sub category");
         } catch (Exception e) {
             USER_INPUT.printWasNotAddedMsg("sub category");
+        }
+
+    }
+
+    private void addVendor() {
+        USER_INPUT.printAddNewDataHeader("Vendor");
+        String vendorName = USER_INPUT.getUserString("Vendor Name");
+        String vendorWebsite = USER_INPUT.getUserString("Website");
+
+        Vendor vendor = VENDOR_DAO.getVendorByName(vendorName);
+        if (vendor != null) {
+            System.out.println("Vendor " + vendorName + " already exists");
+            String addNewVendor = USER_INPUT.getUserString("Are you sure you want to add new vendor with this vendor name? (Y/N)");
+            if (addNewVendor.equalsIgnoreCase("n")) {
+                System.out.println("New vendor was not added");
+                USER_INPUT.waitForUser();
+                return;
+            }
+        }
+
+        Vendor newVendor = new Vendor(-1, vendorName, vendorWebsite);
+        try {
+            VENDOR_DAO.addVendor(newVendor);
+            USER_INPUT.printSuccessfullyAddedMsg("vendor");
+        } catch (Exception e) {
+            USER_INPUT.printWasNotAddedMsg("vendor");
         }
     }
 
