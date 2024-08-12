@@ -77,6 +77,21 @@ h1 {
     background-position: center;
 }
 
+.button-green {
+    color: var(--color-white);
+    background-color: var(--color-green);
+}
+
+
+.button-green:hover {
+    background-color: var(--color-gray);
+}
+
+.button-round,
+.button-round:hover {
+    border-radius: 30px;
+}
+
 /* -------------------- Header -------------------- */
 
 .header {
@@ -85,17 +100,20 @@ h1 {
 
 .header__top {
     border-bottom: 1px solid var(--color-light);
-    padding: 10px 20px;
     width: 100%;
 }
 
 .header__top>div {
     display: flex;
     justify-content: space-between;
+    align-items: center;
+    padding: 20px 12px 20px 20px;
+    height: 65px;
 }
 
 .header__logo {
     width: 135px;
+    margin-top: 5px;
 }
 
 .header__nav-list {
@@ -105,23 +123,53 @@ h1 {
     align-items: center;
 }
 
+.header__top .header__nav-list {
+    column-gap: 12px;
+}
+
 .top-nav-link {
     font-family: PapaSans-MediumCondensed, sans-serif;
     text-transform: uppercase;
     font-size: 20px;
-    padding: 10px;
-}
 
-.top-nav-link>a {
     display: flex;
     align-items: center;
     column-gap: 8px;
+
+    padding: 10px;
+    border-radius: 6px;
+    transition: background 0.2s ease-out;
+}
+
+.top-nav-link:hover {
+    background: #e6e6e6;
+}
+
+.top-nav-link:focus {
+    box-shadow: 0 0 0 2px rgba(0, 0, 0, 0.5);
+}
+
+#signup-btn {
+    border-radius: 30px;
+}
+
+#signup-btn:hover {
+    background-color: var(--color-gray);
 }
 
 .tracker {
     background-image: url(../assets/icons/tracker-icon.svg);
 }
 
+.globe {
+    background-image: url(../assets/icons/globe-bold.svg);
+}
+
+.down-arrow {
+    background-image: url(../assets/icons/down-arrow-1.svg);
+    background-size: 14px auto;
+    width: 14px;
+}
 
 .header__bottom {
     display: flex;
@@ -141,7 +189,7 @@ h1 {
     border-bottom-color: var(--color-green);
 }
 
-.bottom-nav-link>a{
+.bottom-nav-link>a {
     display: inline-block;
     padding: 24px 15px;
 }
@@ -149,7 +197,7 @@ h1 {
 /* -------------------- Hero Section-------------------- */
 
 .hero {
-    height: 400px;
+    height: 1400px;
     background-color: var(--color-green);
 }
 
