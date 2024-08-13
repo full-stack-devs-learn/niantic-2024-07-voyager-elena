@@ -40,6 +40,7 @@
     --color-green: #2d5d2a;
     --color-light: #d1d1d1;
     --color-gray-light: #f3f3f3;
+    --color-btn-hover: #e6e6e6;
     --color-gray: #929292;
     --color-gray-dark: #333333;
     --color-black: #000000;
@@ -57,12 +58,6 @@ body {
     color: var(--color-black);
 }
 
-.container {
-    width: 100%;
-    max-width: 1600px;
-    margin: 0 auto;
-}
-
 *,
 *::after,
 *::before {
@@ -71,15 +66,29 @@ body {
     box-sizing: border-box;
 }
 
+.container {
+    width: 100%;
+    max-width: 1600px;
+    margin: 0 auto;
+}
+
 a {
     text-decoration: none;
     color: unset;
 }
 
-h1 {
+.section__content {
+    width: 100%;
+    max-width: 1374px;
+    padding: 50px 30px;
+    margin: 0 auto;
+}
+
+.section-header {
     font-family: PapaSans-MediumCondensed;
     text-transform: uppercase;
-    font-size: 30px;
+    font-size: 38px;
+    margin-bottom: 15px;
 }
 
 .icon {
@@ -95,6 +104,8 @@ h1 {
     font-family: PapaSans-MediumCondensed, sans-serif;
     text-transform: uppercase;
     font-size: 18px;
+    padding: 8px 12px;
+    transition: all 0.2s ease-out;
 }
 
 .button-green {
@@ -109,6 +120,10 @@ h1 {
 
 .button-green:hover {
     background-color: var(--color-gray-dark);
+}
+
+.button-white:hover {
+    background-color: var(--color-btn-hover);
 }
 
 .button-round,
@@ -186,7 +201,7 @@ input::placeholder {
 }
 
 .top-nav-link:hover {
-    background: #e6e6e6;
+    background: var(--color-btn-hover);
 }
 
 .top-nav-link:focus {
@@ -292,13 +307,15 @@ input::placeholder {
 }
 
 
-/* -------------------- Hero Section-------------------- */
+/* -------------------- Main-------------------- */
 
 .main {
     display: flex;
     flex-direction: column;
     width: 100%;
 }
+
+/* -------------------- Hero Section-------------------- */
 
 .home-hero {
     height: 515px;
@@ -338,6 +355,7 @@ input::placeholder {
 
 .hero-second-title {
     font-family: PapaSans-MediumCondensed, sans-serif;
+    text-transform: uppercase;
     font-size: 120px;
     font-weight: 500;
     color: #cfeb0c;
@@ -352,7 +370,7 @@ input::placeholder {
     font-weight: 500;
     text-transform: uppercase;
     padding-right: 40px;
-    margin-bottom: 120px;
+    margin-bottom: 125px;
 }
 
 .home-hero__content>div {
@@ -416,9 +434,58 @@ input::placeholder {
 /* -------------------- Most Popular Section-------------------- */
 
 .popular {
-    height: 400px;
     background-color: var(--color-white);
 }
+
+.pizza-cards-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    /* column-gap: 30px; */
+    row-gap: 20px;
+    padding: 20px 0;
+}
+
+.pizza-card {
+    width: 305px;
+    border: 1px solid var(--color-gray);
+    border-radius: 6px;
+    overflow: hidden;
+}
+
+.pizza-card__img {
+    width: 100%;
+}
+
+.pizza-card__content {
+    position: relative;
+    padding: 7px 15px 25px;
+}
+
+.pizza-card__title {
+    font-family: PapaSans-Bold, sans-serif;
+    font-size: 18px;
+    margin-bottom: 25px;
+}
+
+.pizza-card__details {
+    position: absolute;
+    top: 5px;
+    right: 15px;
+    text-transform: uppercase;
+    text-decoration: underline;
+    font-family: PapaSans-MediumCondensed, sans-serif;
+    font-size: 16px;
+    transition: all 0.2ms ease-out;
+}
+
+.pizza-card__details:hover {
+    color: var(--color-green);
+}
+
+
+
+
 
 /* -------------------- Footer -------------------- */
 
