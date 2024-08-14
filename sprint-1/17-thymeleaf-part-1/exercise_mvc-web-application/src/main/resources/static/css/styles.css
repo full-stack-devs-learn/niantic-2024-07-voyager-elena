@@ -1,3 +1,13 @@
-body{
+body {
     font-family: Arial, sans-serif;
+}
+
+.table-hover tbody tr:hover td,
+.table-hover tbody tr:hover th {
+    background-color: #d1f1fcd4;
+    
+}
+
+h1 {
+    color: #ADD8E6;
 }
