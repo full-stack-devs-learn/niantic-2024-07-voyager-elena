@@ -590,7 +590,8 @@ input::placeholder {
 }
 
 .checkout__form {
-    width: 380px;
+    width: 100%;
+    max-width: 380px;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -616,11 +617,17 @@ input::placeholder {
 
 .checkout__form select {
     padding: 0 30px 0 15px;
-    height: 50px;
 }
 
-.checkout__form input {
+.checkout__form input,
+.checkout__form select {
     height: 50px;
+    box-shadow: inset 0px 2px 4px -1px rgba(98, 98, 98, 0.2);
+}
+
+.checkout__form input:focus,
+.checkout__form select:focus {
+    box-shadow: 0px 0px 5px 0px rgba(98, 98, 98, 0.75);
 }
 
 #address-type {
@@ -629,10 +636,6 @@ input::placeholder {
 
 #country {
     width: 140px;
-}
-
-#street {
-    width: 100%;
 }
 
 #apt-ste-floor {
@@ -914,11 +917,38 @@ input::placeholder {
         left: 20px;
     }
 
+    .checkout__content {
+        padding: 40px;
+    }
+
     .footer__content {
         flex-direction: column-reverse;
         row-gap: 20px;
     }
 
+}
+
+/* ---------- max-width: 620px ---------- */
+
+@media only screen and (max-width: 621px) {
+
+    .order-type-container {
+        column-gap: 30px;
+    }
+
+    .order-type-container .radio-button {
+        column-gap: 30px;
+        font-size: 22px;
+        width: 200px;
+        height: 90px;
+    }
+
+    .order-type-container .icon {
+        background-size: 55px auto;
+        width: 55px;
+        height: 55px;
+        flex: 0 0 55px;
+    }
 }
 
 /* ---------- max-width: 480px ---------- */
@@ -954,6 +984,40 @@ input::placeholder {
         font-size: 16px;
     }
 
+    .checkout__content {
+        padding: 20px 15px;
+    }
+
+    .order-type-container {
+        column-gap: 15px;
+    }
+
+    .order-type-container .radio-button {
+        column-gap: 15px;
+        font-size: 22px;
+        width: 160px;
+        height: 80px;
+    }
+
+    .order-type-container .icon {
+        background-size: 42px auto;
+        width: 42px;
+        height: 42px;
+        flex: 0 0 42px;
+    }
+
+    #address-type {
+        width: 200px;
+    }
+
+    #country {
+        width: 120px;
+    }
+
+    #asf-value {
+        width: 215px;
+    }
+
 }
 
 /* ---------- max-width: 410px ---------- */
@@ -981,6 +1045,18 @@ input::placeholder {
     .bottom-nav-link {
         font-size: 18px;
         padding: 10px 6px 6px;
+    }
+
+    #address-type {
+        width: 190px;
+    }
+
+    #country {
+        width: 110px;
+    }
+
+    #asf-value {
+        width: 190px;
     }
 
 }
