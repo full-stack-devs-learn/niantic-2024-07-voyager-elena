@@ -4,10 +4,12 @@ body {
 
 .table-hover tbody tr:hover td,
 .table-hover tbody tr:hover th {
-    background-color: #d1f1fcd4;
+    /* background-color: #d1f1fcd4; */
+    background-color: #7393b390;
     
 }
 
 h1 {
-    color: #ADD8E6;
+    /* color: #ADD8E6; */
+    color: #7393B3;
 }

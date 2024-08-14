@@ -34,12 +34,12 @@
                 <tr th:each="category:${categories}">
                     <td th:text="${category.categoryId}"></td>
                     <td>
-                        <a th:href="@{|/categories/$c{ategory.categoryId}|}" th:text="${category.categoryName}"></a>
+                        <a th:href="@{|/categories/${category.categoryId}|}" th:text="${category.categoryName}"></a>
                     </td>
                     <td th:text="${category.description}"></td>
                     <td>
-                        <a th:href="@{|/categories/$c{ategory.categoryId}/edit|}">Edit</a>
-                        <a th:href="@{|/categories/$c{ategory.categoryId}/delete|}">Delete</a>
+                        <a th:href="@{|/categories/${category.categoryId}/edit|}">Edit</a>
+                        <a th:href="@{|/categories/${category.categoryId}/delete|}">Delete</a>
                     </td>
                 </tr>
             </tbody>
