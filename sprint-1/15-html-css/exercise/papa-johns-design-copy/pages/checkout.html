@@ -81,21 +81,22 @@
         <section class="checkout">
             <div class="container checkout__content">
                 <h1 class="checkout__title">Start your order</h1>
-                <div class="order-type">
-                    <a href="#" class="delivery button button-green">
-                        <div>
+                <div class="order-type-container">
+                    <input type="radio" id="delivery" name="order-type" checked>
+                    <label for="delivery" class="button radio-button">
+                        <span class="icon delivery"></span>
+                        Delivery
+                    </label>
 
-                        </div>
-                        <div>Delivery</div>
-                    </a>
-                    <a href="#" class="delivery button button-white">
-                        <div>
-
-                        </div>
-                        <div>Carryout</div>
-                    </a>
+                    <input type="radio" id="carryout" name="order-type">
+                    <label for="carryout" class="button radio-button">
+                        <span class="icon carryout"></span>
+                        Carryout
+                    </label>
                 </div>
-                <p>All fields marked with an asterisk ( * ) are required.</p>
+
+                <p>All fields marked with an asterisk (*) are required.</p>
+
                 <form class="checkout__form">
                     <div class="form-row">
                         <div class="form-field">
