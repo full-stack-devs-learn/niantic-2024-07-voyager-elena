@@ -66,6 +66,10 @@ body {
     box-sizing: border-box;
 }
 
+h1 {
+    margin: 0;
+}
+
 .container {
     width: 100%;
     max-width: 1600px;
@@ -348,19 +352,15 @@ input::placeholder {
 }
 
 .home-hero__content {
-    position: relative;
     display: flex;
     flex-direction: column;
     align-items: center;
     row-gap: 3px;
-    padding: 110px 60px 0px;
+    padding: 120px 85px 0px 45px;
     width: fit-content;
 }
 
 .hero-first-title {
-    position: absolute;
-    top: 120px;
-    left: 45px;
     z-index: 2;
     font-family: Pappy;
     font-size: 135px;
@@ -369,7 +369,6 @@ input::placeholder {
     text-transform: uppercase;
     color: var(--color-red);
     -webkit-text-stroke: 3px var(--color-white);
-
 }
 
 .hero-second-title {
@@ -378,7 +377,7 @@ input::placeholder {
     font-size: 120px;
     font-weight: 500;
     color: #cfeb0c;
-    padding-right: 40px;
+    margin: 45px 0 80px;
 }
 
 .hero-subtitle {
@@ -388,14 +387,13 @@ input::placeholder {
     font-size: 36px;
     font-weight: 500;
     text-transform: uppercase;
-    padding-right: 40px;
     margin-bottom: 125px;
 }
 
 .home-hero__content>div {
     display: flex;
     justify-content: space-between;
-    width: 590px;
+    width: 100%;
 }
 
 .hero-price {
@@ -432,9 +430,7 @@ input::placeholder {
     background-position: left 0px top -5px;
     height: 650px;
     background-size: contain;
-
 }
-
 
 /* -------------------- Deals Slider Section-------------------- */
 
@@ -557,6 +553,44 @@ input::placeholder {
 
 /* ---------- Styles for smaller screens ----------*/
 
+/* ---------- max-width: 1100px ---------- */
+
+@media only screen and (max-width: 1101px) {
+
+    .home-hero__container {
+        column-gap: 50px;
+    }
+
+    .hero-first-title {
+        font-size: 100px;
+    }
+
+    .hero-second-title {
+        font-size: 88px;
+        margin: 25px 0 50px;
+    }
+
+    .hero-subtitle {
+        font-size: 26px;
+        margin-bottom: 180px;
+    }
+
+    .hero-price1 {
+        font-size: 42px;
+    }
+
+    .hero-price2 {
+        font-size: 54px;
+        padding-bottom: 5px;
+    }
+
+    .hero-btn {
+        padding: 12px 16px;
+        font-size: 18px;
+    }
+
+}
+
 /* ---------- max-width: 990px ---------- */
 
 @media only screen and (max-width: 991px) {
@@ -595,6 +629,19 @@ input::placeholder {
     .promo-code-form {
         height: 62px;
     }
+
+    .home-hero {
+        height: 450px;
+    }
+
+    .home-hero__container {
+        column-gap: 30px;
+    }
+
+    .hero-subtitle {
+        font-size: 26px;
+        margin-bottom: 120px;
+    }
 }
 
 /* ---------- max-width: 830px ---------- */
@@ -610,7 +657,6 @@ input::placeholder {
         display: block;
     }
 
-
     .top-nav-link {
         padding: 10px 5px;
     }
@@ -618,6 +664,103 @@ input::placeholder {
     .bottom-nav-link {
         font-size: 22px;
         padding: 12px 8px 8px;
+    }
+
+    .home-hero__content {
+        padding: 110px 30px 0;
+    }
+
+    .home-hero__container {
+        column-gap: 0px;
+    }
+
+    .home-hero__img {
+        background-position: left 0px top 30px;
+        height: 500px;
+    }
+
+}
+
+/* ---------- max-width: 720px ---------- */
+
+@media only screen and (max-width: 721px) {
+
+    .home-hero__container {
+        flex-direction: column-reverse;
+        height: 100%;
+    }
+
+    .home-hero__img {
+        background-image: url('../assets/images/mobile-pizza-hero.webp');
+        background-position: bottom 0px center;
+    }
+
+    .home-hero__content {
+        position: relative;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        row-gap: 3px;
+        width: 100%;
+        padding: 0 30px 20px;
+    }
+
+    .hero-first-title {
+        margin-bottom: 15px;
+        letter-spacing: -3px;
+    }
+
+    .hero-second-title {
+        margin: 10px 0 50px;
+    }
+
+    .hero-subtitle {
+        margin-bottom: 30px;
+    }
+
+}
+
+/* ---------- max-width: 480px ---------- */
+
+@media only screen and (max-width: 481px) {
+
+    .hero-first-title {
+        font-size: 70px;
+        letter-spacing: -1px;
+    }
+
+    .hero-second-title {
+        font-size: 63px;
+        margin: 0px 0 30px;
+    }
+
+    .hero-subtitle {
+        font-size: 24px;
+        margin-bottom: 20px;
+    }
+
+    .hero-price1 {
+        font-size: 35px;
+    }
+
+    .hero-price2 {
+        font-size: 42px;
+        padding-bottom: 2px;
+    }
+
+    .hero-btn {
+        padding: 8px 12px;
+        font-size: 16px;
+    }
+
+}
+
+/* ---------- max-width: 410px ---------- */
+
+@media only screen and (max-width: 411px) {
+
+    .home-hero__img {
+        background-position: center 190px;
     }
 
 }
