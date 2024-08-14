@@ -768,6 +768,10 @@ input::placeholder {
         left: 20px;
     }
 
+    .footer__content {
+        flex-direction: column-reverse;
+        row-gap: 20px;
+    }
 
 }
 
