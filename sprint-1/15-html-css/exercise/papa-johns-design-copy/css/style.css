@@ -136,7 +136,13 @@ a {
     border-radius: 30px;
 }
 
-input {
+.button:disabled {
+    background-color: var(--color-btn-hover);
+    color: var(--color-gray);
+}
+
+input,
+select {
     height: 40px;
     border-radius: 6px;
     border: 1px solid var(--color-gray);
@@ -147,7 +153,8 @@ input[type="text"] {
     padding: 5px 5px 5px 10px;
 }
 
-input[type="text"]:focus {
+input[type="text"]:focus,
+select:focus {
     border: 1px solid var(--color-green-bright);
     outline: none;
 }
@@ -292,7 +299,6 @@ input::placeholder {
     border-bottom-left-radius: 0;
     padding: 8px 12px;
 }
-
 
 .header__cart {
     display: flex;
@@ -500,9 +506,105 @@ input::placeholder {
     color: var(--color-green);
 }
 
+/* -------------------- Checkout Section-------------------- */
 
+.checkout {
+    /* background: linear-gradient(var(--color-light) 3px, var(--color-white) 1%, white, white 30%); */
+    background: rgb(209, 209, 209);
+    background: linear-gradient(180deg, rgba(220, 220, 220, 1) 0%, rgba(245, 245, 245, 1) 2%, rgba(255, 255, 255, 1) 50%);
+    /* height: 1500px; */
+}
 
+.checkout__content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    row-gap: 30px;
+    height: 100%;
+    padding: 60px;
+}
 
+.checkout__title {
+    font-family: PapaSans-MediumCondensed, sans-serif;
+    text-transform: uppercase;
+    font-size: 48px;
+    line-height: normal;
+    text-align: center;
+}
+
+.order-type {
+    display: flex;
+    column-gap: 30px;
+}
+
+.checkout__content p,
+.checkout__content label {
+    font-family: PapaSans, sans-serif;
+    font-size: 14px;
+    line-height: 17px;
+}
+
+.checkout__form {
+    width: 380px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    row-gap: 25px;
+    padding: 20px 0;
+}
+
+.form-row {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+}
+
+.form-field {
+    display: flex;
+    flex-direction: column;
+    row-gap: 3px;
+}
+
+.form-field.street-field,
+.form-field.zip-code-field {
+    width: 100%;
+}
+
+.checkout__form select {
+    padding: 0 30px 0 15px;
+    height: 50px;
+}
+
+.checkout__form input {
+    height: 50px;
+}
+
+#address-type {
+    width: 210px;
+}
+
+#country {
+    width: 140px;
+}
+
+#street {
+    width: 100%;
+}
+
+#apt-ste-floor {
+    width: 110px;
+}
+
+#asf-value {
+    width: 235px;
+}
+
+.checkout__form input[type="submit"] {
+    padding: 20px 30px 45px;
+    font-size: 24px;
+    line-height: 24px;
+    border: none;
+}
 
 /* -------------------- Footer -------------------- */
 
