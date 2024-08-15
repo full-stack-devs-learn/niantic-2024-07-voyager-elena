@@ -1,3 +1,28 @@
-body{
+body {
     font-family: Arial, sans-serif;
+}
+
+
+.navbar-custom {
+    background-color: #7393B3;
+}
+
+.table-hover tbody tr:hover td,
+.table-hover tbody tr:hover th {
+    background-color: #7393b390;
+    color: white;
+    /* font-weight: bold; */
+}
+
+h1 {
+    color: #7393B3;
+}
+
+a {
+    text-decoration: none;
+    color: #7393B3;
+}
+
+.table-hover tbody tr:hover a {
+    color: white;
 }
