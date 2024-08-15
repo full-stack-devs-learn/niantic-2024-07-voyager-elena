@@ -547,6 +547,8 @@ input::placeholder {
     height: 118px;
     border-radius: 10px;
     border: solid 2px var(--color-black);
+    transition: all 0.3ms ease-in-out;
+    cursor: pointer;
 }
 
 .order-type-container input[type="radio"] {
