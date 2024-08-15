@@ -64,6 +64,44 @@ public class ProductDao
         return products;
     }
 
+    public ArrayList<Product> getAllProducts()
+    {
+        ArrayList<Product> products = new ArrayList<>();
+
+        String sql = """
+            SELECT product_id
+                , category_id
+                , product_name
+                , quantity_per_unit
+                , unit_price
+                , units_in_stock
+                , units_on_order
+                , reorder_level
+            FROM products
+            ORDER BY category_id
+                    , product_name
+        """;
+
+        SqlRowSet row = jdbcTemplate.queryForRowSet(sql);
+
+        while(row.next())
+        {
+            int productId = row.getInt("product_id");
+            int categoryId=row.getInt("category_id");
+            String productName = row.getString("product_name");
+            String quantityPerUnit = row.getString("quantity_per_unit");
+            double unitPrice = row.getDouble("unit_price");
+            int unitsInStock = row.getInt("units_in_stock");
+            int unitsOnOrder = row.getInt("units_on_order");
+            int reorderLevel = row.getInt("reorder_level");
+
+            Product product = new Product(productId, categoryId,productName,quantityPerUnit, unitPrice, unitsInStock, unitsOnOrder, reorderLevel);
+            products.add(product);
+        }
+
+        return products;
+    }
+
     public Product getProduct(int productId)
     {
 
