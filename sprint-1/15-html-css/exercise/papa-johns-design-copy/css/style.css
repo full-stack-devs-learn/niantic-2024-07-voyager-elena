@@ -653,6 +653,52 @@ input::placeholder {
     border: none;
 }
 
+/* -------------------- Pizza Details Section-------------------- */
+
+.details {
+    background: rgb(209, 209, 209);
+    background: linear-gradient(180deg, rgba(220, 220, 220, 1) 0%, rgba(245, 245, 245, 1) 2%, rgba(255, 255, 255, 1) 50%);
+}
+
+.details__container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: nowrap;
+    column-gap: 50px;
+    width: 100%;
+    padding: 30px 100px 60px;
+}
+
+.details__img {
+    flex: 0 0 60%;
+    width: 60%;
+}
+
+.details__content {
+    flex: 0 0 40%;
+    width: 40%;
+    padding: 30px 60px 30px 30px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.details__title {
+    font-family: PapaSans-MediumCondensed, sans-serif;
+    text-transform: uppercase;
+    font-size: 38px;
+    line-height: normal;
+    margin-bottom: 25px;
+}
+
+.details__content p {
+    font-family: PapaSans, sans-serif;
+    font-size: 18px;
+    line-height: 28px;
+    margin-bottom: 50px;
+}
+
 /* -------------------- Footer -------------------- */
 
 .footer {
@@ -748,6 +794,15 @@ input::placeholder {
         font-size: 18px;
     }
 
+    .details__container {
+        column-gap: 30px;
+        padding: 30px 50px 60px;
+    }
+
+    .details__content {
+        padding: 30px;
+    }
+
 }
 
 /* ---------- max-width: 990px ---------- */
@@ -841,6 +896,27 @@ input::placeholder {
     .home-hero__img {
         background-position: left 0px top 30px;
         height: 500px;
+    }
+
+    .details__container {
+        flex-direction: column;
+    }
+
+    .details__img,
+    .details__content {
+        width: 100%;
+    }
+
+    .details__title {
+        text-align: center;
+    }
+
+    .details__content {
+        align-items: center;
+    }
+
+    .details__content p {
+        margin-bottom: 30px;
     }
 
 }
@@ -1016,6 +1092,10 @@ input::placeholder {
 
     #asf-value {
         width: 215px;
+    }
+
+    .details__content {
+        padding: 20px 0;
     }
 
 }
