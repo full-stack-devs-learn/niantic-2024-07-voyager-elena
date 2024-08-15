@@ -7,6 +7,7 @@ import com.niantic.services.ProductDao;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.ArrayList;
@@ -34,6 +35,16 @@ public class ProductsController {
         model.addAttribute("products", products);
 
         return "products/index";
+    }
+
+    @GetMapping("/products/{id}")
+    public String getProductDetails(Model model,  @PathVariable int id) {
+        Product product = productDao.getProduct(id);
+        Category category = categoryDao.getCategoryById(product.getCategoryId());
+        model.addAttribute("category", category);
+        model.addAttribute("product", product);
+
+        return "products/details";
     }
 
 }
