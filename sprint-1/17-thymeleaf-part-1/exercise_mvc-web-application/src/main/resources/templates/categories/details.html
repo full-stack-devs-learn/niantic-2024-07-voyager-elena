@@ -16,7 +16,7 @@
 </head>
 
 <body>
-    <div th:replace="fragments/header.html :: nav"></div>
+    <div th:replace="~{fragments/header.html :: nav}"></div>
 
     <main class="d-flex flex-column align-items-center gap-3 mt-5">
         <h1 class="fw-bold mb-5">Category Details</h1>
@@ -28,7 +28,7 @@
                     <td th:text="${category.categoryId}"></td>
                 </tr>
                 <tr>
-                    <td>Category Name</td>
+                    <td class="pe-2">Category Name</td>
                     <td th:text="${category.categoryName}"></td>
                 </tr>
                 <tr>
@@ -38,7 +38,7 @@
             </tbody>
         </table>
 
-        <a th:href="@{|/products?catId=${category.categoryId}|}" class="btn btn-secondary mt-3">View all products in this category</a>
+        <a th:href="@{|/products?catId=${category.categoryId}|}" class="btn btn-outline-secondary mt-3">View all products in this category</a>
         
     </main>
 </body>

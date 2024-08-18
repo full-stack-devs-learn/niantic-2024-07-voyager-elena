@@ -2,6 +2,10 @@ body {
     font-family: Arial, sans-serif;
 }
 
+.nav-container {
+    max-width: 1440px;
+    margin: 0 auto;
+}
 
 .navbar-custom {
     background-color: #7393B3;
@@ -11,7 +15,6 @@ body {
 .table-hover tbody tr:hover th {
     background-color: #7393b390;
     color: white;
-    /* font-weight: bold; */
 }
 
 h1 {
