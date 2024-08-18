@@ -59,7 +59,7 @@ public class CategoriesController {
         categoryDao.updateCategory(category);
         model.addAttribute("prevCategory", prevCategory);
         model.addAttribute("category", category);
-        return "redirect:/edit_success";
+        return "categories/edit_success";
     }
 
     @GetMapping("/categories/{id}/delete")
