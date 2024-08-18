@@ -63,16 +63,18 @@ public class CategoriesController {
     }
 
     @GetMapping("/categories/{id}/delete")
-    public String deleteCategory(Model model, @PathVariable int id) {
+    public String deleteCategoryPage(Model model, @PathVariable int id) {
         Category category = categoryDao.getCategoryById(id);
         model.addAttribute("category", category);
         return "categories/delete";
     }
 
     @PostMapping("/categories/{id}/delete")
-    public String deleteCategory(@PathVariable int id) {
+    public String deleteCategory(Model model, @PathVariable int id) {
+        Category category = categoryDao.getCategoryById(id);
+        model.addAttribute("category", category);
         categoryDao.deleteCategory(id);
-        return "redirect:/categories";
+        return "categories/delete_success";
     }
 
 }
