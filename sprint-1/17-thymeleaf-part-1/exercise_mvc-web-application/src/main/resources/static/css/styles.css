@@ -21,6 +21,10 @@ h1 {
     color: #7393B3;
 }
 
+h1 span {
+    color: #4d6277;
+}
+
 a {
     text-decoration: none;
     color: #7393B3;
@@ -28,4 +32,8 @@ a {
 
 .table-hover tbody tr:hover a {
     color: white;
+}
+
+.category-form {
+    max-width: 500px;
 }
