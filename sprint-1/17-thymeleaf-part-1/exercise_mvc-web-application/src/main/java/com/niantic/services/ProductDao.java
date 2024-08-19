@@ -3,9 +3,12 @@ package com.niantic.services;
 import com.niantic.models.Product;
 import org.apache.commons.dbcp2.BasicDataSource;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.support.GeneratedKeyHolder;
 import org.springframework.jdbc.support.rowset.SqlRowSet;
 
 import javax.sql.DataSource;
+import java.sql.PreparedStatement;
+import java.sql.Statement;
 import java.util.ArrayList;
 
 public class ProductDao
@@ -137,21 +140,42 @@ public class ProductDao
         return null;
     }
 
-    public void addProduct(Product product)
+    public int addProduct(Product product)
     {
         String sql = """
                 INSERT INTO products (product_name, category_id, quantity_per_unit, unit_price, units_in_stock, units_on_order, reorder_level)
                 VALUES (?, ?, ?, ?, ?, ?, ?);
                 """;
 
-        jdbcTemplate.update(sql
-                , product.getProductName()
-                , product.getCategoryId()
-                , product.getQuantityPerUnit()
-                , product.getUnitPrice()
-                , product.getUnitsInStock()
-                , product.getUnitsOnOrder()
-                , product.getReorderLevel());
+//        jdbcTemplate.update(sql
+//                , product.getProductName()
+//                , product.getCategoryId()
+//                , product.getQuantityPerUnit()
+//                , product.getUnitPrice()
+//                , product.getUnitsInStock()
+//                , product.getUnitsOnOrder()
+//                , product.getReorderLevel());
+
+        GeneratedKeyHolder generatedKeyHolder = new GeneratedKeyHolder();
+        jdbcTemplate.update(conn -> {
+
+            // Pre-compiling SQL
+            PreparedStatement preparedStatement = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+
+            // Set parameters
+            preparedStatement.setString(1, product.getProductName());
+            preparedStatement.setInt(2, product.getCategoryId());
+            preparedStatement.setString(3, product.getQuantityPerUnit());
+            preparedStatement.setDouble(4, product.getUnitPrice());
+            preparedStatement.setInt(5, product.getUnitsInStock());
+            preparedStatement.setInt(6, product.getUnitsOnOrder());
+            preparedStatement.setInt(7, product.getReorderLevel());
+
+            return preparedStatement;
+
+        }, generatedKeyHolder);
+
+        return generatedKeyHolder.getKey().intValue();
     }
 
     public void updateProduct(Product product)

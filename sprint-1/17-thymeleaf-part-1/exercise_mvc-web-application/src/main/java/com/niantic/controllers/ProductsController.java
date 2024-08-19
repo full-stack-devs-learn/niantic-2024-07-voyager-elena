@@ -6,9 +6,7 @@ import com.niantic.services.CategoryDao;
 import com.niantic.services.ProductDao;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 
@@ -38,13 +36,105 @@ public class ProductsController {
     }
 
     @GetMapping("/products/{id}")
-    public String getProductDetails(Model model,  @PathVariable int id) {
-        Product product = productDao.getProduct(id);
-        Category category = categoryDao.getCategoryById(product.getCategoryId());
-        model.addAttribute("category", category);
-        model.addAttribute("product", product);
+    public String getProductDetails(Model model, @PathVariable int id) {
+        try {
+            Product product = productDao.getProduct(id);
+            String categoryName = categoryDao.getCategoryById(product.getCategoryId()).getCategoryName();
+            model.addAttribute("categoryName", categoryName);
+            model.addAttribute("product", product);
 
-        return "products/details";
+            return "products/details";
+        } catch (Exception e) {
+            return ("error");
+        }
     }
+
+    @GetMapping("/products/add")
+    public String addProduct(Model model) {
+        model.addAttribute("product", new Product());
+        model.addAttribute("action", "add");
+
+        ArrayList<Category> categories = categoryDao.getCategories();
+        model.addAttribute("categories", categories);
+
+        return "products/add_edit";
+    }
+
+    @PostMapping("/products/add")
+    public String addProduct(Model model, @ModelAttribute("product") Product product) {
+        try {
+            int productId = productDao.addProduct(product);
+            product.setProductId(productId);
+            model.addAttribute("product", product);
+            String categoryName = categoryDao.getCategoryById(product.getCategoryId()).getCategoryName();
+            model.addAttribute("categoryName", categoryName);
+            return "products/add_success";
+        } catch (Exception e) {
+            return ("error");
+        }
+    }
+
+    @GetMapping("/products/{id}/edit")
+    public String editProduct(Model model, @PathVariable int id) {
+        try {
+            Product product = productDao.getProduct(id);
+            model.addAttribute("product", product);
+            model.addAttribute("action", "edit");
+
+            ArrayList<Category> categories = categoryDao.getCategories();
+            model.addAttribute("categories", categories);
+
+            return "products/add_edit";
+        } catch (Exception e) {
+            return ("error");
+        }
+    }
+
+    @PostMapping("/products/{id}/edit")
+    public String editProduct(Model model, @ModelAttribute("product") Product product, @PathVariable int id) {
+        try {
+            Product prevProduct = productDao.getProduct(id);
+            product.setProductId(id);
+            productDao.updateProduct(product);
+            model.addAttribute("prevProduct", prevProduct);
+            model.addAttribute("product", product);
+            return "products/edit_success";
+        } catch (Exception e) {
+            return ("error");
+        }
+    }
+
+    @GetMapping("/products/{id}/delete")
+    public String deleteProductPage(Model model, @PathVariable int id) {
+        try {
+            Product product = productDao.getProduct(id);
+            model.addAttribute("product", product);
+
+            String categoryName = categoryDao.getCategoryById(product.getCategoryId()).getCategoryName();
+            model.addAttribute("categoryName", categoryName);
+
+            return "products/delete";
+        } catch (Exception e) {
+            return ("error");
+        }
+    }
+
+    @PostMapping("/products/{id}/delete")
+    public String deleteProduct(Model model, @PathVariable int id) {
+        try {
+            Product product = productDao.getProduct(id);
+            model.addAttribute("product", product);
+
+            String categoryName = categoryDao.getCategoryById(product.getCategoryId()).getCategoryName();
+            model.addAttribute("categoryName", categoryName);
+
+            productDao.deleteProduct(id);
+
+            return "products/delete_success";
+        } catch (Exception e) {
+            return ("error");
+        }
+    }
+
 
 }

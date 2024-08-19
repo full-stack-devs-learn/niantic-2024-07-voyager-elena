@@ -24,9 +24,13 @@ public class CategoriesController {
 
     @GetMapping("/categories/{id}")
     public String getCategoryDetails(Model model, @PathVariable int id) {
-        var category = categoryDao.getCategoryById(id);
-        model.addAttribute("category", category);
-        return "categories/details";
+        try {
+            var category = categoryDao.getCategoryById(id);
+            model.addAttribute("category", category);
+            return "categories/details";
+        } catch (Exception e) {
+            return ("error");
+        }
     }
 
     @GetMapping("/categories/add")
@@ -50,10 +54,14 @@ public class CategoriesController {
 
     @GetMapping("/categories/{id}/edit")
     public String editCategory(Model model, @PathVariable int id) {
-        Category category = categoryDao.getCategoryById(id);
-        model.addAttribute("category", category);
-        model.addAttribute("action", "edit");
-        return "categories/add_edit";
+        try {
+            Category category = categoryDao.getCategoryById(id);
+            model.addAttribute("category", category);
+            model.addAttribute("action", "edit");
+            return "categories/add_edit";
+        } catch (Exception e) {
+            return ("error");
+        }
     }
 
     @PostMapping("/categories/{id}/edit")
@@ -71,10 +79,15 @@ public class CategoriesController {
     }
 
     @GetMapping("/categories/{id}/delete")
+    // had to change name from deleteCategory
     public String deleteCategoryPage(Model model, @PathVariable int id) {
-        Category category = categoryDao.getCategoryById(id);
-        model.addAttribute("category", category);
-        return "categories/delete";
+        try {
+            Category category = categoryDao.getCategoryById(id);
+            model.addAttribute("category", category);
+            return "categories/delete";
+        } catch (Exception e) {
+            return ("error");
+        }
     }
 
     @PostMapping("/categories/{id}/delete")
