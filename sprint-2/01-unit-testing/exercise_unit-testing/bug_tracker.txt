@@ -50,22 +50,49 @@ Class: Quiz
     Bug 1:
 
         Describe the bug/error:
+        getPercent always returns 0
 
         Where was the bug? (function, line number)
+        getPercent method, in the return statement, the formula had wrong order of operations and (score / possiblePoints) gives zero in integer division
 
         What test helped you find the bug?
+        getPercent_shouldCalculatePercent()
 
         What did you do to fix the bug?
+        changed formula from score / possiblePoints * 100 to score  * 100 / possiblePoints
 
     Bug 2:
 
         Describe the bug/error:
+        getLetterGrade returns B when score is 90 and possiblePoints = 100
 
         Where was the bug? (function, line number)
+        getLetterGrade method, condition in the first if statement
 
         What test helped you find the bug?
+        getLetterGrade_shouldReturnA_whenPercentIs90()
 
         What did you do to fix the bug?
+        replaced percent > 90 with percent >= 90 in the first if statement
+
+    Bugs 3 and 4 are the same as 2 but for percent equals to 80 and 70 correspondingly
+        Tests:
+            getLetterGrade_shouldReturnB_whenPercentIs80() and
+            getLetterGrade_shouldReturnC_whenPercentIs70()
+
+    Bug 5:
+
+        Describe the bug/error:
+        getLetterGrade returns D when score is 54 and possiblePoints = 100
+
+        Where was the bug? (function, line number)
+        getLetterGrade method, condition in the last if statement
+
+        What test helped you find the bug?
+        getLetterGrade_shouldReturnF_whenPercentBetween50and60()
+
+        What did you do to fix the bug?
+        replaced last if statement if(percent > 50) with if(percent >= 60)
 
 
 *** Optional / Challenge ***
