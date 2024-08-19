@@ -96,6 +96,10 @@ public class ProductsController {
             Product prevProduct = productDao.getProduct(id);
             product.setProductId(id);
             productDao.updateProduct(product);
+            String categoryName = categoryDao.getCategoryById(product.getCategoryId()).getCategoryName();
+            model.addAttribute("categoryName", categoryName);
+            String prevCategoryName = categoryDao.getCategoryById(prevProduct.getCategoryId()).getCategoryName();
+            model.addAttribute("prevCategoryName", prevCategoryName);
             model.addAttribute("prevProduct", prevProduct);
             model.addAttribute("product", product);
             return "products/edit_success";
