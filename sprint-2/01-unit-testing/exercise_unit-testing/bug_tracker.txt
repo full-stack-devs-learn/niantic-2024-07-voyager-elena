@@ -3,34 +3,44 @@ Bug Tracker
 Class: Rectangle
 
     Bug 1:
-
         Describe the bug/error:
+        getArea returns wrong result for negative width
 
         Where was the bug? (function, line number)
+        The bug was in the getArea function
 
         What test helped you find the bug?
+        getArea_shouldReturnZero_withNegativeWidth()
 
         What did you do to fix the bug?
+        added condition statement to check if width is negative and returned 0 in this case
 
     Bug 2:
-
         Describe the bug/error:
+        getArea returns wrong result for negative height
 
         Where was the bug? (function, line number)
+        The bug was in the getArea function
 
         What test helped you find the bug?
+        getArea_shouldReturnZero_withNegativeHeight()
 
         What did you do to fix the bug?
+        added condition statement to check if height is negative and returned 0 in this case
 
     Bug 3:
 
         Describe the bug/error:
+        getPerimeter returns wrong perimeter when both width and height are positive
 
         Where was the bug? (function, line number)
+        getPerimeter function, in return statement
 
         What test helped you find the bug?
+        getPerimeter_shouldReturnCorrectPerimeter_whenSizesArePositive()
 
         What did you do to fix the bug?
+        added multiplying the expression in the return statement by 2
 
 
 

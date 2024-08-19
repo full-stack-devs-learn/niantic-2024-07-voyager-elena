@@ -39,6 +39,9 @@ public class Rectangle
 
     public int getArea()
     {
+        if (height < 0 || width < 0) {
+            return 0;
+        }
         return width * height;
     }
 
@@ -49,7 +52,7 @@ public class Rectangle
             return 0;
         }
 
-        return width + height;
+        return (width + height) * 2;
     }
 
 }
