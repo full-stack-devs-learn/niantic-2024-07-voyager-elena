@@ -26,17 +26,35 @@ public class GameCharacter
         this.maxEnergyLevel = maxEnergyLevel;
         this.name = name;
 
-        this.energyLevel = 0;
+        // I believe we should set initial value of energyLevel to maxEnergyLevel
+        // otherwise it is impossible to do something with the gameCharacter object,
+        // we cannot heal the character with energyLevel = 0
+        // because of this requirement "If the energyLevel reaches 0 the character is knocked out and cannot heal anymore."
+
+        this.energyLevel = maxEnergyLevel;
+        // this.energyLevel = 0;
+
     }
 
     public void takeHit(int damage)
     {
-        energyLevel -= damage;
+        if (damage <= energyLevel) {
+            energyLevel -= damage;
+        } else {
+            energyLevel = 0;
+        }
     }
 
     public void heal(int amount)
     {
+        if (isKnockedOut()) {
+            // can not heal
+            return;
+        }
         energyLevel += amount;
+        if (energyLevel > maxEnergyLevel) {
+            energyLevel = maxEnergyLevel;
+        }
     }
 
     public boolean isKnockedOut()

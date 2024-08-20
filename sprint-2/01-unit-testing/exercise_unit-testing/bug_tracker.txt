@@ -104,23 +104,48 @@ Class: GameCharacter
     Bug 1:
 
         Describe the bug/error:
+        takeHit sets energyLevel to negative number wwhen damage is grate then the current energy level
 
         Where was the bug? (function, line number)
+        takeHit method
 
         What test helped you find the bug?
+        takeHit_shouldSetEnergyLevelToZero_whenDamageGreaterThanEnergyLevel()
 
         What did you do to fix the bug?
+        added conditional statement to check if damage is greater then current energy level and set energy level to 0 in that case
 
     Bug 2:
 
         Describe the bug/error:
+        heal sets wrong energy level and it becomes greater than maxEnergyLevel
+        The energyLevel should never increase above the maximum level
 
         Where was the bug? (function, line number)
+        heal method
 
         What test helped you find the bug?
+        heal_ShouldSetEnergyLevelToMaxEnergy_whenTheResultEnergyGreaterThanMaxEnergyLevel()
 
         What did you do to fix the bug?
+        added conditional statement to check if the result energy is greater than maxEnergyLevel
+        and set energyLevel to maxEnergyLevel in this case
 
+    Bug 3:
+
+        Describe the bug/error:
+        heal increases energy level when it is equals to zero
+        But according to the requirements, the character with energyLevel = 0 is knocked out and cannot heal anymore
+
+        Where was the bug? (function, line number)
+        heal method
+
+        What test helped you find the bug?
+        heal_ShouldNotIncreaseEnergyLevel_whenEnergyLevelIsZero()
+
+        What did you do to fix the bug?
+        added conditional statement to check if the character's energylevel = 0
+        (or isKnockedOut is true) then do not increase energyLevel (used return)
 
 
 
