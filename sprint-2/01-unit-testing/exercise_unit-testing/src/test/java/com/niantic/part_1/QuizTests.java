@@ -10,7 +10,6 @@ class QuizTests {
     private Quiz quiz;
     private final int possiblePoints = 100;
     private final String studentName = "John Doe";
-    private String expectedLetterGrade;
 
     @BeforeEach
     public void setup() {
@@ -229,6 +228,34 @@ class QuizTests {
                 "Letter grade for score = " + score +
                         " and possiblePoints = " + possiblePoints +
                         " should be equals to " + expectedLetterGrade);
+    }
+
+    @Test
+    public void getLetterGrade_shouldReturnF_whenPercentBelow60() {
+        // I want to test every case from 0 to 59
+        // tests for A, B, C, D could be organized the same way, with for loop
+        // for (int score = 90; score <= 100; score++) for A
+        // for (int score = 80; score < 90 ; score++) for B
+        // for (int score = 70; score < 80; score++) for C
+        // for (int score = 60; score < 70; score++) for D
+
+
+        // arrange
+        String expectedLetterGrade = "F";
+
+        for (int score = 0; score < 60; score++) {
+            //arrange
+            quiz.setScore(score);
+
+            // act
+            String actualLetterGrade = quiz.getLetterGrade();
+
+            // assert
+            assertEquals(expectedLetterGrade, actualLetterGrade,
+                    "Letter grade for score = " + score +
+                            " and possiblePoints = " + possiblePoints +
+                            " should be equals to " + expectedLetterGrade);
+        }
     }
 
 }
