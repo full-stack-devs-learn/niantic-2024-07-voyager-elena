@@ -245,4 +245,20 @@ class WizardTest extends ReflectionBase<Wizard>
 
     }
 
+    @Test
+    public void wizard_shouldHave_SpecialAbilityOverridden() throws InvocationTargetException, InstantiationException, IllegalAccessException
+    {
+        // arrange
+        var constructor = getConstructor(klass, String.class, Integer.TYPE, Integer.TYPE, Integer.TYPE, Integer.TYPE);
+        var champ = constructor.newInstance("Gandalf", 50, 1, 200, 100);
+        String expectedSpecialAbility = "Cast Spells";
+
+        // act
+        var specialAbility = getMethod(klass, "specialAbility");
+
+        // assert
+        assertNotNull(specialAbility, "\nWizard should have a specialAbility method");
+        assertEquals(expectedSpecialAbility, (String) specialAbility.invoke(champ), "Wizard's special ability should be \"Cast Spells\"");
+    }
+
 }

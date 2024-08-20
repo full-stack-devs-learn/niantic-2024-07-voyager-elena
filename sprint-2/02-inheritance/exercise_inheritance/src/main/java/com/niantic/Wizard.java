@@ -58,6 +58,7 @@ public class Wizard extends Character {
 
     @Override
     public String specialAbility() {
+        // return "Grow long white beard";
         return "Cast Spells";
     }
 }
