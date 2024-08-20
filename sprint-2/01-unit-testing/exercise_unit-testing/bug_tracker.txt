@@ -104,7 +104,7 @@ Class: GameCharacter
     Bug 1:
 
         Describe the bug/error:
-        takeHit sets energyLevel to negative number wwhen damage is grate then the current energy level
+        takeHit sets energyLevel to negative number when damage is grater then the current energy level
 
         Where was the bug? (function, line number)
         takeHit method
@@ -154,19 +154,27 @@ Class: Printer
     Bug 1:
 
         Describe the bug/error:
+        print method returns negative number when the amount of pages to be print is negative
 
         Where was the bug? (function, line number)
+        print method
 
         What test helped you find the bug?
+        print_shouldNotPrint_whenAmountOfCopiesIsNegative()
 
         What did you do to fix the bug?
+        added conditional statement to check if pages < 0, if so return 0
 
     Bug 2:
 
         Describe the bug/error:
+        replaceToner does not set toner to MAX_TONER
 
         Where was the bug? (function, line number)
+        replaceToner method
 
         What test helped you find the bug?
+        replaceToner_shouldResetTonerToMaximumCapacity()
 
         What did you do to fix the bug?
+        replaced this.toner += MAX_TONER; with this.toner = MAX_TONER;
