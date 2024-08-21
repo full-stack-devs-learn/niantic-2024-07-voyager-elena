@@ -36,7 +36,9 @@ public class Knight extends Character {
         // should perform all of the levelUp functions of a character levelUp()
         super.levelUp();
         // should also increase the armor by 5 points
-        armor += 5;
+        if (!isDefeated()) {
+            armor += 5;
+        }
     }
 
     @Override
