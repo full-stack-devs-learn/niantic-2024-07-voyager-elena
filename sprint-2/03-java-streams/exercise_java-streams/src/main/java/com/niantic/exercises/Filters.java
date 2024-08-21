@@ -15,7 +15,9 @@ public class Filters
      */
     public List<LineItem> filterByCompanyName(List<LineItem> lineItems, String companyName)
     {
-        return new ArrayList<>();
+        return lineItems.stream()
+                .filter(item -> item.getCompanyName().toLowerCase().contains(companyName.toLowerCase()))
+                .toList();
     }
 
     /*
@@ -25,7 +27,9 @@ public class Filters
      */
     public List<LineItem> filterByCategory(List<LineItem> lineItems, String categoryName)
     {
-        return new ArrayList<>();
+        return lineItems.stream()
+                .filter(item -> item.getCategoryName().toLowerCase().contains(categoryName.toLowerCase()))
+                .toList();
     }
 
     /*
@@ -35,7 +39,9 @@ public class Filters
      */
     public List<LineItem> filterByProduct(List<LineItem> lineItems, String productName)
     {
-        return new ArrayList<>();
+        return lineItems.stream()
+                .filter(item -> item.getProductName().toLowerCase().contains(productName.toLowerCase()))
+                .toList();
     }
 
     /*
@@ -44,7 +50,9 @@ public class Filters
      */
     public List<LineItem> filterByYear(List<LineItem> lineItems, int year)
     {
-        return new ArrayList<>();
+        return lineItems.stream()
+                .filter(item -> item.getOrderDate().getYear() == year)
+                .toList();
     }
 
 
@@ -54,6 +62,8 @@ public class Filters
      */
     public List<LineItem> filterByOrderId(List<LineItem> lineItems, int orderId)
     {
-        return new ArrayList<>();
+        return lineItems.stream()
+                .filter(item -> item.getOrderId() == orderId)
+                .toList();
     }
 }
