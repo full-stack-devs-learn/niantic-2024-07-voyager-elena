@@ -2,6 +2,8 @@ package com.niantic.part_2_challenge;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvSource;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
@@ -115,7 +117,7 @@ class PrinterTests {
         // set
         int actualNumberOfPagesPrinted = printer.print(pages);
 
-        //assert
+        // assert
         assertEquals(expectedNumberOfPagesPrinted, actualNumberOfPagesPrinted,
                 "Printer should print " + expectedNumberOfPagesPrinted +
                         " pages when number of pages to be printed is " + pages + ", sheets=" + sheets +
@@ -139,10 +141,48 @@ class PrinterTests {
 
     }
 
-//    @Test
-//    public void addPaper_should
+    @Test
+    public void addPaper_shouldNotChangeSheetsValue_whenPaperIsNegative() {
+        // arrange
+        int sheetsBeforeCallingAddPapper = printer.getSheets();
+        int expectedSheets = sheetsBeforeCallingAddPapper;
 
+        // set
+        printer.addPaper(-100);
+        int actualSheets = printer.getSheets();
 
+        // assert
+        assertEquals(expectedSheets, actualSheets, "addPaper should not add paper when paper is negative");
+    }
+
+    @ParameterizedTest
+    @CsvSource({
+            "-20, 300",
+            "0, 300",
+            "100, 400",
+            "111, 411",
+            "199, 499",
+            "200, 500",
+            "201, 500",
+            "300, 500",
+            "1000, 500"
+    })
+    public void addPaper_shouldCorrectlyAddPaper(String paperIn, String expectedIn) {
+        // arrange
+        int paper = Integer.parseInt(paperIn);
+        int expectedSheets = Integer.parseInt(expectedIn);
+        int sheetsBefore = printer.getSheets();
+
+        // set
+        printer.addPaper(paper);
+        int actualSheets = printer.getSheets();
+
+        // assert
+        assertEquals(expectedSheets, actualSheets, "addPaper should add paper correctly" +
+                "\n sheets before adding paper: " + sheetsBefore +
+                "\n MAX_SHEET_CAPACITY = " + MAX_SHEET_CAPACITY +
+                "\n number of sheets were sent to addPaper method: " + paper);
+    }
 
 
 }

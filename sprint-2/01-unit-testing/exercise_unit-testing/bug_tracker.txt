@@ -178,3 +178,31 @@ Class: Printer
 
         What did you do to fix the bug?
         replaced this.toner += MAX_TONER; with this.toner = MAX_TONER;
+
+    Bug 3:
+
+        Describe the bug/error:
+        addPaper method changes number of sheets when its parameter paper is negative
+
+        Where was the bug? (function, line number)
+        addPaper method
+
+        What test helped you find the bug?
+        addPaper_shouldNotChangeSheetsValue_whenPaperIsNegative()
+
+        What did you do to fix the bug?
+        added conditional statement to check if paper is 0 or negative and return (=do nothing) in this case
+
+    Bug 4:
+
+        Describe the bug/error:
+        addPaper method returns more than MAX_SHEET_CAPACITY pages added
+
+        Where was the bug? (function, line number)
+        addPaper method, in if statement: if(paper > MAX_SHEET_CAPACITY)
+
+        What test helped you find the bug?
+        addPaper_shouldCorrectlyAddPaper()
+
+        What did you do to fix the bug?
+        replaced if(paper > MAX_SHEET_CAPACITY) with if(paper + sheets > MAX_SHEET_CAPACITY)
