@@ -199,7 +199,7 @@ public class KnightTest extends ReflectionBase<Knight> {
 //            "10",
 //            "20"
 //    })
-    @ValueSource(ints = {0, 1, 5, 10, 15}) // found example with Value score here https://www.baeldung.com/parameterized-tests-junit-5
+    @ValueSource(ints = {0, 1, 5, 10, 15}) // found example with ValueSource here https://www.baeldung.com/parameterized-tests-junit-5
     public void takeDamage_shouldTakeArmorInAccount(int armor) throws InvocationTargetException, InstantiationException, IllegalAccessException {
         // arrange
         var constructor = getConstructor(knightClass, String.class, Integer.TYPE, Integer.TYPE, Integer.TYPE, Integer.TYPE);
