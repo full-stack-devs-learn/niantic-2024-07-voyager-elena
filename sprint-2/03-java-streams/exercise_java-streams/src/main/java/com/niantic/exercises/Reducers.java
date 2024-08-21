@@ -16,7 +16,9 @@ public class Reducers
      */
     public double totalSales(List<LineItem> lineItems)
     {
-        return 0;
+        return lineItems.stream()
+                .map(LineItem::getLineTotal)
+                .reduce(0.0, Double::sum);
     }
 
     /*
@@ -26,7 +28,7 @@ public class Reducers
      */
     public double averageSalesPerLineItem(List<LineItem> lineItems)
     {
-        return 0;
+        return totalSales(lineItems) / lineItems.size();
     }
 
     /*
@@ -40,7 +42,13 @@ public class Reducers
      */
     public double averageSalesPerItem(List<LineItem> lineItems)
     {
-        return 0;
+        // this method did not pass test
+//        return lineItems.stream()
+//                .map(item -> item.getLineTotal() / item.getQuantity())
+//                .reduce(0.0, Double::sum)
+//                / lineItems.size();
+//
+        return totalSales(lineItems) / totalItemCount(lineItems);
     }
 
     /*
@@ -52,7 +60,9 @@ public class Reducers
      */
     public int totalItemCount(List<LineItem> lineItems)
     {
-        return 0;
+        return lineItems.stream()
+                .map(LineItem::getQuantity)
+                .reduce(0, Integer::sum);
     }
 
     /*
@@ -62,7 +72,7 @@ public class Reducers
      */
     public double averageItemCount(List<LineItem> lineItems)
     {
-        return 0;
+        return 1.0 * totalItemCount(lineItems) / lineItems.size();
     }
 
     /*
@@ -71,7 +81,9 @@ public class Reducers
      */
     public double maxLineItem(List<LineItem> lineItems)
     {
-        return 0;
+        return lineItems.stream()
+                .map(LineItem::getLineTotal)
+                .reduce(lineItems.getFirst().getLineTotal(), Math::max);
     }
 
     /*
@@ -82,7 +94,9 @@ public class Reducers
      */
     public double minLineItem(List<LineItem> lineItems)
     {
-        return 0;
+        return lineItems.stream()
+                .map(LineItem::getLineTotal)
+                .reduce(lineItems.getFirst().getLineTotal(), Math::min);
     }
 
 }
