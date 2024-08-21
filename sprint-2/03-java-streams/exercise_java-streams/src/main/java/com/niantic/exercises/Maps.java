@@ -18,7 +18,11 @@ public class Maps
      */
     public List<String> mapCompanyNames(List<LineItem> lineItems)
     {
-        return new ArrayList<>();
+        return lineItems.stream()
+                .map(LineItem::getCompanyName)
+                .distinct()
+                .sorted()
+                .toList();
     }
 
     /*
@@ -31,7 +35,11 @@ public class Maps
      */
     public List<String> mapCategories(List<LineItem> lineItems)
     {
-        return new ArrayList<>();
+        return lineItems.stream()
+            .map(LineItem::getCategoryName)
+            .distinct()
+            .sorted()
+            .toList();
     }
 
     /*
@@ -44,7 +52,11 @@ public class Maps
      */
     public List<String> mapProducts(List<LineItem> lineItems)
     {
-        return new ArrayList<>();
+        return lineItems.stream()
+                .map(LineItem::getProductName)
+                .distinct()
+                .sorted()
+                .toList();
     }
 
     /*
@@ -57,7 +69,12 @@ public class Maps
      */
     public List<String> mapYears(List<LineItem> lineItems)
     {
-        return new ArrayList<>();
+        return lineItems.stream()
+                .map(item -> item.getOrderDate().getYear())
+                .distinct()
+                .sorted()
+                .map(yearInt -> Integer.toString(yearInt))
+                .toList();
     }
 
     /*
@@ -70,6 +87,11 @@ public class Maps
      */
     public List<String> mapOrderIds(List<LineItem> lineItems)
     {
-        return new ArrayList<>();
+        return lineItems.stream()
+                .map(LineItem::getOrderId)
+                .distinct()
+                .sorted()
+                .map(yearInt -> Integer.toString(yearInt))
+                .toList();
     }
 }
