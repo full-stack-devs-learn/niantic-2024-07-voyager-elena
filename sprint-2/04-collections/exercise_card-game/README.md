@@ -29,6 +29,16 @@ the code later if needed.
 * Consider using collections besides an ArrayList if possible (not required)
 
 
+## Go Fish Card Game  
+
+![Go Fish image](./images/go_fish.png)
+
+Game description can be found here:  
+https://thegeniusofplay.org/genius/play-ideas-tips/play-ideas/go-fish-card-game.aspx
+
+and on Wikipedia:
+https://en.wikipedia.org/wiki/Go_Fish
+
 
 
 
