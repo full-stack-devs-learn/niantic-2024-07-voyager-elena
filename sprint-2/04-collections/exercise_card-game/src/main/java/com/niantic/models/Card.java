@@ -29,6 +29,8 @@ public class Card implements Comparable<Card> {
 
     @Override
     public int compareTo(Card o) {
-        return this.faceValue.getIntValue() - o.faceValue.getIntValue();
+        return (this.faceValue.getIntValue() - o.faceValue.getIntValue()) == 0
+                ? this.suit.getOrder() - o.getSuit().getOrder()
+                : this.faceValue.getIntValue() - o.faceValue.getIntValue();
     }
 }
