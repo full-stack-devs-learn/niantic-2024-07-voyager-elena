@@ -44,7 +44,7 @@ Number of players: 2 - 5
 Five cards are dealt from a standard 52-card deck to each player, or seven cards if there are only two players.  
 The remaining cards are shared between the players, usually spread out in a disorderly pile referred to as the "ocean" or "pool".
 
-### Game flow - how to play he game
+### Game flow - how to play the game
 - The player whose turn it is to play asks any another player for their cards of a particular face value. For example, Player 1 may ask, "Player 2, do you have any eights?"
 Player 1 must have at least one card of the rank they requested.
 
