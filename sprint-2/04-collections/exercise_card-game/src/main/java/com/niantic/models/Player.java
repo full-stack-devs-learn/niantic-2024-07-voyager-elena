@@ -1,33 +1,30 @@
 package com.niantic.models;
 
-public class Player
-{
-    private String name;
-    private Hand hand;
+import java.util.HashSet;
 
-    public Player(String name)
-    {
+public class Player {
+    private final String name;
+    private final Hand hand;
+    private final HashSet<CardSet> collectedSets = new HashSet<>();
+
+    public Player(String name) {
         this.name = name;
         hand = new Hand();
     }
 
-    public String getName()
-    {
+    public String getName() {
         return name;
     }
 
-    public void dealTo(Card card)
-    {
+    public void dealTo(Card card) {
         hand.dealTo(card);
     }
 
-    public int getHandValue()
-    {
-        return hand.getPointValue();
+    public void displayCards() {
+        hand.displayCards();
     }
 
-    public Hand getHand()
-    {
-        return hand;
+    public int getPlayerScore() {
+        return collectedSets.size();
     }
 }
