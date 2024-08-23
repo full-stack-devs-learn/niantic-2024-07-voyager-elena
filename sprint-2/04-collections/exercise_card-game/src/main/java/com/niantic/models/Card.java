@@ -1,23 +1,34 @@
 package com.niantic.models;
 
-public class Card
-{
-    private String color;
-    private int number;
+import com.niantic.models.enums.FaceValue;
+import com.niantic.models.enums.Suit;
+import com.niantic.ui.ColorCodes;
 
-    public Card(String color, int number)
-    {
-        this.color = color;
-        this.number = number;
+public class Card implements Comparable<Card> {
+
+    private final Suit suit;
+    private final FaceValue faceValue;
+
+    public Card(Suit suit, FaceValue faceValue) {
+        this.suit = suit;
+        this.faceValue = faceValue;
     }
 
-    public String getColor()
-    {
-        return color;
+    public Suit getSuit() {
+        return suit;
     }
 
-    public int getValue()
-    {
-        return number;
+    public FaceValue getFaceValue() {
+        return faceValue;
+    }
+
+    @Override
+    public String toString() {
+        return ColorCodes.WHITE_BACKGROUND + faceValue.getDisplayValue() + suit.getImage() + ColorCodes.RESET;
+    }
+
+    @Override
+    public int compareTo(Card o) {
+        return this.faceValue.getIntValue() - o.faceValue.getIntValue();
     }
 }
