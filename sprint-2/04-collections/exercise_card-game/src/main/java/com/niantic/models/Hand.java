@@ -1,35 +1,32 @@
 package com.niantic.models;
 
 import java.util.ArrayList;
+import java.util.Collections;
 
-public class Hand
-{
+public class Hand {
     private final ArrayList<Card> cards = new ArrayList<>();
 
-    public ArrayList<Card> getCards()
-    {
+    public ArrayList<Card> getCards() {
         return cards;
     }
 
-    public int getPointValue()
-    {
-        // return sum of all card points
-        int sum = 0;
-
-        for(Card card : cards)
-        {
-            sum += card.getValue();
-        }
-        return sum;
+    public boolean isEmpty() {
+        return cards.isEmpty();
     }
 
-    public int getCardCount()
-    {
-        return cards.size();
-    }
-
-    public void dealTo(Card card)
-    {
+    public void dealTo(Card card) {
         cards.add(card);
+    }
+
+    public void displayCards() {
+        sortCarts();
+        for (var card : cards) {
+            System.out.print(card + " ");
+        }
+        System.out.println();
+    }
+
+    private void sortCarts() {
+        Collections.sort(cards);
     }
 }
