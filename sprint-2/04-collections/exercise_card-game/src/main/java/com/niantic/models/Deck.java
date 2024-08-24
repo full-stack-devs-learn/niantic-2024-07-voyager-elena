@@ -40,6 +40,15 @@ public class Deck {
         return cards.size();
     }
 
+    public boolean isEmpty() {
+        return cards.isEmpty();
+    }
+
+    public Card drawCard() {
+        return cards.removeFirst();
+    }
+
+    // since our deck is shuffled there is no need in this method
     public Card takeRandomCard() {
         int randIdx = (int) (Math.random() * cards.size());
         System.out.println("Deck size: " + cards.size());
@@ -51,5 +60,11 @@ public class Deck {
 
     public void shuffle() {
         Collections.shuffle(cards);
+    }
+
+    public void displayAllCardsInDeck() {
+        for (var card : cards) {
+            System.out.println(card);
+        }
     }
 }
