@@ -29,4 +29,29 @@ public class Hand {
     private void sortCarts() {
         Collections.sort(cards);
     }
+
+    public ArrayList<Card> returnCardsByFaceValue(String value, boolean removeFromHand) {
+        ArrayList<Card> requestedCards = new ArrayList<>();
+        ArrayList<Integer> indexesToRemove = new ArrayList<>();
+
+        for (int i = 0; i < cards.size(); i++) {
+            Card card = cards.get(i);
+            if (card.getFaceValue().getDisplayValue().equalsIgnoreCase(value)) {
+                requestedCards.add(card);
+                indexesToRemove.add(i);
+            }
+        }
+
+        if (removeFromHand) {
+            System.out.println("Indexes to remove:");
+            System.out.println(indexesToRemove);
+            for (int i = indexesToRemove.size() - 1; i >= 0; i--) {
+                cards.remove((int)indexesToRemove.get(i));
+            }
+            System.out.println("cards after removing:");
+            displayCards();
+        }
+
+        return requestedCards;
+    }
 }

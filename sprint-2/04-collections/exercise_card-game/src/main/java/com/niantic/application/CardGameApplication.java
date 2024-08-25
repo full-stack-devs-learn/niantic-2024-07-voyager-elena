@@ -24,23 +24,14 @@ public class CardGameApplication {
         return players.getFirst();
     }
 
-    private void gamePlay() {
-    }
-
     private void startGame() {
-        // TODO:
-        //   play with computer or with other players
-        //   how many players?
-        //   enter players names
-        System.out.println("Deck before shuffling: ");
-        deck.displayAllCardsInDeck();
-        System.out.println("Number of cards in the deck: " + deck.getCardCount());
         createPlayers();
         dealCards();
     }
 
     private void createPlayers() {
         // TODO:
+        //   play with computer or with other players
         //   ask user how many players (2 - 5)
         //   ask to enter player names
 
@@ -64,6 +55,21 @@ public class CardGameApplication {
             }
         }
     }
+
+    private void gamePlay() {
+        while (!deck.isEmpty()) {
+            for (Player player : players) {
+                UserInterface.printPlayerTurn(player);
+                String requestedValue = player.askForCardValue();
+
+                if(!player.hasCards()) {
+                    UserInterface.displayNoCardsLeft(player);
+                    return;
+                }
+            }
+        }
+    }
+
 
 
 }
