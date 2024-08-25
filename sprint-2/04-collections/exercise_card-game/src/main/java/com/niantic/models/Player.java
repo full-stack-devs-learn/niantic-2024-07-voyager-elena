@@ -1,15 +1,14 @@
 package com.niantic.models;
 
-import com.niantic.models.enums.FaceValue;
 import com.niantic.ui.UserInterface;
 
 import java.util.ArrayList;
 import java.util.HashSet;
 
 public class Player {
-    private final String name;
-    private final Hand hand;
-    private final HashSet<CardSet> collectedSets = new HashSet<>();
+    protected final String name;
+    protected final Hand hand;
+    protected final HashSet<CardSet> collectedSets = new HashSet<>();
 
     public Player(String name) {
         this.name = name;
@@ -28,7 +27,7 @@ public class Player {
         hand.displayCards();
     }
 
-    public int getPlayerScore() {
+    public int getScore() {
         return collectedSets.size();
     }
 

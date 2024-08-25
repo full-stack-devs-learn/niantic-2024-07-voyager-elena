@@ -23,7 +23,7 @@ public class UserInterface {
         System.out.println("-".repeat(30));
 
         for (var player : players) {
-            System.out.print(player.getName() + ": " + player.getPlayerScore());
+            System.out.print(player.getName() + ": " + player.getScore());
             System.out.println();
         }
     }

@@ -14,6 +14,10 @@ public class Hand {
         return cards.isEmpty();
     }
 
+    public int getNumberOfCards() {
+        return cards.size();
+    }
+
     public void dealTo(Card card) {
         cards.add(card);
     }
@@ -46,12 +50,16 @@ public class Hand {
             System.out.println("Indexes to remove:");
             System.out.println(indexesToRemove);
             for (int i = indexesToRemove.size() - 1; i >= 0; i--) {
-                cards.remove((int)indexesToRemove.get(i));
+                cards.remove((int) indexesToRemove.get(i));
             }
             System.out.println("cards after removing:");
             displayCards();
         }
 
         return requestedCards;
+    }
+
+    public Card getCardByIndex(int idx) {
+        return cards.get(idx);
     }
 }

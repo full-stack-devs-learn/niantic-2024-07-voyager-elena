@@ -1,6 +1,7 @@
 package com.niantic.application;
 
 import com.niantic.models.Card;
+import com.niantic.models.Computer;
 import com.niantic.models.Deck;
 import com.niantic.models.Player;
 import com.niantic.ui.UserInterface;
@@ -13,6 +14,8 @@ public class CardGameApplication {
 
     public void run() {
         startGame();
+        // for testing purposes
+        UserInterface.displayAllPlayersCards(players);
         gamePlay();
         UserInterface.displayAllPlayersCards(players);
         UserInterface.printAllPlayersScores(players);
@@ -38,6 +41,9 @@ public class CardGameApplication {
         // for now there will be only two players: Player 1 and Player 2
         players.add(new Player("Player 1"));
         players.add(new Player("Player 2"));
+        players.add(new Computer());
+        players.add(new Computer());
+        players.add(new Computer());
     }
 
     private void dealCards() {
@@ -61,6 +67,17 @@ public class CardGameApplication {
             for (Player player : players) {
                 UserInterface.printPlayerTurn(player);
                 String requestedValue = player.askForCardValue();
+
+                // since there are only two players in this game version so far,
+                // skip step where player choose another player to ask cards
+
+                Player playerToAskCards = player;
+                for (var p : players) {
+                    if (p != player) {
+                        playerToAskCards = p;
+                    }
+                }
+                System.out.println("Player to ask: " + playerToAskCards.getName());
 
                 if(!player.hasCards()) {
                     UserInterface.displayNoCardsLeft(player);
