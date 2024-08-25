@@ -4,6 +4,7 @@ import com.niantic.models.Card;
 import com.niantic.models.Computer;
 import com.niantic.models.Deck;
 import com.niantic.models.Player;
+import com.niantic.models.enums.FaceValue;
 import com.niantic.ui.UserInterface;
 
 import java.util.ArrayList;
@@ -88,21 +89,36 @@ public class CardGameApplication {
                     // check if playerToAskCards has cards with requestedValue
                     // playerToAskCards must hand over all cards of that face value they have
                     ArrayList<Card> requestedCards = playerToAskCards.returnCardsByFaceValue(requestedValue, true);
+                    FaceValue faceValueGot;
                     if (requestedCards.isEmpty()) {
                         UserInterface.goFish(playerToAskCards.getName(), requestedValue);
                         // If a player is told to “Go fish!” they pull a random card from the deck and add it to their hand.
                         Card card = deck.drawCard();
                         UserInterface.newCardMessage(card);
                         player.dealTo(card);
+                        faceValueGot = card.getFaceValue();
                         // After a player is told to “Go Fish!” and selects their random card, their turn ends
                         endOfTurn = true;
-
                     } else {
                         // add cards to player's hand
                         UserInterface.newCardsMessage(requestedCards, playerToAskCards.getName());
                         player.addCards(requestedCards);
+                        faceValueGot = requestedCards.getFirst().getFaceValue();
                     }
                     // TODO: check if player has a set after getting cards (form another player or from deck
+                    boolean wasSetCollected = player.checkForSet(faceValueGot);
+                    if (wasSetCollected) {
+                        UserInterface.displaySetCollectedMessage(player);
+                        UserInterface.displayPlayerCards(player);
+                        if (!player.hasCards()) {
+                            // Game over because play continues until one player runs out of cards
+                            return;
+                        }
+                    }
+                    if(!playerToAskCards.hasCards()) {
+                        // Game over
+                        return;
+                    }
                 }
 
                 if (!player.hasCards()) {

@@ -6,10 +6,6 @@ import java.util.Collections;
 public class Hand {
     private final ArrayList<Card> cards = new ArrayList<>();
 
-    public ArrayList<Card> getCards() {
-        return cards;
-    }
-
     public boolean isEmpty() {
         return cards.isEmpty();
     }
@@ -65,5 +61,27 @@ public class Hand {
 
     public void addCards(ArrayList<Card> requestedCards) {
         cards.addAll(requestedCards);
+    }
+
+    // returns true if set was found
+    public boolean removeSet(String value) {
+        int cardsFound = 0;
+        int[] indexes = new int[4];
+        for (int i = 0; i < cards.size(); i++) {
+            Card card = cards.get(i);
+            if (card.getFaceValue().getDisplayValue().equals(value)) {
+                indexes[cardsFound] = i;
+                cardsFound++;
+            }
+        }
+
+        if (cardsFound == 4) { //set
+            for (int i = 3; i >= 0 ; i--) {
+                cards.remove(indexes[i]);
+            }
+            return true;
+        }
+
+        return false;
     }
 }

@@ -22,4 +22,8 @@ public class CardSet {
 
         Collections.sort(cards);
     }
+
+    public ArrayList<Card> getCards() {
+        return cards;
+    }
 }

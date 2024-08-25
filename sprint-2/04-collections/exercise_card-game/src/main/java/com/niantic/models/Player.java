@@ -1,14 +1,14 @@
 package com.niantic.models;
 
+import com.niantic.models.enums.FaceValue;
 import com.niantic.ui.UserInterface;
 
 import java.util.ArrayList;
-import java.util.HashSet;
 
 public class Player {
     protected final String name;
     protected final Hand hand;
-    protected final HashSet<CardSet> collectedSets = new HashSet<>();
+    protected final ArrayList<CardSet> collectedSets = new ArrayList<>();
 
     public Player(String name) {
         this.name = name;
@@ -19,6 +19,14 @@ public class Player {
         return name;
     }
 
+    public int getScore() {
+        return collectedSets.size();
+    }
+
+    public ArrayList<CardSet> getCollectedSets() {
+        return collectedSets;
+    }
+
     public void dealTo(Card card) {
         hand.dealTo(card);
     }
@@ -27,9 +35,7 @@ public class Player {
         hand.displayCards();
     }
 
-    public int getScore() {
-        return collectedSets.size();
-    }
+
 
     public String askForCardValue() {
         boolean isRequestValid = false;
@@ -49,7 +55,7 @@ public class Player {
         return requestedValue;
     }
 
-    public ArrayList<Card> returnCardsByFaceValue (String value, boolean removeFromHand) {
+    public ArrayList<Card> returnCardsByFaceValue(String value, boolean removeFromHand) {
         return hand.returnCardsByFaceValue(value, removeFromHand);
     }
 
@@ -60,5 +66,18 @@ public class Player {
 
     public void addCards(ArrayList<Card> requestedCards) {
         hand.addCards(requestedCards);
+    }
+
+    public boolean checkForSet(FaceValue faceValue) {
+        // player just got a card / cards with face value = value
+        // check if now the player collected a set of that value
+        if (hand.removeSet(faceValue.getDisplayValue())) {
+            // add set to the player's collectedSets
+            CardSet set = new CardSet(faceValue);
+            collectedSets.add(set);
+            return true;
+        }
+
+        return false;
     }
 }

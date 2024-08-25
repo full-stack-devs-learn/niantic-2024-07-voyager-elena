@@ -1,6 +1,7 @@
 package com.niantic.ui;
 
 import com.niantic.models.Card;
+import com.niantic.models.CardSet;
 import com.niantic.models.Player;
 import com.niantic.models.enums.Suit;
 
@@ -89,7 +90,7 @@ public class UserInterface {
 
     public static void newCardsMessage(ArrayList<Card> cards, String name) {
         System.out.println();
-        System.out.println("You got " + cards.size() + " cards form " + name + ":");
+        System.out.println("You got " + cards.size() + (cards.size() == 1 ? " card" : " cards") + " from " + name + ":");
         for (Card card : cards) {
             System.out.print(card + " ");
         }
@@ -100,5 +101,17 @@ public class UserInterface {
         System.out.println();
         System.out.println("Press ENTER to continue...");
         USER_INPUT.nextLine();
+    }
+
+    public static void displaySetCollectedMessage(Player player) {
+        System.out.println();
+        System.out.println(player.getName() + " collected new set!");
+        CardSet set = player.getCollectedSets().getLast();
+
+        for (Card card : set.getCards()) {
+            System.out.print(card + " ");
+        }
+
+        System.out.println();
     }
 }
