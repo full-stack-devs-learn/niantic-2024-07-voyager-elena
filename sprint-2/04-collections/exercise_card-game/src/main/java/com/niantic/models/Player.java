@@ -49,7 +49,16 @@ public class Player {
         return requestedValue;
     }
 
+    public ArrayList<Card> returnCardsByFaceValue (String value, boolean removeFromHand) {
+        return hand.returnCardsByFaceValue(value, removeFromHand);
+    }
+
+
     public boolean hasCards() {
         return !hand.isEmpty();
+    }
+
+    public void addCards(ArrayList<Card> requestedCards) {
+        hand.addCards(requestedCards);
     }
 }

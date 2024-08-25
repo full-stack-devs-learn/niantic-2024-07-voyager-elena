@@ -1,5 +1,6 @@
 package com.niantic.ui;
 
+import com.niantic.models.Card;
 import com.niantic.models.Player;
 import com.niantic.models.enums.Suit;
 
@@ -16,16 +17,18 @@ public class UserInterface {
             System.out.println(player.getName());
             player.displayCards();
         }
+        System.out.println();
     }
 
     public static void printAllPlayersScores(ArrayList<Player> players) {
         System.out.println("All Players Scores");
-        System.out.println("-".repeat(30));
+        System.out.println("-".repeat(25));
 
         for (var player : players) {
-            System.out.print(player.getName() + ": " + player.getScore());
+            System.out.printf("%-22s %2d", player.getName(), player.getScore());
             System.out.println();
         }
+        System.out.println();
     }
 
     public static void declareWinner(Player winner) {
@@ -47,7 +50,10 @@ public class UserInterface {
 
     public static void printPlayerTurn(Player player) {
         System.out.println();
-        System.out.println(ColorCodes.BOLD + player.getName() + ColorCodes.RESET + ", your turn!");
+        System.out.println(ColorCodes.BOLD + player.getName() + ", your turn!" + ColorCodes.RESET);
+    }
+
+    public static void displayPlayerCards(Player player) {
         System.out.println("Your cards:");
         player.displayCards();
     }
@@ -68,5 +74,31 @@ public class UserInterface {
         System.out.println(player.getName() + " does not have cards in their hand");
         System.out.println("GAME OVER!");
         System.out.println();
+    }
+
+    public static void goFish(String name, String value) {
+        System.out.println(name + " doesn't have cards with value " + value);
+        System.out.println("GO FISH!");
+        waitForUser();
+    }
+
+    public static void newCardMessage(Card card) {
+        System.out.println();
+        System.out.println("You got " + card);
+    }
+
+    public static void newCardsMessage(ArrayList<Card> cards, String name) {
+        System.out.println();
+        System.out.println("You got " + cards.size() + " cards form " + name + ":");
+        for (Card card : cards) {
+            System.out.print(card + " ");
+        }
+        System.out.println();
+    }
+
+    public static void waitForUser() {
+        System.out.println();
+        System.out.println("Press ENTER to continue...");
+        USER_INPUT.nextLine();
     }
 }

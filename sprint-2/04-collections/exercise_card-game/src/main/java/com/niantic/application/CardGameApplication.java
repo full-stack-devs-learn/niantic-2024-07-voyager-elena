@@ -40,10 +40,10 @@ public class CardGameApplication {
 
         // for now there will be only two players: Player 1 and Player 2
         players.add(new Player("Player 1"));
-        players.add(new Player("Player 2"));
+//        players.add(new Player("Player 2"));
         players.add(new Computer());
-        players.add(new Computer());
-        players.add(new Computer());
+//        players.add(new Computer());
+//        players.add(new Computer());
     }
 
     private void dealCards() {
@@ -65,28 +65,53 @@ public class CardGameApplication {
     private void gamePlay() {
         while (!deck.isEmpty()) {
             for (Player player : players) {
-                UserInterface.printPlayerTurn(player);
-                String requestedValue = player.askForCardValue();
+                boolean endOfTurn = false;
+                while (!endOfTurn) {
+                    UserInterface.printPlayerTurn(player);
+                    UserInterface.printAllPlayersScores(players);
+                    // TODO: move displaying player's cards inside player.askForCardValue()
+                    //       so that human player cannot see computer's cards
+                    UserInterface.displayPlayerCards(player);
+                    String requestedValue = player.askForCardValue();
 
-                // since there are only two players in this game version so far,
-                // skip step where player choose another player to ask cards
+                    // since there are only two players in this game version so far,
+                    // skip step where player choose another player to ask cards
 
-                Player playerToAskCards = player;
-                for (var p : players) {
-                    if (p != player) {
-                        playerToAskCards = p;
+                    Player playerToAskCards = player;
+                    for (var p : players) {
+                        if (p != player) {
+                            playerToAskCards = p;
+                        }
                     }
-                }
-                System.out.println("Player to ask: " + playerToAskCards.getName());
+                    System.out.println("Player to ask: " + playerToAskCards.getName());
 
-                if(!player.hasCards()) {
+                    // check if playerToAskCards has cards with requestedValue
+                    // playerToAskCards must hand over all cards of that face value they have
+                    ArrayList<Card> requestedCards = playerToAskCards.returnCardsByFaceValue(requestedValue, true);
+                    if (requestedCards.isEmpty()) {
+                        UserInterface.goFish(playerToAskCards.getName(), requestedValue);
+                        // If a player is told to “Go fish!” they pull a random card from the deck and add it to their hand.
+                        Card card = deck.drawCard();
+                        UserInterface.newCardMessage(card);
+                        player.dealTo(card);
+                        // After a player is told to “Go Fish!” and selects their random card, their turn ends
+                        endOfTurn = true;
+
+                    } else {
+                        // add cards to player's hand
+                        UserInterface.newCardsMessage(requestedCards, playerToAskCards.getName());
+                        player.addCards(requestedCards);
+                    }
+                    // TODO: check if player has a set after getting cards (form another player or from deck
+                }
+
+                if (!player.hasCards()) {
                     UserInterface.displayNoCardsLeft(player);
                     return;
                 }
             }
         }
     }
-
 
 
 }

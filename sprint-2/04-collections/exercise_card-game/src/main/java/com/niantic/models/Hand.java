@@ -62,4 +62,8 @@ public class Hand {
     public Card getCardByIndex(int idx) {
         return cards.get(idx);
     }
+
+    public void addCards(ArrayList<Card> requestedCards) {
+        cards.addAll(requestedCards);
+    }
 }
