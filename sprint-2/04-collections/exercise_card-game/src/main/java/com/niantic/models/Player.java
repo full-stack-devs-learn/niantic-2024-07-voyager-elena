@@ -36,7 +36,7 @@ public class Player {
     }
 
 
-
+    // How can I remove interaction with user from Player class?
     public String askForCardValue() {
         boolean isRequestValid = false;
         ArrayList<Card> cards;

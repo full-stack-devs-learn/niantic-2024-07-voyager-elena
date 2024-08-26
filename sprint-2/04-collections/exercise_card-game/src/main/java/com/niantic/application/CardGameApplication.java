@@ -8,6 +8,7 @@ import com.niantic.models.enums.FaceValue;
 import com.niantic.ui.UserInterface;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class CardGameApplication {
     Deck deck = new Deck();
@@ -103,13 +104,16 @@ public class CardGameApplication {
 
                     // since there are only two players in this game version so far
                     // skip step where player choose another player to ask cards
+                    // could do something like this later when expanding the game to allow more players:
+                    // List<Player> playersWithoutCurrentPlayer = players.stream().filter(player1 -> player1 != player).toList();
+                    // and then user can choose a player to ask cards from this list
+
                     Player playerToAskCards = player;
                     for (var p : players) {
                         if (p != player) {
                             playerToAskCards = p;
                         }
                     }
-
                     // for testing purposes
                     // System.out.println("Player to ask: " + playerToAskCards.getName());
 
