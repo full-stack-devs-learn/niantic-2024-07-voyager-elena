@@ -32,26 +32,9 @@ public class UserInterface {
         System.out.println();
     }
 
-    public static void declareWinner(Player winner) {
-        System.out.println();
-        System.out.println(ColorCodes.WHITE_BACKGROUND
-                + (Suit.SPADES.getImage()
-                + Suit.HEARTS.getImage()
-                + Suit.CLUBS.getImage()
-                + Suit.DIAMONDS.getImage()).repeat(3) + ColorCodes.RESET);
-        System.out.println(ColorCodes.RED + ColorCodes.BOLD + winner.getName() + " wins!" + ColorCodes.RESET);
-        System.out.println(ColorCodes.WHITE_BACKGROUND
-                + (Suit.SPADES.getImage()
-                + Suit.HEARTS.getImage()
-                + Suit.CLUBS.getImage()
-                + Suit.DIAMONDS.getImage()).repeat(3) + ColorCodes.RESET);
-        System.out.println("Sets collected by " + winner.getName() + ":");
-        // TODO: display sets collected by the winner
-    }
-
     public static void printPlayerTurn(Player player) {
         System.out.println();
-        System.out.println(ColorCodes.BOLD + player.getName() + ", your turn!" + ColorCodes.RESET);
+        System.out.println(ColorCodes.BOLD + ColorCodes.BLUE + player.getName() + ", your turn!" + ColorCodes.RESET);
     }
 
     public static void displayPlayerCards(Player player) {
@@ -83,14 +66,14 @@ public class UserInterface {
         waitForUser();
     }
 
-    public static void newCardMessage(Card card) {
+    public static void newCardMessage(Card card, Player player) {
         System.out.println();
-        System.out.println("You got " + card);
+        System.out.println(player.getName() + ", you got " + card);
     }
 
-    public static void newCardsMessage(ArrayList<Card> cards, String name) {
+    public static void newCardsMessage(ArrayList<Card> cards, String name, Player player) {
         System.out.println();
-        System.out.println("You got " + cards.size() + (cards.size() == 1 ? " card" : " cards") + " from " + name + ":");
+        System.out.println(player.getName() + " you got " + cards.size() + (cards.size() == 1 ? " card" : " cards") + " from " + name + ":");
         for (Card card : cards) {
             System.out.print(card + " ");
         }
@@ -99,7 +82,7 @@ public class UserInterface {
 
     public static void waitForUser() {
         System.out.println();
-        System.out.println("Press ENTER to continue...");
+        System.out.println("Press ENTER to get a card from the deck...");
         USER_INPUT.nextLine();
     }
 
@@ -107,11 +90,32 @@ public class UserInterface {
         System.out.println();
         System.out.println(player.getName() + " collected new set!");
         CardSet set = player.getCollectedSets().getLast();
-
-        for (Card card : set.getCards()) {
-            System.out.print(card + " ");
-        }
-
+        System.out.println(set);
         System.out.println();
     }
+
+    public static void declareWinner(Player winner, ArrayList<Player> players) {
+        System.out.println();
+        System.out.println(ColorCodes.WHITE_BACKGROUND
+                + (Suit.SPADES.getImage()
+                + Suit.HEARTS.getImage()
+                + Suit.CLUBS.getImage()
+                + Suit.DIAMONDS.getImage()).repeat(3) + ColorCodes.RESET);
+        System.out.println(ColorCodes.RED + ColorCodes.BOLD + " ".repeat(7) + winner.getName() + " wins!" + ColorCodes.RESET);
+        System.out.println(ColorCodes.WHITE_BACKGROUND
+                + (Suit.SPADES.getImage()
+                + Suit.HEARTS.getImage()
+                + Suit.CLUBS.getImage()
+                + Suit.DIAMONDS.getImage()).repeat(3) + ColorCodes.RESET);
+
+        printAllPlayersScores(players);
+
+        System.out.println("Sets collected by " + winner.getName() + ":");
+        // display sets collected by the winner
+        for (CardSet set : winner.getCollectedSets()) {
+            System.out.println(set);
+            System.out.println();
+        }
+    }
+
 }

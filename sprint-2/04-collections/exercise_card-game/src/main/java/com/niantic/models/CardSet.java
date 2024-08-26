@@ -22,8 +22,18 @@ public class CardSet {
 
         Collections.sort(cards);
     }
+    
+    @Override
+    public String toString() {
+        StringBuilder sb = new StringBuilder();
 
-    public ArrayList<Card> getCards() {
-        return cards;
+        for (int i = 0; i < cards.size(); i++) {
+            sb.append(cards.get(i).toString());
+            if (i != cards.size() - 1) {
+                sb.append(" ");
+            }
+        }
+
+        return sb.toString();
     }
 }

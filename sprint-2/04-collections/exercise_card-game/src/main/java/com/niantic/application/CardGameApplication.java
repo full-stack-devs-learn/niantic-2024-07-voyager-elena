@@ -15,13 +15,9 @@ public class CardGameApplication {
 
     public void run() {
         startGame();
-        // for testing purposes
-        UserInterface.displayAllPlayersCards(players);
         gamePlay();
-        UserInterface.displayAllPlayersCards(players);
-        UserInterface.printAllPlayersScores(players);
         Player winner = determineWinner();
-        UserInterface.declareWinner(winner);
+        UserInterface.declareWinner(winner, players);
     }
 
     private Player determineWinner() {
@@ -94,36 +90,37 @@ public class CardGameApplication {
                         UserInterface.goFish(playerToAskCards.getName(), requestedValue);
                         // If a player is told to “Go fish!” they pull a random card from the deck and add it to their hand.
                         Card card = deck.drawCard();
-                        UserInterface.newCardMessage(card);
+                        if (player instanceof Computer) {
+
+                        } else {
+                            UserInterface.newCardMessage(card, player);
+                        }
                         player.dealTo(card);
                         faceValueGot = card.getFaceValue();
                         // After a player is told to “Go Fish!” and selects their random card, their turn ends
                         endOfTurn = true;
                     } else {
                         // add cards to player's hand
-                        UserInterface.newCardsMessage(requestedCards, playerToAskCards.getName());
+                        UserInterface.newCardsMessage(requestedCards, playerToAskCards.getName(), player);
                         player.addCards(requestedCards);
                         faceValueGot = requestedCards.getFirst().getFaceValue();
                     }
-                    // TODO: check if player has a set after getting cards (form another player or from deck
+                    // check if player has a set after getting cards (from another player or from deck
                     boolean wasSetCollected = player.checkForSet(faceValueGot);
                     if (wasSetCollected) {
                         UserInterface.displaySetCollectedMessage(player);
                         UserInterface.displayPlayerCards(player);
                         if (!player.hasCards()) {
                             // Game over because play continues until one player runs out of cards
+                            UserInterface.displayNoCardsLeft(player);
                             return;
                         }
                     }
                     if(!playerToAskCards.hasCards()) {
                         // Game over
+                        UserInterface.displayNoCardsLeft(playerToAskCards);
                         return;
                     }
-                }
-
-                if (!player.hasCards()) {
-                    UserInterface.displayNoCardsLeft(player);
-                    return;
                 }
             }
         }
