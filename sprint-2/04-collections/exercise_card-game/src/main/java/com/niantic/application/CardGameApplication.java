@@ -21,39 +21,43 @@ public class CardGameApplication {
         UserInterface.declareWinner(winner, players);
     }
 
-    private Player determineWinner() {
-        Player winner = players.getFirst();
-        int maxScore =  winner.getScore();
-
-        for (Player player : players) {
-            if (player.getScore() > maxScore) {
-                winner = player;
-                maxScore =  winner.getScore();
-            }
-        }
-
-        return winner;
-    }
-
     private void startGame() {
         UserInterface.displayTitle();
-        UserInterface.displayMainMenu();
-        createPlayers();
+        int gameChoice = UserInterface.mainMenuSelection();
+        createPlayers(gameChoice);
+        String gameMode = UserInterface.gameModeSelection();
         dealCards();
     }
 
-    private void createPlayers() {
-        // TODO:
-        //   play with computer or with other players
-        //   ask user how many players (2 - 5)
-        //   ask to enter player names
+    private void createPlayers(int gameChoice) {
 
         // for now there will be only two players: Player 1 and Player 2
-        players.add(new Player("Player 1"));
-//        players.add(new Player("Player 2"));
-        players.add(new Computer());
-//        players.add(new Computer());
-//        players.add(new Computer());
+        // players.add(new Player("Player 1"));
+        // players.add(new Player("Player 2"));
+        // players.add(new Computer());
+        // players.add(new Computer());
+        // players.add(new Computer());
+
+        // This version allows only two players
+        // TODO: add opportunity play game with more players (from 2 to 5)
+        int numberOfPlayers = 2;
+
+        if (gameChoice == 1) {
+            // Player vs Computer(s)
+            String playerName = UserInterface.getUserString("Please enter your name");
+            players.add(new Player(playerName));
+
+            for (int i = 1; i < numberOfPlayers; i++) {
+                players.add(new Computer());
+            }
+
+        } else {
+            // two Players
+            for (int i = 0; i < 2; i++) {
+                String playerName = UserInterface.getUserString("Please enter Player " + (i + 1) + " name");
+                players.add(new Player(playerName));
+            }
+        }
     }
 
     private void dealCards() {
@@ -129,7 +133,7 @@ public class CardGameApplication {
                             return;
                         }
                     }
-                    if(!playerToAskCards.hasCards()) {
+                    if (!playerToAskCards.hasCards()) {
                         // Game over
                         UserInterface.displayNoCardsLeft(playerToAskCards);
                         return;
@@ -137,6 +141,20 @@ public class CardGameApplication {
                 }
             }
         }
+    }
+
+    private Player determineWinner() {
+        Player winner = players.getFirst();
+        int maxScore = winner.getScore();
+
+        for (Player player : players) {
+            if (player.getScore() > maxScore) {
+                winner = player;
+                maxScore = winner.getScore();
+            }
+        }
+
+        return winner;
     }
 
 
