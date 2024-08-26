@@ -62,6 +62,11 @@ Play continues until one player runs out of cards.
 ### Winner
 The game is won by the player who has collected the most sets of four like cards. 
 
+### Gurrent game version features
+- Only two players
+- Two game options: Player VS Copmuter and Player VS Player
+- For game with Computer, player can select to play in Normal Mode or Testing Mode
+- in Testing Mode, Player can see Computer's cards
 
 
 
