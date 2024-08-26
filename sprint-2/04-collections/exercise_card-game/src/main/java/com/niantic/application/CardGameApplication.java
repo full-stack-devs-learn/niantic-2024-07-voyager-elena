@@ -12,7 +12,7 @@ import java.util.ArrayList;
 public class CardGameApplication {
     Deck deck = new Deck();
     ArrayList<Player> players = new ArrayList<>();
-    String gameMode;
+    String gameMode = "normal";
 
     public void run() {
         startGame();
@@ -25,7 +25,10 @@ public class CardGameApplication {
         UserInterface.displayTitle();
         int gameChoice = UserInterface.mainMenuSelection();
         createPlayers(gameChoice);
-        String gameMode = UserInterface.gameModeSelection();
+        if (gameChoice == 1) {
+            // vs Computer
+            gameMode = UserInterface.gameModeSelection();
+        }
         dealCards();
     }
 
@@ -77,38 +80,53 @@ public class CardGameApplication {
     }
 
     private void gamePlay() {
+        if (gameMode.equals("test")) {
+            UserInterface.displayAllPlayersCards(players);
+        }
         while (!deck.isEmpty()) {
             for (Player player : players) {
                 boolean endOfTurn = false;
                 while (!endOfTurn) {
                     UserInterface.printPlayerTurn(player);
                     UserInterface.printAllPlayersScores(players);
-                    // TODO: move displaying player's cards inside player.askForCardValue()
-                    //       so that human player cannot see computer's cards
-                    UserInterface.displayPlayerCards(player);
+
+                    if (player instanceof Computer) {
+                        if (gameMode.equals("test")) {
+                            UserInterface.displayPlayerCards(player);
+                        }
+                    } else {
+                        UserInterface.displayPlayerCards(player);
+                    }
                     String requestedValue = player.askForCardValue();
+                    System.out.println(player.getName() + " asks for faceValue: " + requestedValue);
 
-                    // since there are only two players in this game version so far,
+
+                    // since there are only two players in this game version so far
                     // skip step where player choose another player to ask cards
-
                     Player playerToAskCards = player;
                     for (var p : players) {
                         if (p != player) {
                             playerToAskCards = p;
                         }
                     }
-                    System.out.println("Player to ask: " + playerToAskCards.getName());
+
+                    // for testing purposes
+                    // System.out.println("Player to ask: " + playerToAskCards.getName());
 
                     // check if playerToAskCards has cards with requestedValue
                     // playerToAskCards must hand over all cards of that face value they have
                     ArrayList<Card> requestedCards = playerToAskCards.returnCardsByFaceValue(requestedValue, true);
                     FaceValue faceValueGot;
                     if (requestedCards.isEmpty()) {
-                        UserInterface.goFish(playerToAskCards.getName(), requestedValue);
+                        UserInterface.goFish(playerToAskCards.getName(), requestedValue, player);
                         // If a player is told to “Go fish!” they pull a random card from the deck and add it to their hand.
                         Card card = deck.drawCard();
                         if (player instanceof Computer) {
-
+                            if (gameMode.equals("test")) {
+                                UserInterface.newCardMessage(card, player);
+                            } else {
+                                UserInterface.computerGotCardMessage(player);
+                            }
                         } else {
                             UserInterface.newCardMessage(card, player);
                         }
@@ -126,7 +144,9 @@ public class CardGameApplication {
                     boolean wasSetCollected = player.checkForSet(faceValueGot);
                     if (wasSetCollected) {
                         UserInterface.displaySetCollectedMessage(player);
-                        UserInterface.displayPlayerCards(player);
+                        // for testing purposes
+                        // to make sure set was removed from the player's hand
+                        // UserInterface.displayPlayerCards(player);
                         if (!player.hasCards()) {
                             // Game over because play continues until one player runs out of cards
                             UserInterface.displayNoCardsLeft(player);

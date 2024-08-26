@@ -2,6 +2,7 @@ package com.niantic.ui;
 
 import com.niantic.models.Card;
 import com.niantic.models.CardSet;
+import com.niantic.models.Computer;
 import com.niantic.models.Player;
 import com.niantic.models.enums.Suit;
 
@@ -12,7 +13,8 @@ public class UserInterface {
     private static final Scanner USER_INPUT = new Scanner(System.in);
 
     public static void displayAllPlayersCards(ArrayList<Player> players) {
-        System.out.println("All Players");
+        System.out.println();
+        System.out.println("All Players Cards");
         System.out.println("-".repeat(30));
         for (Player player : players) {
             System.out.println(player.getName());
@@ -38,7 +40,11 @@ public class UserInterface {
     }
 
     public static void displayPlayerCards(Player player) {
-        System.out.println("Your cards:");
+        if (player instanceof Computer) {
+            System.out.println(player.getName() + " cards:");
+        } else {
+            System.out.println("Your cards:");
+        }
         player.displayCards();
     }
 
@@ -46,7 +52,7 @@ public class UserInterface {
         System.out.println();
         System.out.println("Please choose a card face value you want to request");
         System.out.print("(you must have at least one card of this value in your hand): ");
-        return USER_INPUT.nextLine().strip();
+        return USER_INPUT.nextLine().strip().toUpperCase();
     }
 
     public static void printWrongInputMessage() {
@@ -58,17 +64,25 @@ public class UserInterface {
         System.out.println(player.getName() + " does not have cards in their hand");
         System.out.println("GAME OVER!");
         System.out.println();
+
     }
 
-    public static void goFish(String name, String value) {
+    public static void goFish(String name, String value, Player player) {
         System.out.println(name + " doesn't have cards with value " + value);
         System.out.println("GO FISH!");
-        waitForUser();
+        if (!(player instanceof Computer)) {
+            waitForUser();
+        }
     }
 
     public static void newCardMessage(Card card, Player player) {
         System.out.println();
-        System.out.println(player.getName() + ", you got " + card);
+        if (player instanceof Computer) {
+            System.out.println((player.getName() + " got " + card));
+        } else {
+            System.out.println(player.getName() + ", you got " + card);
+        }
+        waitForUser();
     }
 
     public static void newCardsMessage(ArrayList<Card> cards, String name, Player player) {
@@ -78,11 +92,12 @@ public class UserInterface {
             System.out.print(card + " ");
         }
         System.out.println();
+        waitForUser();
     }
 
     public static void waitForUser() {
         System.out.println();
-        System.out.println("Press ENTER to get a card from the deck...");
+        System.out.print("Press ENTER to continue...");
         USER_INPUT.nextLine();
     }
 
@@ -126,7 +141,6 @@ public class UserInterface {
                 + Suit.DIAMONDS.getImage()).repeat(7)
                 + Suit.SPADES.getImage()
                 + Suit.HEARTS.getImage()
-//                + Suit.CLUBS.getImage()
                 + " " + ColorCodes.RESET);
         System.out.println(ColorCodes.WHITE_BACKGROUND + " ".repeat(70) + ColorCodes.RESET);
         System.out.println(ColorCodes.WHITE_BACKGROUND_BLUE_FONT + "      ██████\\                  ████████\\ ██\\           ██\\            " + ColorCodes.RESET);
@@ -138,7 +152,7 @@ public class UserInterface {
         System.out.println(ColorCodes.WHITE_BACKGROUND_BLUE_FONT + "     \\██████  |\\██████  |      ██ |      ██ |███████  |██ |  ██ |     " + ColorCodes.RESET);
         System.out.println(ColorCodes.WHITE_BACKGROUND_BLUE_FONT + "      \\______/  \\______/       \\__|      \\__|\\_______/ \\__|  \\__|     " + ColorCodes.RESET);
         System.out.println(ColorCodes.WHITE_BACKGROUND_BLUE_FONT + " ".repeat(70) + ColorCodes.RESET);
-        System.out.println(ColorCodes.WHITE_BACKGROUND_BLUE_FONT  + " "
+        System.out.println(ColorCodes.WHITE_BACKGROUND_BLUE_FONT + " "
                 + (Suit.SPADES.getImage()
                 + Suit.HEARTS.getImage()
                 + Suit.CLUBS.getImage()
@@ -206,4 +220,8 @@ public class UserInterface {
         System.out.println("Invalid selection, please select from the available options.");
     }
 
+    public static void computerGotCardMessage(Player player) {
+        System.out.println(player.getName() + " got 1 card from the deck");
+        waitForUser();
+    }
 }

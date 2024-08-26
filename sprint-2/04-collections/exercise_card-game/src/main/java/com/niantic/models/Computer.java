@@ -12,10 +12,9 @@ public class Computer extends Player {
     public String askForCardValue() {
         // this computer is not very smart, so it will choose random card to ask
         int randIdx = (int) (Math.random() * hand.getNumberOfCards());
-        System.out.println("Computer hand size: " + hand.getNumberOfCards());
-        System.out.println("Random card index: " + randIdx);
+        // System.out.println("Computer hand size: " + hand.getNumberOfCards());
+        // System.out.println("Random card index: " + randIdx);
         Card randomCard = hand.getCardByIndex(randIdx);
-        System.out.println("Chosen value: " + randomCard.getFaceValue().getDisplayValue());
         return randomCard.getFaceValue().getDisplayValue();
     }
 }

@@ -43,13 +43,17 @@ public class Hand {
         }
 
         if (removeFromHand) {
-            System.out.println("Indexes to remove:");
-            System.out.println(indexesToRemove);
+            // for testing purposes
+            // System.out.println("Indexes to remove:");
+            // System.out.println(indexesToRemove);
+
             for (int i = indexesToRemove.size() - 1; i >= 0; i--) {
                 cards.remove((int) indexesToRemove.get(i));
             }
-            System.out.println("cards after removing:");
-            displayCards();
+
+            // for testing purposes
+            // System.out.println("cards after removing:");
+            // displayCards();
         }
 
         return requestedCards;
@@ -76,7 +80,7 @@ public class Hand {
         }
 
         if (cardsFound == 4) { //set
-            for (int i = 3; i >= 0 ; i--) {
+            for (int i = 3; i >= 0; i--) {
                 cards.remove(indexes[i]);
             }
             return true;
