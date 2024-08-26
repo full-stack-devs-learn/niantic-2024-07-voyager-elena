@@ -118,4 +118,9 @@ public class UserInterface {
         }
     }
 
+    public static void displayTitle() {
+    }
+
+    public static void displayMainMenu() {
+    }
 }

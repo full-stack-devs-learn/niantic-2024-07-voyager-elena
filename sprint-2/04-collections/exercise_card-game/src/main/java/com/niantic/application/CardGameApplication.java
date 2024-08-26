@@ -12,6 +12,7 @@ import java.util.ArrayList;
 public class CardGameApplication {
     Deck deck = new Deck();
     ArrayList<Player> players = new ArrayList<>();
+    String gameMode;
 
     public void run() {
         startGame();
@@ -21,10 +22,22 @@ public class CardGameApplication {
     }
 
     private Player determineWinner() {
-        return players.getFirst();
+        Player winner = players.getFirst();
+        int maxScore =  winner.getScore();
+
+        for (Player player : players) {
+            if (player.getScore() > maxScore) {
+                winner = player;
+                maxScore =  winner.getScore();
+            }
+        }
+
+        return winner;
     }
 
     private void startGame() {
+        UserInterface.displayTitle();
+        UserInterface.displayMainMenu();
         createPlayers();
         dealCards();
     }
