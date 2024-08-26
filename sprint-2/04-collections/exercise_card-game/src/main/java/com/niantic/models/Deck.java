@@ -62,6 +62,8 @@ public class Deck {
         Collections.shuffle(cards);
     }
 
+    // for testing purposes
+    // to check if all cards were created correctly
     public void displayAllCardsInDeck() {
         for (var card : cards) {
             System.out.println(card);

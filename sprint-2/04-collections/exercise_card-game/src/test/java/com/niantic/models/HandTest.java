@@ -36,8 +36,6 @@ class HandTest {
 
         // assert
         assertEquals(expectedNumberOfCards, actualNumberOfCards, "dealTo should increase number of cards by 1");
-
-
     }
 
 
