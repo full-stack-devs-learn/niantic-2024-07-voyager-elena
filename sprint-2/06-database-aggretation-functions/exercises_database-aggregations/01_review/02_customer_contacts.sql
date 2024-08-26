@@ -10,5 +10,13 @@
 
 -- (78 Rows)
 
+USE northwind;
+
+SELECT company_name
+	, contact_name
+	, contact_title
+	, CONCAT(city, ', ', COALESCE(region, ''), ' ', postal_code) as city_state_zip -- how to get rid of double space when region is NULL?
+FROM customers
+WHERE NOT country = 'USA';
 
 

@@ -12,5 +12,11 @@
 
 -- Order the results alphabetically by city_state_zip.
 -- (5 rows)
+USE northwind;
+
+SELECT company_name
+	, CONCAT(city, ', ', region, ' ', postal_code) as CityStateZip
+FROM customers
+WHERE region IN ('CA', 'WA', 'ID');
 
 
