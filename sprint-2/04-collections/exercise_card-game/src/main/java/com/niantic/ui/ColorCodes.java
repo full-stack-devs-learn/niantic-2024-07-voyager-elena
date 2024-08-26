@@ -23,6 +23,8 @@ public final class ColorCodes
     public static final String GRAY_BACKGROUND = "\u001B[47m";
     public static final String WHITE_BACKGROUND = "\u001B[7m";
 
+    public static final String WHITE_BACKGROUND_BLUE_FONT = "\u001B[44;7m";
+
     public static final String BOLD = "\u001B[1m";
     public static final String UNDERLINE_REGULAR = "\u001B[4m";
     public static final String ITALIC = "\u001B[3m";

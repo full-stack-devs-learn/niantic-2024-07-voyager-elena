@@ -119,6 +119,32 @@ public class UserInterface {
     }
 
     public static void displayTitle() {
+        System.out.println(ColorCodes.WHITE_BACKGROUND + " "
+                + (Suit.SPADES.getImage()
+                + Suit.HEARTS.getImage()
+                + Suit.CLUBS.getImage()
+                + Suit.DIAMONDS.getImage()).repeat(7)
+                + Suit.SPADES.getImage()
+                + Suit.HEARTS.getImage()
+                + " " + ColorCodes.RESET);
+        System.out.println(ColorCodes.WHITE_BACKGROUND + " ".repeat(68) + ColorCodes.RESET);
+        System.out.println(ColorCodes.WHITE_BACKGROUND_BLUE_FONT + "     ██████\\                  ████████\\ ██\\           ██\\           " + ColorCodes.RESET);
+        System.out.println(ColorCodes.WHITE_BACKGROUND_BLUE_FONT + "    ██  __██\\                 ██  _____|\\__|          ██ |          " + ColorCodes.RESET);
+        System.out.println(ColorCodes.WHITE_BACKGROUND_BLUE_FONT + "    ██ /  \\__| ██████\\        ██ |      ██\\  ███████\\ ███████\\      " + ColorCodes.RESET);
+        System.out.println(ColorCodes.WHITE_BACKGROUND_BLUE_FONT + "    ██ |████\\ ██  __██\\       █████\\    ██ |██  _____|██  __██\\     " + ColorCodes.RESET);
+        System.out.println(ColorCodes.WHITE_BACKGROUND_BLUE_FONT + "    ██ |\\_██ |██ /  ██ |      ██  __|   ██ |\\██████\\  ██ |  ██ |    " + ColorCodes.RESET);
+        System.out.println(ColorCodes.WHITE_BACKGROUND_BLUE_FONT + "    ██ |  ██ |██ |  ██ |      ██ |      ██ | \\____██\\ ██ |  ██ |    " + ColorCodes.RESET);
+        System.out.println(ColorCodes.WHITE_BACKGROUND_BLUE_FONT + "    \\██████  |\\██████  |      ██ |      ██ |███████  |██ |  ██ |    " + ColorCodes.RESET);
+        System.out.println(ColorCodes.WHITE_BACKGROUND_BLUE_FONT + "     \\______/  \\______/       \\__|      \\__|\\_______/ \\__|  \\__|    " + ColorCodes.RESET);
+        System.out.println(ColorCodes.WHITE_BACKGROUND_BLUE_FONT + " ".repeat(68) + ColorCodes.RESET);
+        System.out.println(ColorCodes.WHITE_BACKGROUND_BLUE_FONT  + " "
+                + (Suit.SPADES.getImage()
+                + Suit.HEARTS.getImage()
+                + Suit.CLUBS.getImage()
+                + Suit.DIAMONDS.getImage()).repeat(7)
+                + Suit.SPADES.getImage()
+                + Suit.HEARTS.getImage()
+                + " " + ColorCodes.RESET);
     }
 
     public static void displayMainMenu() {
