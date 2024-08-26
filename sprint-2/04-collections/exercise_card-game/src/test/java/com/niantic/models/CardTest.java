@@ -19,7 +19,7 @@ class CardTest {
     }
 
     @Test
-    public void card_parameterizedConstructor_ShouldCreateCardWithGivenParameters() {
+    public void parameterizedConstructor_shouldCreateCard_withGivenParameters() {
         // arrange
         // act
         Suit expectedSuit = hearts;
