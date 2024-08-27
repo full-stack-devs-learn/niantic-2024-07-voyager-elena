@@ -5,6 +5,7 @@
 
 -- (13 rows)
 
+USE northwind;
 
 SELECT company_name
 	, region
@@ -15,5 +16,3 @@ GROUP BY company_name
 	, region
 ORDER BY region
 	, total_sales DESC;
-
-
