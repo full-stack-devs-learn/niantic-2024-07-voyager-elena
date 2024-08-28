@@ -14,4 +14,12 @@
 
 USE Northwind;
 
-
+SELECT product_name
+    , units_in_stock
+    ,	(
+		SELECT company_name
+		FROM suppliers
+        WHERE supplier_id = p.supplier_id
+	) AS supplier_name 
+FROM products AS p
+ORDER BY product_name;

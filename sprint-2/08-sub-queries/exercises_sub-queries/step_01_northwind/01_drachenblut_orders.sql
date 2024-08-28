@@ -16,4 +16,13 @@
 
 USE northwind;
 
-
+SELECT order_id
+    , order_date
+    , shipped_date
+FROM orders
+WHERE customer_id = (
+		SELECT customer_id
+        FROM customers
+		WHERE company_name = 'Drachenblut Delikatessen'
+)
+ORDER BY shipped_date DESC;
