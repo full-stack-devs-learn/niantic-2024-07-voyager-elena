@@ -23,4 +23,22 @@
 
 USE northwind;
 
+SELECT category_name
+	, (
+		SELECT product_name
+        FROM products
+        WHERE category_id = c.category_id 
+			AND unit_price IN ( -- I had unit_price = (... at first, but then decided to chnge it to IN because there could be more than one products with the same max_price
+				SELECT MAX(unit_price)
+                FROM products
+                WHERE category_id = c.category_id
+            )
+    ) AS most_expesive_product
+    , (
+		SELECT MAX(unit_price)
+		FROM products
+		WHERE category_id = c.category_id
+    ) AS max_unit_price
+FROM categories AS c;
+
 
