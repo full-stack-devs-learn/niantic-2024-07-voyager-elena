@@ -14,10 +14,11 @@
 
 */
 
-function calculateOrderSubtotal(quantity)
-{
-	return 0;
-}
+const BASIC_COST_PER_DOZEN = 12.95;
+const TAX_RATE = 5.75;
+
+const calculateOrderSubtotal = quantity => Math.round(BASIC_COST_PER_DOZEN * quantity * 100) / 100;
+
 
 
 /*
@@ -38,10 +39,7 @@ function calculateOrderSubtotal(quantity)
 
 */
 
-function calculateTax(quantity)
-{
-	return 0;
-}
+const calculateTax = quantity => Math.round(calculateOrderSubtotal(quantity) * TAX_RATE) / 100;
 
 
 
@@ -64,10 +62,11 @@ function calculateTax(quantity)
 */
 
 // create your function here
+const calculateOrderTotal = quantity => Math.round((calculateOrderSubtotal(quantity) + calculateTax(quantity)) * 100) / 100;
 
 
 /*
-3.	With each order Claire needs to generate 
+4.	With each order Claire needs to generate
 	a receipt to print for the customer
 	and to store for her records.
 
@@ -80,11 +79,11 @@ function calculateTax(quantity)
 	Total
 
 	When a customer places an they specify their
-	name, and the quantity of cookies that they 
+	name, and the quantity of cookies that they
 	want to order (in dozens)
 
 	The place order function should perform all
-	calculations and return the receipt in 
+	calculations and return the receipt in
 	JavaScript object format as follows:
 
 	placeOrder("Sean", 1) =>	{
@@ -107,10 +106,14 @@ function calculateTax(quantity)
 
 // create your function here
 
+class Order {
+
+}
+
 
 /*
-5.	Sean's classes have all earned a cookie party. 
-	The number of cookies that each student receives 
+5.	Sean's classes have all earned a cookie party.
+	The number of cookies that each student receives
 	depends on their current grade in Sean's class.
 
 	A students = 4 cookies
@@ -119,7 +122,7 @@ function calculateTax(quantity)
 
 	Claire's Cookies only sells by the dozen. Create a function
 	that calculates how many dozen cookies Sean needs
-	to buy based on the students grades	
+	to buy based on the students grades
 
 	calculateCookiesNeeded(2, 4, 8) → 3
 	calculateCookiesNeeded(1, 5, 12) → 5
