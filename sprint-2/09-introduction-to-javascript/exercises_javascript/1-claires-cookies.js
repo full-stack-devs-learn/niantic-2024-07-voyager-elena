@@ -107,8 +107,23 @@ const calculateOrderTotal = quantity => Math.round((calculateOrderSubtotal(quant
 // create your function here
 
 class Order {
+	constructor(customer, quantity) {
+		this.customer = customer;
+		this.quantity = quantity;
+		this.subtotal = calculateOrderSubtotal(quantity);
+		this.tax = calculateTax(quantity);
+		this.total = calculateOrderTotal(quantity);
+		// this.subtotal = this.getOrderSubtotal(quantity);
+		// this.tax = this.getOrderTax(quantity);
+		// this.total = this.getOrderTotal(quantity);
+	}
 
+	// getOrderSubtotal = calculateOrderSubtotal;
+	// getOrderTax = calculateTax;
+	// getOrderTotal = calculateOrderTotal;
 }
+
+const placeOrder = (customer, quantity) => new Order(customer, quantity);
 
 
 /*
@@ -131,3 +146,12 @@ class Order {
 */
 
 // create your function here
+const calculateCookiesNeeded = (a = 0, b = 0, c = 0) => {
+	const numberOfCookiesForA = 4;
+	const numberOfCookiesForB = 3;
+	const numberOfCookiesForC = 2; // c and below
+
+	const numberOfCookiesRequired = a * numberOfCookiesForA + b * numberOfCookiesForB + c * numberOfCookiesForC;
+	
+	return Math.ceil(numberOfCookiesRequired / 12);
+}
