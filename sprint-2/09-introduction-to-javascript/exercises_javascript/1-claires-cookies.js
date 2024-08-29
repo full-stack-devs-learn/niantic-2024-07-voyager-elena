@@ -106,7 +106,7 @@ const calculateOrderTotal = quantity => Math.round((calculateOrderSubtotal(quant
 
 // create your function here
 
-class Order {
+class CookiesOrder {
 	constructor(customer, quantity) {
 		this.customer = customer;
 		this.quantity = quantity;
@@ -123,7 +123,7 @@ class Order {
 	// getOrderTotal = calculateOrderTotal;
 }
 
-const placeOrder = (customer, quantity) => new Order(customer, quantity);
+const placeOrder = (customer, quantity) => new CookiesOrder(customer, quantity);
 
 
 /*

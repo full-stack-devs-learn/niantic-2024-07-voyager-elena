@@ -13,6 +13,27 @@
 
 */
 
+class Pizza {
+	constructor(name, toppings) {
+		this.name = name;
+		this.toppings = toppings;
+	}
+}
+
+const pizzaData = [
+	new Pizza('Hawaiian', ['Ham', 'Pineapple', 'Mushroom']),
+	new Pizza('Cowboy', ['Pepperoni', 'Sausage', 'Beef']),
+	new Pizza('Supreme', ['Pepperoni', 'Sausage', 'Pepper', 'Onion', 'Black Olives']),
+	new Pizza('Vegetarian', ['Spinach', 'Zucchini', 'Mushroom', 'Artichoke', 'Tomato', 'Onion']),
+	new Pizza('Cheese', ['Cheese']),
+];
+
+const getToppings = pizzaName => {
+	const pizzaToppings = pizzaData.find(item => item.name.toUpperCase() === pizzaName.toUpperCase())?.toppings;
+	return pizzaToppings || [];
+};
+
+
 
 
 
@@ -29,6 +50,8 @@
 							}
 
 */
+
+const makePizza = pizzaName => pizzaData.find(item => item.name.toUpperCase() === pizzaName.toUpperCase()) || {};
 
 
 
@@ -63,6 +86,22 @@
 	makeCustom() => {}
 
 */
+
+const makeCustom = (topping1 = '', topping2 = '', topping3 = '') => {
+	// console.log(arguments);
+	// interesting, arguments is not defined for arrow function
+	const pizzaName = 'Custom';
+
+	if (topping1 && topping2 && topping3) {
+		return new Pizza(pizzaName, [topping1, topping2, topping3]);
+	} else if (topping1 && topping2) {
+		return new Pizza(pizzaName, [topping1, topping2]);
+	} else if (topping1) {
+		return new Pizza(pizzaName, [topping1]);
+	}
+
+	return {};
+}
 
 
 
@@ -113,4 +152,32 @@
 
 
 */
+
+class PizzaOrder {
+	constructor(customer, pizzas) {
+		this.customer = customer;
+		this.pizzas = pizzas;
+	}
+}
+
+
+
+const createOrder = (customer, pizza1 = false, pizza2 = false, pizza3 = false, pizza4 = false, pizza5 = false) => {
+	pizzaArr = [pizza1, pizza2, pizza3, pizza4, pizza5];
+	
+	if (pizzaArr.filter(el => el).length === 0) {
+		return {};
+	} 
+
+	const order = new PizzaOrder(customer, []);
+	
+	for (let i = 0; i < pizzaArr.length; i++) {
+		if (pizzaArr[i]) {
+			order.pizzas.push(pizzaData[i]);
+		}
+	}
+
+	return order;		
+};
+
 
