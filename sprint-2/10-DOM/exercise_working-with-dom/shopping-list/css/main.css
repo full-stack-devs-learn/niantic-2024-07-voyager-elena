@@ -102,6 +102,12 @@ body {
     color: var(--color-med);
 }
 
+.buttons_container {
+    display: flex;
+    align-items: center;
+    column-gap: 50px;
+}
+
 .btn {
     border-radius: 10px;
     border: 0;
@@ -113,5 +119,4 @@ body {
 
 .btn:hover {
     background-color: var(--color-danger-hover);
-
 }

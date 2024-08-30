@@ -66,6 +66,12 @@ const markCompleted =() => {
 }
 
 
+const markUncompleted =() => {
+    const itemElementsList = document.querySelectorAll('.list-item');
+    itemElementsList.forEach(item => item.classList.remove('complete'));
+}
+
+
 displayListTitle();
 displayGroceries();
 
