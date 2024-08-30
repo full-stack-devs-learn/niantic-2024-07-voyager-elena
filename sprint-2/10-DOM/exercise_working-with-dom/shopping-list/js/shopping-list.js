@@ -30,6 +30,7 @@ const addShoppingListItemElement = (item, container) => container.appendChild(cr
 
 const createShoppingListItemElement = (item) => {
     const itemElement = document.createElement('li');
+    itemElement.classList.add('list-item');
     itemElement.appendChild(createShoppingListItemTitleDiv(item.title));
     itemElement.appendChild(createShoppingListItemQuantityDiv(item.quantity));
     if (item.isComplete) {
@@ -46,7 +47,12 @@ const createShoppingListItemTitleDiv = (title) => {
 
 const createShoppingListItemQuantityDiv = (quantity) => {
     const quantityElement = document.createElement('div');
-    quantityElement.textContent = quantity;
+    quantityElement.classList.add('quantity-container');
+    const quantityTextSpan = document.createElement('span');
+    quantityTextSpan.classList.add('super');
+    quantityTextSpan.textContent = 'quantity';
+    quantityElement.appendChild(quantityTextSpan);
+    quantityElement.appendChild(document.createTextNode(quantity));
     return quantityElement;
 }
 
