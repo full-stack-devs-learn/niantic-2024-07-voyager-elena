@@ -1,6 +1,7 @@
 class ShoppingService {
 
     getListName() {
+        return 'Grocery Shopping List';
     }
 
     getShoppingList() {
