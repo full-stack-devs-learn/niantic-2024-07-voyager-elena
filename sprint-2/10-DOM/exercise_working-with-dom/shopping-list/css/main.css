@@ -7,6 +7,7 @@
     --color-danger-hover: #df0000;
     --color-warning: rgb(255, 162, 0);
     --color-success: rgb(140, 187, 41);
+    --color-success-hover: rgb(113, 150, 35);
     --bg-primary: #e2e2e2;
     --bg-primary-light: #ffffff66;
     --bg-danger: #ffdfdf;
@@ -119,4 +120,12 @@ body {
 
 .btn:hover {
     background-color: var(--color-danger-hover);
+}
+
+.completed-btn {
+    background-color: var(--color-success);
+}
+
+.completed-btn:hover {
+    background-color: var(--color-success-hover);
 }
