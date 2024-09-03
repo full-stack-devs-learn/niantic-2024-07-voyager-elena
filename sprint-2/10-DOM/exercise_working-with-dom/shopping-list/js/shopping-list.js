@@ -9,17 +9,17 @@ const shoppingListService = new ShoppingService();
  * of the pageTitle variable that was set above.
  */
 const displayListTitle = () => {
-    const titleElement = document.querySelector('#title');
-    titleElement.textContent = shoppingListService.getListName();
+  const titleElement = document.querySelector('#title');
+  titleElement.textContent = shoppingListService.getListName();
 }
 
 /**
  * This function will loop over the array of groceries that was set above and add them to the DOM.
  */
 const displayGroceries = () => {
-    const shoppingListItemsContainer = document.querySelector('#groceries');
-    const shoppingList = shoppingListService.getShoppingList();
-    shoppingList.forEach(item => addShoppingListItemElement(item, shoppingListItemsContainer));
+  const shoppingListItemsContainer = document.querySelector('#groceries');
+  const shoppingList = shoppingListService.getShoppingList();
+  shoppingList.forEach(item => addShoppingListItemElement(item, shoppingListItemsContainer));
 }
 
 /**
@@ -29,46 +29,41 @@ const addShoppingListItemElement = (item, container) => container.appendChild(cr
 
 
 const createShoppingListItemElement = (item) => {
-    const itemElement = document.createElement('li');
-    itemElement.classList.add('list-item');
-    itemElement.appendChild(createShoppingListItemTitleDiv(item.title));
-    itemElement.appendChild(createShoppingListItemQuantityDiv(item.quantity));
-    if (item.isComplete) {
-        itemElement.classList.add('complete');
-    }
-    return itemElement;
+  const classNames = ['list-item'];
+  if (item.isComplete) {
+    classNames.push('complete');
+  }
+  const itemElement = createElement('li', classNames);
+  itemElement.appendChild(createShoppingListItemTitleDiv(item.title));
+  itemElement.appendChild(createShoppingListItemQuantityDiv(item.quantity));
+  return itemElement;
 }
 
 const createShoppingListItemTitleDiv = (title) => {
-    const titleElement = document.createElement('div');
-    titleElement.textContent = title;
-    return titleElement;
+  return createElement('div', '', title);
 }
 
 const createShoppingListItemQuantityDiv = (quantity) => {
-    const quantityElement = document.createElement('div');
-    quantityElement.classList.add('quantity-container');
-    const quantityTextSpan = document.createElement('span');
-    quantityTextSpan.classList.add('super');
-    quantityTextSpan.textContent = 'quantity';
-    quantityElement.appendChild(quantityTextSpan);
-    quantityElement.appendChild(document.createTextNode(quantity));
-    return quantityElement;
+  const quantityElement = createElement('div', 'quantity-container');
+  const quantityTextSpan = createElement('span', 'super', 'quantity');
+  quantityElement.appendChild(quantityTextSpan);
+  quantityElement.appendChild(document.createTextNode(quantity));
+  return quantityElement;
 }
 
 /**
  * This function will be called when the button is clicked. You will need to get a reference
  * to every list item and add the class completed to each one
  */
-const markCompleted =() => {
-    const itemElementsList = document.querySelectorAll('.list-item');
-    itemElementsList.forEach(item => item.classList.add('complete'));
+const markCompleted = () => {
+  const itemElementsList = document.querySelectorAll('.list-item');
+  itemElementsList.forEach(item => item.classList.add('complete'));
 }
 
 
-const markUncompleted =() => {
-    const itemElementsList = document.querySelectorAll('.list-item');
-    itemElementsList.forEach(item => item.classList.remove('complete'));
+const markUncompleted = () => {
+  const itemElementsList = document.querySelectorAll('.list-item');
+  itemElementsList.forEach(item => item.classList.remove('complete'));
 }
 
 
