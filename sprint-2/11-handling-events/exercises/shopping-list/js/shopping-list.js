@@ -71,33 +71,68 @@ function addQuantity(item, parent) {
 }
 
 
-function markCompleted() {
-  const listItems = document.querySelectorAll(".list-item");
+const markAllComplete = () => {
+  const listItems = document.querySelectorAll('.list-item');
+  listItems.forEach(item => markItemComplete(item));
+}
 
-  listItems.forEach(item => {
-    item.classList.add("complete");
-  })
+const markAllIncomplete = () => {
+  const listItems = document.querySelectorAll('.list-item');
+  listItems.forEach(item => markItemIncomplete(item));
 }
 
 const markComplete = (event) => {
   console.log('click');
   const listItem = event.target;
-  listItem.classList.add('complete');
-  listItem.removeEventListener('click', markComplete);
-  listItem.addEventListener('dblclick', markIncomplete);
+  markItemComplete(listItem);
 }
 
 const markIncomplete = (event) => {
   console.log('double click');
   const listItem = event.target;
-  listItem.classList.remove('complete');
-  listItem.removeEventListener('dblclick', markIncomplete);
-  listItem.addEventListener('click', markComplete);
+  markItemIncomplete(listItem);
 }
 
+// it would be much simpler just to toggle item status on click
 const toggleComplete = (event) => {
   const listItem = event.target;
   listItem.classList.toggle('complete');
+}
+
+const markItemComplete = (item) => {
+  item.classList.add('complete');
+  item.removeEventListener('click', markComplete);
+  item.addEventListener('dblclick', markIncomplete);
+}
+
+const markItemIncomplete = (item) => {
+  item.classList.remove('complete');
+  item.removeEventListener('dblclick', markIncomplete);
+  item.addEventListener('click', markComplete);
+}
+
+const handleMarkAllButtonClick = (event) => {
+  console.log('Button was clicked!');
+  const btn = event.target;
+  const btnTextContent = btn.textContent;
+ 
+  // did not notice the HINT at first
+  // if (btnTextContent === 'Mark All Completed') {
+    if (allItemsIncomplete) {
+    btn.textContent = 'Mark All Incomplete';
+    allItemsIncomplete = false;
+    markAllComplete();
+  } else {
+    btn.textContent = 'Mark All Completed';
+    allItemsIncomplete = true;
+    markAllIncomplete();
+  }
+}
+
+const handleMarkAllButton = () => {
+  const markAllButton = document.querySelector('#allCompleteButton');
+  markAllButton.textContent = 'Mark All Completed';
+  markAllButton.addEventListener('click', handleMarkAllButtonClick);
 }
 
 // create the page load event here
@@ -108,5 +143,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
   displayListTitle();
   displayShoppingList();
+  handleMarkAllButton();
 });
 

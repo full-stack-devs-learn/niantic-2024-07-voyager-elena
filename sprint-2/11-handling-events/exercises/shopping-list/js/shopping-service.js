@@ -28,13 +28,13 @@ class ShoppingService {
               id: 4,
               title: '1.5 lbs pkg Ground Turkey',
               quantity: 2,
-              isComplete: true
+              isComplete: false
           },
           {
               id: 5,
               title: 'Red Bell Pepper',
               quantity: 4,
-              isComplete: true
+              isComplete: false
           },
           {
               id: 6,
@@ -62,9 +62,9 @@ class ShoppingService {
           },
           {
               id: 10,
-              title: '5.3 oz Chobany Blueberry Yogurt',
+              title: '5.3 oz Chobani Blueberry Yogurt',
               quantity: 4,
-              isComplete: true
+              isComplete: false
           },
         ];
     }
