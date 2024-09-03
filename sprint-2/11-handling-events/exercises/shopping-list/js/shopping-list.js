@@ -28,9 +28,21 @@ function addListItem(item, parent)
     }
 
     addItemTitle(item, div);
-    addQuantity(item, div)
+    addQuantity(item, div);
+    // add event listeners to the list item
+    // div.addEventListener('click', toggleComplete);
+    // div.addEventListener('click', markComplete);
+    // div.addEventListener('dblclick', markIncomplete);
+    // div.addEventListener('click', () => console.log('Click!'));
+    // div.addEventListener('dblclick', () => console.log('Double click!'));
+    div.addEventListener("click", () => {
+      div.classList.add("complete");
+    })
+    div.addEventListener("dblclick", () => {
+      div.classList.remove("complete");
+    })
 
-    parent.appendChild(div)
+    parent.appendChild(div);
 }
 
 function addItemTitle(item, parent)
@@ -67,6 +79,20 @@ function markCompleted() {
     })
 }
 
+const markComplete = (event) => {
+  console.log('click')
+  console.log(event.target);
+}
+
+const markIncomplete = (event) => {
+  console.log('double click')
+  console.log(event.target);
+}
+
+const toggleComplete = (event) => {
+  const listItem = event.target;
+  listItem.classList.toggle('complete');
+}
 
 // create the page load event here
 
