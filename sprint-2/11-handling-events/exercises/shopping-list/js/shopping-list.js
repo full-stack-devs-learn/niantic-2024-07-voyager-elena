@@ -29,20 +29,10 @@ function addListItem(item, parent) {
   addQuantity(item, div);
   // add event listeners to the list item
   if (item.isComplete) {
-    div.addEventListener('dblclick', markIncomplete);
+    div.addEventListener('dblclick', () => markItemIncomplete(div));
   } else {
-    div.addEventListener('click', markComplete);
+    div.addEventListener('click', () => markItemComplete(div));
   }
-
-  // div.addEventListener('click', toggleComplete);
-  // div.addEventListener('click', () => console.log('Click!'));
-  // div.addEventListener('dblclick', () => console.log('Double click!'));
-  // div.addEventListener("click", () => {
-  //   div.classList.add("complete");
-  // })
-  // div.addEventListener("dblclick", () => {
-  //   div.classList.remove("complete");
-  // })
 
   parent.appendChild(div);
 }
@@ -81,17 +71,21 @@ const markAllIncomplete = () => {
   listItems.forEach(item => markItemIncomplete(item));
 }
 
-const markComplete = (event) => {
-  console.log('click');
-  const listItem = event.target;
-  markItemComplete(listItem);
-}
+// do not work as expected
+// const markComplete = (event) => {
+//   console.log('click');
+//   if(event.target.classList.contains('.list-item')) {
+//     const listItem = event.target;
+//     markItemComplete(listItem);
+//   }  
+// }
 
-const markIncomplete = (event) => {
-  console.log('double click');
-  const listItem = event.target;
-  markItemIncomplete(listItem);
-}
+// const markIncomplete = (event) => {
+//   console.log('double click');
+//   const listItem = event.target;
+//   console.log(listItem.classList)
+//   markItemIncomplete(listItem);
+// }
 
 // it would be much simpler just to toggle item status on click
 const toggleComplete = (event) => {
@@ -101,24 +95,24 @@ const toggleComplete = (event) => {
 
 const markItemComplete = (item) => {
   item.classList.add('complete');
-  item.removeEventListener('click', markComplete);
-  item.addEventListener('dblclick', markIncomplete);
+  item.removeEventListener('click', () => markItemComplete(item));
+  item.addEventListener('dblclick', () => markItemIncomplete(item));
 }
 
 const markItemIncomplete = (item) => {
   item.classList.remove('complete');
-  item.removeEventListener('dblclick', markIncomplete);
-  item.addEventListener('click', markComplete);
+  item.removeEventListener('dblclick', () => markItemIncomplete(item));
+  item.addEventListener('click', () => markItemComplete(item));
 }
 
 const handleMarkAllButtonClick = (event) => {
-  console.log('Button was clicked!');
+  console.log(`Button was clicked! allItemsIncomplete is ${allItemsIncomplete}`);
   const btn = event.target;
   const btnTextContent = btn.textContent;
- 
+
   // did not notice the HINT at first
   // if (btnTextContent === 'Mark All Completed') {
-    if (allItemsIncomplete) {
+  if (allItemsIncomplete) {
     btn.textContent = 'Mark All Incomplete';
     allItemsIncomplete = false;
     markAllComplete();
