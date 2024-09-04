@@ -11,23 +11,41 @@ import org.springframework.web.bind.annotation.*;
 import java.util.ArrayList;
 
 @Controller
-public class ProductsController
-{
+public class ProductsController {
     private CategoryDao categoryDao = new CategoryDao();
     private ProductDao productDao = new ProductDao();
 
     // list all categories
-    @GetMapping( "/products")
-    public String products(Model model, @RequestParam(defaultValue = "1") int catId)
-    {
-        var products = productDao.getProductsByCategory(catId);
-        var category = categoryDao.getCategoryById(catId);
+    @GetMapping("/products")
+    public String products(Model model, @RequestParam(defaultValue = "0") int catId) {
+        ArrayList<Product> products;
+        Category category;
+
+        if (catId == 0) {
+            category = new Category();
+            category.setCategoryId(0);
+            products = new ArrayList<>();
+        } else {
+            products = productDao.getProductsByCategory(catId);
+            category = categoryDao.getCategoryById(catId);
+        }
+
         var categories = categoryDao.getCategories();
 
         model.addAttribute("categories", categories);
         model.addAttribute("currentCategory", category);
         model.addAttribute("products", products);
         return "products/index";
+    }
+
+    @GetMapping("/products/category/{categoryId}")
+    public String getProductsByCategoryId(Model model, @PathVariable int categoryId) {
+        if (categoryId <= 0) {
+            return "redirect:/products";
+        }
+        var products = productDao.getProductsByCategory(categoryId);
+        model.addAttribute("products", products);
+        return "/products/fragments/product-table-list";
     }
 
     // details page
