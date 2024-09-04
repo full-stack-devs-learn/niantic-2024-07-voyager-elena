@@ -16,6 +16,8 @@ const loadProducts = (categoryId) => {
         throw new Error(response);
     }).then(data => {
         container.innerHTML = data;
+        const msgElement = document.querySelector('#products-msg');
+        msgElement.style.display = 'none';
     }).catch(error => {
         console.log(error);
     });
