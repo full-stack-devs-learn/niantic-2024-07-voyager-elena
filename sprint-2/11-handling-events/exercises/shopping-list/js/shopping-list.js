@@ -3,6 +3,12 @@ let list = []
 
 let allItemsIncomplete = true;
 
+let form;
+let itemNameInput;
+let itemNameError;
+let quantityInput;
+let quantityError;
+
 
 function displayListTitle() {
   const title = document.getElementById("title")
@@ -27,7 +33,7 @@ function addListItem(item, parent) {
 
   addItemTitle(item, div);
   addQuantity(item, div);
-  // add event listeners to the list item
+  // add event listener to the list item
   if (item.isComplete) {
     div.addEventListener('dblclick', () => markItemIncomplete(div));
   } else {
@@ -129,6 +135,74 @@ const handleMarkAllButton = () => {
   markAllButton.addEventListener('click', handleMarkAllButtonClick);
 }
 
+const handleAddNewItem = (event) => {
+  event.preventDefault();
+
+  if (formValidation()) {
+    // add new item
+    addNewItemToList();
+
+    // reset form 
+    form.reset();
+  };
+
+}
+
+const formValidation = () => {
+  let isValid = true;
+
+  if (itemNameInput.validity.valid) {
+    itemNameError.textContent = '\u00a0'; // 'empty' line so that gaps between inputs do not change
+    itemNameInput.classList.remove('error');
+  } else {
+    itemNameError.textContent = 'Item name is required';
+    itemNameInput.classList.add('error');
+    isValid = false;
+  }
+
+  if (quantityInput.validity.valid) {
+    quantityError.textContent = '\u00a0';
+    quantityInput.classList.remove('error');
+  } else {
+    const quantityValue = quantityInput.value
+    if (quantityValue.trim() === '') {
+      quantityError.textContent = 'Quantity is required';
+    } else {
+      console.log(`quantityValue = ${quantityValue}`);
+      quantityError.textContent = 'Quantity must be a whole number';
+    }
+    quantityInput.classList.add('error');
+    isValid = false;
+  }
+
+  return isValid;
+}
+
+const setupFormValidation = () => {
+  itemNameInput = document.querySelector('#itemName');
+  itemNameError = document.querySelector('#nameError');
+  quantityInput = document.querySelector('#quantity');
+  quantityError = document.querySelector('#quantityError');
+};
+
+const addNewItemToList = () => {
+  // create list item object
+  const newItemObject = {
+    id: list.length,
+    title: itemNameInput.value,
+    quantity: quantityInput.value,
+    isComplete: false
+  };
+
+  list.push(newItemObject); // do not need to do it actually, just to keep track of number of items to create a new item id
+
+  // get parent element
+  const shoppingListElement = document.querySelector('#shopping-list');
+
+  // call addListItem(item, parent) that is already defined
+  addListItem(newItemObject, shoppingListElement);
+}
+
 // create the page load event here
 
 document.addEventListener("DOMContentLoaded", () => {
@@ -138,5 +212,9 @@ document.addEventListener("DOMContentLoaded", () => {
   displayListTitle();
   displayShoppingList();
   handleMarkAllButton();
-});
 
+  form = document.querySelector('form');
+  form.addEventListener('submit', handleAddNewItem);
+
+  setupFormValidation();
+});
