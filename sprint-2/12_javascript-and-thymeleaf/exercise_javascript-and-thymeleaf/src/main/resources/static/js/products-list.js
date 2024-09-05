@@ -1,5 +1,9 @@
 document.addEventListener('DOMContentLoaded', () => {
     const categorySelector = document.querySelector('#category');
+    const categoryId = categorySelector.value;
+    if (categoryId > 0) {
+        loadProducts(categoryId);
+    }
     categorySelector.addEventListener('change', () => loadProducts(categorySelector.value));
 });
 
