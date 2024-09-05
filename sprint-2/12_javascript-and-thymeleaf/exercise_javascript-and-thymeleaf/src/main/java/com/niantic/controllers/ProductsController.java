@@ -4,18 +4,21 @@ import com.niantic.models.Category;
 import com.niantic.models.Product;
 import com.niantic.services.CategoryDao;
 import com.niantic.services.ProductDao;
+import jakarta.validation.Valid;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 @Controller
 public class ProductsController {
     private CategoryDao categoryDao = new CategoryDao();
     private ProductDao productDao = new ProductDao();
 
-    // list all categories
+    // list products
     @GetMapping("/products")
     public String products(Model model, @RequestParam(defaultValue = "0") int catId) {
         ArrayList<Product> products;
@@ -66,9 +69,9 @@ public class ProductsController {
         return "products/details";
     }
 
-    // add category
+    // add product
     @GetMapping("/products/new")
-    public String addCategory(Model model)
+    public String addProduct(Model model)
     {
         var categories = categoryDao.getCategories();
         model.addAttribute("categories", categories);
@@ -77,9 +80,26 @@ public class ProductsController {
     }
 
     @PostMapping("/products/new")
-    public String saveProduct(@ModelAttribute("product") Product product)
-    {
-
+    public String saveProduct(Model model, @Valid @ModelAttribute("product") Product product, BindingResult result) {
+        if (result.hasErrors()) {
+            model.addAttribute("isInvalid", true);
+            // attempt to send errors from server
+//            HashMap<String, String> errors = new HashMap<>();
+//            for (var error : result.getAllErrors()) {
+//                errors.put(error.getField(), error.getDefaultMessage());
+//            }
+            ArrayList<String> errorMessages = new ArrayList<>();
+            for (var error : result.getAllErrors()) {
+                errorMessages.add(error.getDefaultMessage());
+            }
+            model.addAttribute("errorMessages", errorMessages);
+            // redirect back to the add product page
+            // return "redirect:/products/new";
+            // is there another way to keep categories in model?
+            var categories = categoryDao.getCategories();
+            model.addAttribute("categories", categories);
+            return "products/add";
+        }
         productDao.addProduct(product);
         return "redirect:/products?catId=" + product.getCategoryId();
     }
