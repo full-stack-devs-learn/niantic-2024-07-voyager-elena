@@ -10,7 +10,7 @@ import java.util.ArrayList;
 
 @RestController
 public class ProductApiController {
-    @GetMapping("/products/category/{categoryId}")
+    @GetMapping("/api/products/category/{categoryId}")
     public ArrayList<Product> getProductsByCategoryId(@PathVariable int categoryId) {
         ProductDao productDao = new ProductDao();
         return productDao.getProductsByCategory(categoryId);

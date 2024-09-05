@@ -27,9 +27,9 @@ public class ProductsController {
         if (catId == 0) {
             category = new Category();
             category.setCategoryId(0);
-            products = new ArrayList<>();
+//            products = new ArrayList<>();
         } else {
-            products = productDao.getProductsByCategory(catId);
+//            products = productDao.getProductsByCategory(catId);
             category = categoryDao.getCategoryById(catId);
         }
 
@@ -37,7 +37,7 @@ public class ProductsController {
 
         model.addAttribute("categories", categories);
         model.addAttribute("currentCategory", category);
-        model.addAttribute("products", products);
+//        model.addAttribute("products", products);  // we never use products
         return "products/index";
     }
 
