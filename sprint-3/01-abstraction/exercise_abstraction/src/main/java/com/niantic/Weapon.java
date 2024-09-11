@@ -1,10 +1,9 @@
 package com.niantic;
 
 public abstract class Weapon {
-    protected String name;
-    protected int damage;
-    protected int percentCharged;
-    protected int range;
+    private String name;
+    private int damage;
+    private int percentCharged;
 
     public Weapon(String name, int damage) {
         this.name = name;
@@ -24,11 +23,13 @@ public abstract class Weapon {
         return percentCharged;
     }
 
-    public abstract int getRange();
-
-    protected abstract void setPercentCharged();
+    protected void setPercentCharged(int percentCharged) {
+        this.percentCharged = percentCharged;
+    }
 
     public abstract int attack();
 
     public abstract int powerAttack();
+
+    public abstract int getRange();
 }
