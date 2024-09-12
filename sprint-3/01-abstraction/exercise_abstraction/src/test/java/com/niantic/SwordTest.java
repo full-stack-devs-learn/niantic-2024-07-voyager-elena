@@ -17,7 +17,7 @@ class SwordTest {
     }
 
     @Test
-    public void parameterizedConstructor_ShouldCreateSwordCorrecty_withGivenNameAndDamage() {
+    public void parameterizedConstructor_ShouldCreateSwordCorrectly_withGivenNameAndDamage() {
         // arrange
         String expectedName = swordName;
         int expectedDamage = damage;
