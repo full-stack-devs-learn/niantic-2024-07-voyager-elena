@@ -34,16 +34,21 @@ public class Dagger extends Weapon {
 
     @Override
     public int powerAttack() {
+        if (daggerCount == 0) {
+            return 0;
+        }
+
         int percentCharged = getPercentCharged();
 
         // can only be used if the dagger is charged 100%
-        if (percentCharged < 100 || daggerCount == 0) {
-            return 0;
+        if (percentCharged < 100) {
+            return attack();
         }
 
         // A dagger cannot be retrieved from a power attack, so the daggerCount is reduced by 1
         daggerCount--;
         setPercentCharged(0);
+
         // 3x the default
         return 3 * getDamage();
     }
