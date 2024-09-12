@@ -11,12 +11,11 @@ class DaggerTest {
     // name taken from this website https://www.fantasynamegenerators.com/dagger-names.php
     private final String daggerName = "Fleshshaper";
     private final int damage = 5;
-    private int daggerCount = 10;
 
 
     @BeforeEach
     public void setup() {
-         dagger = new Dagger(daggerName, damage, daggerCount);
+         dagger = new Dagger(daggerName, damage);
     }
 
     @Test
@@ -24,7 +23,7 @@ class DaggerTest {
         // arrange
         String expectedName = daggerName;
         int expectedDamage = damage;
-        int expectedDaggerCount = daggerCount;
+        int expectedDaggerCount = 1;
         int expectedPercentCharged = 0;
 
         // act
