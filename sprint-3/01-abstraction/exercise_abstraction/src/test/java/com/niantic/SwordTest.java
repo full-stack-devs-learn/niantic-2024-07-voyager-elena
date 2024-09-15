@@ -17,7 +17,7 @@ class SwordTest {
     }
 
     @Test
-    public void parameterizedConstructor_ShouldCreateSwordCorrectly_withGivenNameAndDamage() {
+    public void parameterizedConstructor_shouldCreateSwordCorrectly_withGivenNameAndDamage() {
         // arrange
         String expectedName = swordName;
         int expectedDamage = damage;
@@ -34,9 +34,13 @@ class SwordTest {
 
     @Test
     void getRange_shouldReturn1() {
+        // arrange
         int expectedRange = 1;
 
-        assertEquals(expectedRange, sword.getRange());
+        // act
+        int actualRange = sword.getRange();
+
+        assertEquals(expectedRange, actualRange, "The sword range should be equal to 1");
     }
 
     @Test
