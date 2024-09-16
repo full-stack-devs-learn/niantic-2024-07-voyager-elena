@@ -2,12 +2,10 @@ package com.niantic.ui;
 
 import java.util.Scanner;
 
-public class UserInput
-{
+public class UserInput {
     protected static Scanner in = new Scanner(System.in);
 
-    public static int homeScreenSelection()
-    {
+    public static int homeScreenSelection() {
         System.out.println();
         System.out.println("What do you want to do?");
         System.out.println("-".repeat(30));
@@ -30,9 +28,43 @@ public class UserInput
         return Integer.parseInt(in.nextLine());
     }
 
-    public static void displayMessage(String message)
-    {
+    public static void displayMessage(String message) {
         System.out.println();
         System.out.println(message);
     }
+
+    public static int displayMenuToChooseFile(String[] files) {
+        int n = files.length;
+        boolean valid = false;
+        int choice = 0;
+
+        while (!valid) {
+            System.out.println();
+            System.out.println(" All students files");
+            System.out.println("=".repeat(20));
+
+            for (int i = 0; i < n; i++) {
+                System.out.printf("%2d) %s \n", i + 1, files[i]);
+            }
+
+            System.out.println();
+            System.out.print("Please select a file: ");
+
+            String choiceStr = in.nextLine();
+
+            try {
+                choice = Integer.parseInt(choiceStr);
+            } catch (Exception e) {
+                choice = 0;
+            }
+            if (choice <= 0 || choice > n) {
+                displayMessage("Invalid input, please select a valid option");
+            } else {
+                valid = true;
+            }
+
+        }
+        return choice;
+    }
+
 }

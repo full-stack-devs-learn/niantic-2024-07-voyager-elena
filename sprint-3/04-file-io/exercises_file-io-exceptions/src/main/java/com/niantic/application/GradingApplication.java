@@ -42,6 +42,7 @@ public class GradingApplication implements Runnable {
     private String[] getAllFiles() {
         File directory = new File("files");
         String[] files = directory.list();
+        assert files != null; // IntelliJ insists I need this
         Arrays.sort(files);
 
         return files;
@@ -49,7 +50,6 @@ public class GradingApplication implements Runnable {
 
     private void displayAllFiles() {
         // todo: 1 - get and display all student file names
-
         String[] files = getAllFiles();
 
         System.out.println();
@@ -64,6 +64,10 @@ public class GradingApplication implements Runnable {
     private void displayFileScores() {
         // todo: 2 - allow the user to select a file name
         // load all student assignment scores from the file - display all files
+
+        String[] files = getAllFiles();
+        int choice = UserInput.displayMenuToChooseFile(files);
+        System.out.println("You selected: " + files[choice - 1]);
 
     }
 
