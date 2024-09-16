@@ -4,10 +4,7 @@ import com.niantic.models.Assignment;
 import com.niantic.models.Student;
 
 import java.io.File;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Scanner;
+import java.util.*;
 
 public class GradesFileService implements GradesService {
 
@@ -59,6 +56,7 @@ public class GradesFileService implements GradesService {
             System.out.println(e.getMessage());
         }
 
+        Collections.sort(assignments);
         return assignments;
     }
 

@@ -68,7 +68,7 @@ public class GradingApplication implements Runnable {
                     + assignments.getFirst().getStudent().getFirstName()
                     + " "
                     + assignments.getFirst().getStudent().getLastName());
-            System.out.println("=".repeat(40));
+            System.out.println("=".repeat(42));
         }
         assignments.forEach(System.out::println);
     }

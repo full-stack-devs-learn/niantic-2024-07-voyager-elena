@@ -1,6 +1,6 @@
 package com.niantic.models;
 
-public class Assignment {
+public class Assignment implements Comparable<Assignment> {
     private int number;
     private Student student;
     private String assignmentName;
@@ -50,6 +50,11 @@ public class Assignment {
 
     @Override
     public String toString() {
-        return String.format("%3d    %-30s %3d", number, assignmentName, score);
+        return String.format("%3d    %-31s %3d", number, assignmentName, score);
+    }
+
+    @Override
+    public int compareTo(Assignment o) {
+        return this.number - o.getNumber();
     }
 }
