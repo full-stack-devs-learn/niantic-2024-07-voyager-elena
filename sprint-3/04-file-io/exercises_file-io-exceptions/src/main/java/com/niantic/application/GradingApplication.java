@@ -5,6 +5,9 @@ import com.niantic.services.GradesFileService;
 import com.niantic.services.GradesService;
 import com.niantic.ui.UserInput;
 
+import java.io.File;
+import java.util.Arrays;
+
 public class GradingApplication implements Runnable
 {
     private GradesService gradesService = new GradesFileService();
@@ -43,6 +46,13 @@ public class GradingApplication implements Runnable
     private void displayAllFiles()
     {
         // todo: 1 - get and display all student file names
+        File directory = new File("files");
+        String[] files = directory.list();
+        Arrays.sort(files);
+
+        for (var fileName : files) {
+            System.out.println(fileName);
+        }
     }
 
     private void displayFileScores()
