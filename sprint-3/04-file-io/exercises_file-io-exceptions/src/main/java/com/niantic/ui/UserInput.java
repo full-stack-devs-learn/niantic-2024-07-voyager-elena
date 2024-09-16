@@ -28,11 +28,6 @@ public class UserInput {
         return Integer.parseInt(in.nextLine());
     }
 
-    public static void displayMessage(String message) {
-        System.out.println();
-        System.out.println(message);
-    }
-
     public static int displayMenuToChooseFile(String[] files) {
         int n = files.length;
         boolean valid = false;
@@ -65,6 +60,17 @@ public class UserInput {
 
         }
         return choice;
+    }
+
+    public static void displayMessage(String message) {
+        System.out.println();
+        System.out.println(message);
+    }
+
+    public static void waitForUser() {
+        System.out.println();
+        System.out.print("Press ENTER to continue...");
+        in.nextLine();
     }
 
 }

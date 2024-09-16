@@ -5,11 +5,10 @@ import com.niantic.services.GradesFileService;
 import com.niantic.services.GradesService;
 import com.niantic.ui.UserInput;
 
-import java.io.File;
-import java.util.Arrays;
+import java.util.List;
 
 public class GradingApplication implements Runnable {
-    private GradesService gradesService = new GradesFileService();
+    private final GradesService gradesService = new GradesFileService();
 
     public void run() {
         while (true) {
@@ -36,21 +35,13 @@ public class GradingApplication implements Runnable {
                 default:
                     UserInput.displayMessage("Please make a valid selection");
             }
+            UserInput.waitForUser();
         }
-    }
-
-    private String[] getAllFiles() {
-        File directory = new File("files");
-        String[] files = directory.list();
-        assert files != null; // IntelliJ insists I need this
-        Arrays.sort(files);
-
-        return files;
     }
 
     private void displayAllFiles() {
         // todo: 1 - get and display all student file names
-        String[] files = getAllFiles();
+        String[] files = gradesService.getFileNames();
 
         System.out.println();
         System.out.println(" All students files");
@@ -63,12 +54,23 @@ public class GradingApplication implements Runnable {
 
     private void displayFileScores() {
         // todo: 2 - allow the user to select a file name
-        // load all student assignment scores from the file - display all files
+        //      load all student assignment scores from the file - display all files
 
-        String[] files = getAllFiles();
+        String[] files = gradesService.getFileNames();
         int choice = UserInput.displayMenuToChooseFile(files);
-        System.out.println("You selected: " + files[choice - 1]);
+        String selectedFile = files[choice - 1];
+        System.out.println("You selected: " + selectedFile);
 
+        List<Assignment> assignments = gradesService.getAssignments(selectedFile);
+        if (!assignments.isEmpty()) {
+            System.out.println();
+            System.out.println("All scores for student: "
+                    + assignments.getFirst().getStudent().getFirstName()
+                    + " "
+                    + assignments.getFirst().getStudent().getLastName());
+            System.out.println("=".repeat(40));
+        }
+        assignments.forEach(System.out::println);
     }
 
     private void displayStudentAverages() {
@@ -88,9 +90,4 @@ public class GradingApplication implements Runnable {
         // this one could take some time
     }
 
-    private String parseStudentName(String fileName) {
-        return fileName.replace(".csv", "")
-                .replace("_", " ")
-                .substring(10);
-    }
 }
