@@ -3,36 +3,29 @@ package com.niantic.models;
 import java.util.HashMap;
 import java.util.Map;
 
-public class Card implements Comparable<Card>
-{
+public class Card implements Comparable<Card> {
     private String suit;
     private String faceValue;
 
-    public Card(String suit, String faceValue)
-    {
+    public Card(String suit, String faceValue) {
         this.suit = suit;
         this.faceValue = faceValue;
     }
 
-    public String getSuit()
-    {
+    public String getSuit() {
         return suit;
     }
 
-    public String getFaceValue()
-    {
+    public String getFaceValue() {
         return faceValue;
     }
 
-    public int getPointValue()
-    {
+    public int getPointValue() {
         return cardValues.get(faceValue);
     }
 
-    public String getColor()
-    {
-        switch (suit.toLowerCase())
-        {
+    public String getColor() {
+        switch (suit.toLowerCase()) {
             case "hearts":
             case "diamonds":
                 return "Red";
@@ -42,8 +35,7 @@ public class Card implements Comparable<Card>
     }
 
     // lookup map
-    private static final Map<String, Integer> cardValues = new HashMap<>()
-    {{
+    private static final Map<String, Integer> cardValues = new HashMap<>() {{
         put("A", 11);
         put("K", 10);
         put("Q", 10);
@@ -59,10 +51,38 @@ public class Card implements Comparable<Card>
         put("2", 2);
     }};
 
+    private static final Map<String, Integer> SUITS_ORDER = Map.of(
+            "spades", 1,
+            "hearts", 2,
+            "diamonds", 3,
+            "clubs", 4
+    );
+
+    private static final Map<String, Integer> FACE_VALUE10_ORDER = Map.of(
+            "10", 0,
+            "J", 1,
+            "Q", 2,
+            "K", 3,
+            "A", 4
+    );
+
     @Override
-    public int compareTo(Card o)
-    {
+    public int compareTo(Card o) {
         // todo: Exercise 1: implement Comparable<Card>
-        return 0;
+        if (this.getSuit().equalsIgnoreCase(o.getSuit())) {
+            // compare by values
+            if (this.getPointValue() == o.getPointValue()) {
+                if (this.getPointValue() < 10) {
+                    return 0;
+                } else {
+                    return FACE_VALUE10_ORDER.get(this.getFaceValue()) - FACE_VALUE10_ORDER.get(o.getFaceValue());
+                }
+            } else {
+                return this.getPointValue() - o.getPointValue();
+            }
+        } else {
+            // compare by suits
+            return SUITS_ORDER.get(this.getSuit().toLowerCase()) - SUITS_ORDER.get(o.getSuit().toLowerCase());
+        }
     }
 }
