@@ -27,10 +27,6 @@ public class GradesFileService implements GradesService {
         String studentLastName = studentFullName[1];
         Student student = new Student(studentFirstName, studentLastName);
 
-        int highScore = Integer.MIN_VALUE;
-        int lowScore = Integer.MAX_VALUE;
-        int total = 0;
-
         File file = new File("files/" + fileName);
 
         try (Scanner reader = new Scanner(file)) {
@@ -52,9 +48,6 @@ public class GradesFileService implements GradesService {
 
                 String assignmentName = columns[3];
                 int score = Integer.parseInt(columns[4]);
-                highScore = Math.max(highScore, score);
-                lowScore = Math.min(lowScore, score);
-                total += score;
 
                 assignments.add(new Assignment(number, student, assignmentName, score));
             }
@@ -64,9 +57,7 @@ public class GradesFileService implements GradesService {
 
         Collections.sort(assignments);
         if (!assignments.isEmpty()) {
-            student.setLowScore(lowScore);
-            student.setHighScore(highScore);
-            student.setAverageScore(total * 1.0 / assignments.size());
+            student.getAssignments().addAll(assignments);
         }
         return assignments;
     }
