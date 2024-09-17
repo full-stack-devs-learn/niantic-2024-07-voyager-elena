@@ -1,5 +1,9 @@
 package com.niantic.ui;
 
+import com.niantic.models.Assignment;
+import com.niantic.models.Student;
+
+import java.util.List;
 import java.util.Scanner;
 
 public class UserInput {
@@ -18,7 +22,7 @@ public class UserInput {
             System.out.println();
             System.out.println("  ------------ Individual File ------------");
             System.out.println("  2) Student: display all scores");
-            System.out.println("  3) Student: display average score");
+            System.out.println("  3) Student: display statistics");
             System.out.println();
             System.out.println("  ---------- Challenge All Files ----------");
             System.out.println("  5) All Students: display average score");
@@ -61,7 +65,7 @@ public class UserInput {
             }
 
             System.out.println();
-            System.out.print("Please select a file: ");
+            System.out.print("Please select a file to create a report: ");
 
             String choiceStr = in.nextLine();
 
@@ -78,6 +82,38 @@ public class UserInput {
 
         }
         return choice;
+    }
+
+    public static void displayAllFiles(String[] files) {
+        System.out.println();
+        System.out.println(" All students files");
+        System.out.println("=".repeat(20));
+
+        for (var fileName : files) {
+            System.out.println(fileName);
+        }
+    }
+
+    public static void displayStudentAssignments(Student student, List<Assignment> assignments) {
+        System.out.println();
+        System.out.println("All scores for student: "
+                + student.getFirstName()
+                + " "
+                + student.getLastName());
+        System.out.println("=".repeat(42));
+        assignments.forEach(System.out::println);
+    }
+
+    public static void displayStudentStatistics(Student student) {
+        System.out.println();
+        System.out.println("Statistics for student: "
+                + student.getFirstName()
+                + " "
+                + student.getLastName());
+        System.out.println("=".repeat(42));
+        System.out.printf("%-15s %5d \n", "Low Score", student.getLowScore());
+        System.out.printf("%-15s %5d \n", "High Score", student.getHighScore());
+        System.out.printf("%-15s %3.2f \n", "Average Score", student.getAverageScore());
     }
 
     public static void displayMessage(String message) {

@@ -43,14 +43,7 @@ public class GradingApplication implements Runnable {
     private void displayAllFiles() {
         // todo: 1 - get and display all student file names
         String[] files = gradesService.getFileNames();
-
-        System.out.println();
-        System.out.println(" All students files");
-        System.out.println("=".repeat(20));
-
-        for (var fileName : files) {
-            System.out.println(fileName);
-        }
+        UserInput.displayAllFiles(files);
     }
 
     private void displayFileScores() {
@@ -59,41 +52,35 @@ public class GradingApplication implements Runnable {
 
         String[] files = gradesService.getFileNames();
         int choice = UserInput.displayMenuToChooseFile(files);
+
         String selectedFile = files[choice - 1];
-        System.out.println("You selected: " + selectedFile);
+        UserInput.displayMessage("You selected: " + selectedFile);
 
         List<Assignment> assignments = gradesService.getAssignments(selectedFile);
+
         if (!assignments.isEmpty()) {
-            System.out.println();
-            System.out.println("All scores for student: "
-                    + assignments.getFirst().getStudent().getFirstName()
-                    + " "
-                    + assignments.getFirst().getStudent().getLastName());
-            System.out.println("=".repeat(42));
+            Student student = assignments.getFirst().getStudent();
+            UserInput.displayStudentAssignments(student, assignments);
+        } else {
+            UserInput.displayMessage("There is no data in the selected file");
         }
-        assignments.forEach(System.out::println);
     }
 
     private void displayStudentAverages() {
         // todo: 3 - allow the user to select a file name
-        // load all student assignment scores from the file - display student statistics (low score, high score, average score)
+        // load all student assignment scores from the file
+        // display student statistics (low score, high score, average score)
         String[] files = gradesService.getFileNames();
         int choice = UserInput.displayMenuToChooseFile(files);
+
         String selectedFile = files[choice - 1];
-        System.out.println("You selected: " + selectedFile);
+        UserInput.displayMessage("You selected: " + selectedFile);
 
         List<Assignment> assignments = gradesService.getAssignments(selectedFile);
+
         if (!assignments.isEmpty()) {
             Student student = assignments.getFirst().getStudent();
-            System.out.println();
-            System.out.println("Statistics for student: "
-                    + student.getFirstName()
-                    + " "
-                    + student.getLastName());
-            System.out.println("=".repeat(42));
-            System.out.printf("%-15s %5d \n", "Low Score", student.getLowScore());
-            System.out.printf("%-15s %5d \n", "High Score", student.getHighScore());
-            System.out.printf("%-15s %3.2f \n", "Average Score", student.getAverageScore());
+            UserInput.displayStudentStatistics(student);
         } else {
             UserInput.displayMessage("Sorry, there is no data to calculate statistics");
         }
