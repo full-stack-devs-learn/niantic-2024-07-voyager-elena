@@ -1,6 +1,7 @@
 package com.niantic.application;
 
 import com.niantic.models.Assignment;
+import com.niantic.models.Student;
 import com.niantic.services.GradesFileService;
 import com.niantic.services.GradesService;
 import com.niantic.ui.UserInput;
@@ -76,6 +77,26 @@ public class GradingApplication implements Runnable {
     private void displayStudentAverages() {
         // todo: 3 - allow the user to select a file name
         // load all student assignment scores from the file - display student statistics (low score, high score, average score)
+        String[] files = gradesService.getFileNames();
+        int choice = UserInput.displayMenuToChooseFile(files);
+        String selectedFile = files[choice - 1];
+        System.out.println("You selected: " + selectedFile);
+
+        List<Assignment> assignments = gradesService.getAssignments(selectedFile);
+        if (!assignments.isEmpty()) {
+            Student student = assignments.getFirst().getStudent();
+            System.out.println();
+            System.out.println("Statistics for student: "
+                    + student.getFirstName()
+                    + " "
+                    + student.getLastName());
+            System.out.println("=".repeat(42));
+            System.out.printf("%-15s %5d \n", "Low Score", student.getLowScore());
+            System.out.printf("%-15s %5d \n", "High Score", student.getHighScore());
+            System.out.printf("%-15s %3.2f \n", "Average Score", student.getAverageScore());
+        } else {
+            UserInput.displayMessage("Sorry, there is no data to calculate statistics");
+        }
 
     }
 
