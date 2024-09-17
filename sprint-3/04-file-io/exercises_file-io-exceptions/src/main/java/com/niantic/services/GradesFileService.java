@@ -12,7 +12,7 @@ public class GradesFileService implements GradesService {
     public String[] getFileNames() {
         File directory = new File("files");
         String[] files = directory.list();
-        assert files != null; // IntelliJ insists I need this
+        assert files != null; // ? IntelliJ insists I need this
         Arrays.sort(files);
 
         return files;

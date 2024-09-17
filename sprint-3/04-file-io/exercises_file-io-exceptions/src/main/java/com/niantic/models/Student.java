@@ -1,9 +1,6 @@
 package com.niantic.models;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
-import java.util.OptionalInt;
+import java.util.*;
 
 public class Student {
     private final String firstName;
@@ -50,6 +47,27 @@ public class Student {
 
     public double getAverageScore() {
         return assignments.stream().mapToInt(Assignment::getScore).average().getAsDouble();
+    }
+
+    public List<Assignment> getLowScoreAssignments() {
+        int lowScore = getLowScore();
+        return assignments.stream().filter(assignment -> assignment.getScore() == lowScore).toList();
+    }
+
+    public List<Assignment> getHighScoreAssignments() {
+        int highScore = getHighScore();
+        return assignments.stream().filter(assignment -> assignment.getScore() == highScore).toList();
+    }
+
+    public List<Assignment> getAverageScoreAssignments() {
+        double averageScore = getAverageScore();
+        Set<Integer> scores = new HashSet<>();
+        int score = (int) averageScore;
+        scores.add(score);
+        scores.add(score - 1);
+        scores.add(score + 1);
+
+        return assignments.stream().filter(assignment -> scores.contains(assignment.getScore())).toList();
     }
 
 }

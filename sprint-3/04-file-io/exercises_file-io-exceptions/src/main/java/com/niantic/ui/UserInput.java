@@ -106,9 +106,21 @@ public class UserInput {
                 + " "
                 + student.getLastName());
         System.out.println("=".repeat(42));
-        System.out.printf("%-15s %5d \n", "Low Score", student.getLowScore());
-        System.out.printf("%-15s %5d \n", "High Score", student.getHighScore());
-        System.out.printf("%-15s %3.2f \n", "Average Score", student.getAverageScore());
+        System.out.printf("%-20s %5d \n", "Low Score", student.getLowScore());
+        System.out.printf("%-20s %5d \n", "High Score", student.getHighScore());
+        System.out.printf("%-20s %3.2f \n", "Average Score", student.getAverageScore());
+        System.out.println("-".repeat(42));
+        System.out.println("Assignments with the lowest score");
+        System.out.println("-".repeat(42));
+        student.getLowScoreAssignments().forEach(System.out::println);
+        System.out.println("-".repeat(42));
+        System.out.println("Assignments with the highest score");
+        System.out.println("-".repeat(42));
+        student.getHighScoreAssignments().forEach(System.out::println);
+        System.out.println("-".repeat(42));
+        System.out.println("Assignments with the average score");
+        System.out.println("-".repeat(42));
+        student.getAverageScoreAssignments().forEach(System.out::println);
     }
 
     public static void displayMessage(String message) {
