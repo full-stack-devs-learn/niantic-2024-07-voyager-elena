@@ -3,9 +3,9 @@ package com.niantic.models;
 import java.util.HashMap;
 import java.util.Map;
 
-public class Card implements Comparable<Card> {
-    private String suit;
-    private String faceValue;
+public class Card implements Comparable<Card>, Cloneable {
+    private final String suit;
+    private final String faceValue;
 
     public Card(String suit, String faceValue) {
         this.suit = suit;
@@ -83,6 +83,15 @@ public class Card implements Comparable<Card> {
         } else {
             // compare by suits
             return SUITS_ORDER.get(this.getSuit().toLowerCase()) - SUITS_ORDER.get(o.getSuit().toLowerCase());
+        }
+    }
+
+    @Override
+    public Card clone() {
+        try {
+            return (Card) super.clone();
+        } catch (CloneNotSupportedException e) {
+            throw new AssertionError();
         }
     }
 }

@@ -62,6 +62,18 @@ class CardTest
         assertEquals("Q", cards.getFirst().getFaceValue(), "Because card face values should be sorted");
     }
 
+    @Test
+    public void clone_should_createDeepCopy() {
+        // arrange
+        Card card = new Card("Spades", "K");
+
+        // act
+        Card copyOfCard = card.clone();
+
+        // assert
+        assertEquals(card.getSuit(), copyOfCard.getSuit(), "Cloned card should have the same suit");
+        assertEquals(card.getFaceValue(), copyOfCard.getFaceValue(), "Cloned card should have the same face value");
+    }
 
 
 }
