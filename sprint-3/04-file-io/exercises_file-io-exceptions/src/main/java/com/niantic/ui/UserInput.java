@@ -1,9 +1,7 @@
 package com.niantic.ui;
 
-import com.niantic.models.Assignment;
 import com.niantic.models.Student;
 
-import java.util.List;
 import java.util.Scanner;
 
 public class UserInput {
@@ -19,12 +17,9 @@ public class UserInput {
             System.out.println("-".repeat(30));
             System.out.println();
             System.out.println("  1) Display files");
-            System.out.println();
-            System.out.println("  ------------ Individual File ------------");
             System.out.println("  2) Student: display all scores");
             System.out.println("  3) Student: display statistics");
-            System.out.println();
-            System.out.println("  ---------- Challenge All Files ----------");
+            System.out.println("  4) Student: create summary report");
             System.out.println("  5) All Students: display average score");
             System.out.println("  6) All Assignments: display average score");
             System.out.println();
@@ -94,14 +89,14 @@ public class UserInput {
         }
     }
 
-    public static void displayStudentAssignments(Student student, List<Assignment> assignments) {
+    public static void displayStudentAssignments(Student student) {
         System.out.println();
         System.out.println("All scores for student: "
                 + student.getFirstName()
                 + " "
                 + student.getLastName());
         System.out.println("=".repeat(42));
-        assignments.forEach(System.out::println);
+        student.getAssignments().forEach(System.out::println);
     }
 
     public static void displayStudentStatistics(Student student) {

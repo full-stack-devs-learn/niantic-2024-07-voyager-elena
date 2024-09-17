@@ -1,12 +1,9 @@
 package com.niantic.application;
 
-import com.niantic.models.Assignment;
 import com.niantic.models.Student;
 import com.niantic.services.GradesFileService;
 import com.niantic.services.GradesService;
 import com.niantic.ui.UserInput;
-
-import java.util.List;
 
 public class GradingApplication implements Runnable {
     private final GradesService gradesService = new GradesFileService();
@@ -22,16 +19,19 @@ public class GradingApplication implements Runnable {
                     displayFileScores();
                     break;
                 case 3:
-                    displayStudentAverages();
+                    displayStudentStatistics();
                     break;
                 case 4:
-                    displayAllStudentStatistics();
+                    createStudentSummaryReport();
                     break;
                 case 5:
+                    displayAllStudentStatistics();
+                    break;
+                case 6:
                     displayAssignmentStatistics();
                     break;
                 case 0:
-                    UserInput.displayMessage("Goodbye");
+                    UserInput.displayMessage("Program ending... Have a great day!");
                     System.exit(0);
                 default:
                     UserInput.displayMessage("Please make a valid selection");
@@ -42,6 +42,7 @@ public class GradingApplication implements Runnable {
 
     private void displayAllFiles() {
         // todo: 1 - get and display all student file names
+
         String[] files = gradesService.getFileNames();
         UserInput.displayAllFiles(files);
     }
@@ -56,46 +57,48 @@ public class GradingApplication implements Runnable {
         String selectedFile = files[choice - 1];
         UserInput.displayMessage("You selected: " + selectedFile);
 
-        List<Assignment> assignments = gradesService.getAssignments(selectedFile);
+        Student student = gradesService.getStudentAssignments(selectedFile);
 
-        if (!assignments.isEmpty()) {
-            Student student = assignments.getFirst().getStudent();
-            UserInput.displayStudentAssignments(student, assignments);
+        if (!student.getAssignments().isEmpty()) {
+            UserInput.displayStudentAssignments(student);
         } else {
             UserInput.displayMessage("There is no data in the selected file");
         }
     }
 
-    private void displayStudentAverages() {
+    private void displayStudentStatistics() {
         // todo: 3 - allow the user to select a file name
-        // load all student assignment scores from the file
-        // display student statistics (low score, high score, average score)
+        //      load all student assignment scores from the file
+        //      display student statistics (low score, high score, average score)
         String[] files = gradesService.getFileNames();
         int choice = UserInput.displayMenuToChooseFile(files);
 
         String selectedFile = files[choice - 1];
         UserInput.displayMessage("You selected: " + selectedFile);
 
-        List<Assignment> assignments = gradesService.getAssignments(selectedFile);
+        Student student = gradesService.getStudentAssignments(selectedFile);
 
-        if (!assignments.isEmpty()) {
-            Student student = assignments.getFirst().getStudent();
+        if (!student.getAssignments().isEmpty()) {
             UserInput.displayStudentStatistics(student);
         } else {
             UserInput.displayMessage("Sorry, there is no data to calculate statistics");
         }
+    }
 
+    private void createStudentSummaryReport() {
     }
 
     private void displayAllStudentStatistics() {
         // todo: 4 - Optional / Challenge - load all scores from all student and all assignments
-        // display the statistics for all scores (low score, high score, average score, number of students, number of assignments)
+        //      display the statistics for all scores
+        //      (low score, high score, average score, number of students, number of assignments)
     }
 
     private void displayAssignmentStatistics() {
         // todo: 5 - Optional / Challenge - load all scores from all student and all assignments
-        // display the statistics for each assignment (assignment name, low score, high score, average score)
-        // this one could take some time
+        //      display the statistics for each assignment
+        //      (assignment name, low score, high score, average score)
+        //      this one could take some time
     }
 
 }

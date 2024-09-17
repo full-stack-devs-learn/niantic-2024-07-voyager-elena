@@ -19,10 +19,10 @@ public class GradesFileService implements GradesService {
     }
 
     @Override
-    public List<Assignment> getAssignments(String fileName) {
+    public Student getStudentAssignments(String fileName) {
         List<Assignment> assignments = new ArrayList<>();
 
-        String[] studentFullName = parseStudentName(fileName).split(" ");
+        String[] studentFullName = parseStudentName(fileName);
         String studentFirstName = studentFullName[0];
         String studentLastName = studentFullName[1];
         Student student = new Student(studentFirstName, studentLastName);
@@ -55,11 +55,12 @@ public class GradesFileService implements GradesService {
             System.out.println(e.getMessage());
         }
 
-        Collections.sort(assignments);
         if (!assignments.isEmpty()) {
+            Collections.sort(assignments);
             student.getAssignments().addAll(assignments);
         }
-        return assignments;
+
+        return student;
     }
 
     @Override
@@ -69,9 +70,9 @@ public class GradesFileService implements GradesService {
         return allAssignments;
     }
 
-    private String parseStudentName(String fileName) {
+    private String[] parseStudentName(String fileName) {
         return fileName.replace(".csv", "")
-                .replace("_", " ")
-                .substring(10);
+                .substring(10)
+                .split("_");
     }
 }
