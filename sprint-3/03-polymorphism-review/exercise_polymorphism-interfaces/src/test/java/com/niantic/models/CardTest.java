@@ -63,7 +63,7 @@ class CardTest
     }
 
     @Test
-    public void clone_should_createDeepCopy() {
+    public void clone_should_createDeepCopyOfCard() {
         // arrange
         Card card = new Card("Spades", "K");
 
@@ -73,6 +73,32 @@ class CardTest
         // assert
         assertEquals(card.getSuit(), copyOfCard.getSuit(), "Cloned card should have the same suit");
         assertEquals(card.getFaceValue(), copyOfCard.getFaceValue(), "Cloned card should have the same face value");
+    }
+
+    @Test
+    public void equals_should_returnTrue_ifCardsEqual() {
+        // arrange
+        Card card1 = new Card("Spades", "K");
+        Card card2 = new Card("Spades", "K");
+
+        // act
+        boolean actualResult = card1.equals(card2);
+
+        // assert
+        assertTrue(actualResult, "Equals should return true for the same card");
+    }
+
+    @Test
+    public void equals_should_returnFalse_forDifferentCards() {
+        // arrange
+        Card card1 = new Card("Spades", "K");
+        Card card2 = new Card("Spades", "Q");
+
+        // act
+        boolean actualResult = card1.equals(card2);
+
+        // assert
+        assertFalse(actualResult, "Equals should return false for different cards");
     }
 
 

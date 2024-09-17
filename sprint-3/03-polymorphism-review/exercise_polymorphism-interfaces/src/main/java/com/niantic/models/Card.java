@@ -94,4 +94,21 @@ public class Card implements Comparable<Card>, Cloneable {
             throw new AssertionError();
         }
     }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == null) {
+            return false;
+        }
+        if (obj.getClass() != this.getClass()) {
+            return false;
+        }
+        Card otherCard = (Card) obj;
+        return otherCard.getSuit().equalsIgnoreCase(this.suit) && otherCard.getFaceValue().equalsIgnoreCase(this.faceValue);
+    }
+
+    @Override
+    public String toString() {
+        return "Suite: " + suit + " FaceValue: " + faceValue;
+    }
 }

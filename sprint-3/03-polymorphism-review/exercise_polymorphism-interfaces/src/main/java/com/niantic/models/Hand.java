@@ -3,7 +3,7 @@ package com.niantic.models;
 import java.util.ArrayList;
 import java.util.Collections;
 
-public class Hand
+public class Hand implements Cloneable
 {
     private ArrayList<Card> cards = new ArrayList<>();
 
@@ -28,6 +28,10 @@ public class Hand
         Collections.sort(cards);
     }
 
+    public void shuffle() {
+        Collections.shuffle(cards);
+    }
+
     public int getCardCount()
     {
         return cards.size();
@@ -38,5 +42,20 @@ public class Hand
     {
         cards.add(card);
         sort();
+    }
+
+    @Override
+    public Hand clone() {
+        try {
+            Hand clone = (Hand) super.clone();
+            // TODO: copy mutable state here, so the clone can't change the internals of the original
+            clone.cards = new ArrayList<>();
+            for(Card card : cards) {
+                clone.dealTo(card.clone());
+            }
+            return clone;
+        } catch (CloneNotSupportedException e) {
+            throw new AssertionError();
+        }
     }
 }
