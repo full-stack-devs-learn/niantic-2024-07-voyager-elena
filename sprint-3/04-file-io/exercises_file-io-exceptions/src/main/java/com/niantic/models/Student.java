@@ -26,48 +26,29 @@ public class Student {
     }
 
     public int getLowScore() {
-        OptionalInt lowScore = assignments.stream().mapToInt(Assignment::getScore).min();
-        return lowScore.isPresent() ? lowScore.getAsInt() : 0;
-
-        // return assignments.stream().mapToInt(Assignment::getScore).min().getAsInt();
-        // Tried to figure out how to work with Optional because line above gives a warning about using Optional without checking isPresent
-
-//        Optional<Integer> low = assignments.stream().mapToInt(Assignment::getScore).min();
-//        OptionalInt lowScore = assignments.stream().mapToInt(Assignment::getScore).min();
-//        return lowScore.isPresent() ? lowScore.getAsInt() : 0;
-//        return lowScore.ifPresentOrElse();
-//        return lowScore.orElse(0);
+        return ScoresCalculator.getLowScore(assignments);
     }
 
 
     public int getHighScore() {
-        return assignments.stream().mapToInt(Assignment::getScore).max().getAsInt();
+        return ScoresCalculator.getHighScore(assignments);
     }
 
 
     public double getAverageScore() {
-        return assignments.stream().mapToInt(Assignment::getScore).average().getAsDouble();
+        return ScoresCalculator.getAverageScore(assignments);
     }
 
     public List<Assignment> getLowScoreAssignments() {
-        int lowScore = getLowScore();
-        return assignments.stream().filter(assignment -> assignment.getScore() == lowScore).toList();
+        return ScoresCalculator.getLowScoreAssignments(assignments);
     }
 
     public List<Assignment> getHighScoreAssignments() {
-        int highScore = getHighScore();
-        return assignments.stream().filter(assignment -> assignment.getScore() == highScore).toList();
+        return ScoresCalculator.getHighScoreAssignments(assignments);
     }
 
     public List<Assignment> getAverageScoreAssignments() {
-        double averageScore = getAverageScore();
-        Set<Integer> scores = new HashSet<>();
-        int score = (int) averageScore;
-        scores.add(score);
-        scores.add(score - 1);
-        scores.add(score + 1);
-
-        return assignments.stream().filter(assignment -> scores.contains(assignment.getScore())).toList();
+        return ScoresCalculator.getAverageScoreAssignments(assignments);
     }
 
     @Override
@@ -81,6 +62,4 @@ public class Student {
         Student otherStudent = (Student) obj;
         return otherStudent.getFirstName().equals(this.firstName) && otherStudent.getLastName().equals(this.lastName);
     }
-
-
 }

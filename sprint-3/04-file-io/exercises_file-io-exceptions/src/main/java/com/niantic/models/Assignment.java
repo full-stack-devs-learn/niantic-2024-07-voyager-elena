@@ -20,24 +20,12 @@ public class Assignment implements Comparable<Assignment> {
         return number;
     }
 
-    public void setNumber(int number) {
-        this.number = number;
-    }
-
     public Student getStudent() {
         return student;
     }
 
-    public void setStudent(Student student) {
-        this.student = student;
-    }
-
     public String getAssignmentName() {
         return assignmentName;
-    }
-
-    public void setAssignmentName(String assignmentName) {
-        this.assignmentName = assignmentName;
     }
 
     public int getScore() {
