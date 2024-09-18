@@ -1,5 +1,6 @@
 package com.niantic.ui;
 
+import com.niantic.models.AssignmentStatistics;
 import com.niantic.models.Student;
 
 import java.util.Scanner;
@@ -20,8 +21,8 @@ public class UserInput {
             System.out.println("  2) Student: display all scores");
             System.out.println("  3) Student: display statistics");
             System.out.println("  4) Student: create summary report");
-            System.out.println("  5) All Students: display average score");
-            System.out.println("  6) All Assignments: display average score");
+            System.out.println("  5) All Students: display all students statistics");
+            System.out.println("  6) All Assignments: display all assignments statistics");
             System.out.println();
             System.out.println("  0) Exit");
 
@@ -121,6 +122,30 @@ public class UserInput {
         System.out.println("Assignments with the average score");
         System.out.println("-".repeat(42));
         student.getAverageScoreAssignments().forEach(System.out::println);
+    }
+
+    public static void displayAllStudentsStatistics(AssignmentStatistics assignmentsStatistics) {
+        System.out.println();
+        System.out.println("All Students Statistics");
+        System.out.println("=".repeat(60));
+        System.out.printf("%-54s %5d\n", "Total Students", assignmentsStatistics.getStudentsTotalNumber());
+        System.out.printf("%-54s %5d\n", "Total Assignments ", assignmentsStatistics.getAssignmentsTotalNumber());
+        System.out.println("-".repeat(60));
+        System.out.printf("%-54s %5d\n", "Low Score", assignmentsStatistics.getLowScore());
+        System.out.printf("%-54s %5d\n", "High Score", assignmentsStatistics.getHighScore());
+        System.out.printf("%-54s %3.2f\n", "Average Score", assignmentsStatistics.getAverageScore());
+        System.out.println("-".repeat(60));
+        System.out.println("Assignments with the lowest score");
+        System.out.println("-".repeat(60));
+        assignmentsStatistics.getLowScoreAssignments().forEach(assignment -> System.out.println(assignment.toStringWithStudent()));
+        System.out.println("-".repeat(60));
+        System.out.println("Assignments with the highest score");
+        System.out.println("-".repeat(60));
+        assignmentsStatistics.getHighScoreAssignments().forEach(assignment -> System.out.println(assignment.toStringWithStudent()));
+        System.out.println("-".repeat(60));
+        System.out.println("Assignments with the average score");
+        System.out.println("-".repeat(60));
+        assignmentsStatistics.getAverageScoreAssignments().forEach(assignment -> System.out.println(assignment.toStringWithStudent()));
     }
 
     public static void displayMessage(String message) {

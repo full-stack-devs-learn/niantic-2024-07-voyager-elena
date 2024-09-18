@@ -41,6 +41,11 @@ public class Assignment implements Comparable<Assignment> {
         return String.format("%3d    %-31s %3d", number, assignmentName, score);
     }
 
+    public String toStringWithStudent() {
+        String studentFullName = student.getFirstName() + " " + student.getLastName();
+        return String.format("%3d    %-30s %-18s %3d", number, assignmentName, studentFullName, score);
+    }
+
     @Override
     public int compareTo(Assignment o) {
         return this.number - o.getNumber();

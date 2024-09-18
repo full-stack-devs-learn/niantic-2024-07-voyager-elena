@@ -1,6 +1,7 @@
 package com.niantic.application;
 
 import com.niantic.models.Assignment;
+import com.niantic.models.AssignmentStatistics;
 import com.niantic.models.Student;
 import com.niantic.services.GradesFileService;
 import com.niantic.services.GradesService;
@@ -98,24 +99,8 @@ public class GradingApplication implements Runnable {
 
         String[] files = gradesService.getFileNames();
         List<Assignment> allAssignments = gradesService.getAllAssignments(files);
-        Map<String, List<Integer>> assignmentsScoresMap= new HashMap<>();
-        Set<Student> students = new HashSet<>();
-        List<Integer> scores;
-
-        for (Assignment assignment : allAssignments) {
-            students.add(assignment.getStudent());
-            String assignmentName = assignment.getAssignmentName();
-            if (assignmentsScoresMap.containsKey(assignmentName)) {
-                assignmentsScoresMap.get(assignmentName).add(assignment.getScore());
-            } else {
-                scores = new ArrayList<>();
-                scores.add(assignment.getScore());
-                assignmentsScoresMap.put(assignmentName, scores);
-            }
-        }
-
-        System.out.println(assignmentsScoresMap);
-
+        AssignmentStatistics assignmentsStatistics = new AssignmentStatistics(allAssignments);
+        UserInput.displayAllStudentsStatistics(assignmentsStatistics);
     }
 
     private void displayAssignmentStatistics() {

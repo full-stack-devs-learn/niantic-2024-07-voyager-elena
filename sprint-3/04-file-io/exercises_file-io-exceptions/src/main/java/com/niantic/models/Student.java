@@ -29,11 +29,9 @@ public class Student {
         return ScoresCalculator.getLowScore(assignments);
     }
 
-
     public int getHighScore() {
         return ScoresCalculator.getHighScore(assignments);
     }
-
 
     public double getAverageScore() {
         return ScoresCalculator.getAverageScore(assignments);
