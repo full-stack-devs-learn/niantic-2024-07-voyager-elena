@@ -1,9 +1,12 @@
 package com.niantic.application;
 
+import com.niantic.models.Assignment;
 import com.niantic.models.Student;
 import com.niantic.services.GradesFileService;
 import com.niantic.services.GradesService;
 import com.niantic.ui.UserInput;
+
+import java.util.*;
 
 public class GradingApplication implements Runnable {
     private final GradesService gradesService = new GradesFileService();
@@ -92,6 +95,27 @@ public class GradingApplication implements Runnable {
         // todo: 4 - Optional / Challenge - load all scores from all student and all assignments
         //      display the statistics for all scores
         //      (low score, high score, average score, number of students, number of assignments)
+
+        String[] files = gradesService.getFileNames();
+        List<Assignment> allAssignments = gradesService.getAllAssignments(files);
+        Map<String, List<Integer>> assignmentsScoresMap= new HashMap<>();
+        Set<Student> students = new HashSet<>();
+        List<Integer> scores;
+
+        for (Assignment assignment : allAssignments) {
+            students.add(assignment.getStudent());
+            String assignmentName = assignment.getAssignmentName();
+            if (assignmentsScoresMap.containsKey(assignmentName)) {
+                assignmentsScoresMap.get(assignmentName).add(assignment.getScore());
+            } else {
+                scores = new ArrayList<>();
+                scores.add(assignment.getScore());
+                assignmentsScoresMap.put(assignmentName, scores);
+            }
+        }
+
+        System.out.println(assignmentsScoresMap);
+
     }
 
     private void displayAssignmentStatistics() {

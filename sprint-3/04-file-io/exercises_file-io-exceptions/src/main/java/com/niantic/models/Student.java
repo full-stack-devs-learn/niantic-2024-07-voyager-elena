@@ -70,4 +70,17 @@ public class Student {
         return assignments.stream().filter(assignment -> scores.contains(assignment.getScore())).toList();
     }
 
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == null) {
+            return false;
+        }
+        if (obj.getClass() != this.getClass()) {
+            return false;
+        }
+        Student otherStudent = (Student) obj;
+        return otherStudent.getFirstName().equals(this.firstName) && otherStudent.getLastName().equals(this.lastName);
+    }
+
+
 }
