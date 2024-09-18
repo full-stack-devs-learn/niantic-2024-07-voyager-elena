@@ -108,6 +108,10 @@ public class GradingApplication implements Runnable {
         //      display the statistics for each assignment
         //      (assignment name, low score, high score, average score)
         //      this one could take some time
+        String[] files = gradesService.getFileNames();
+        List<Assignment> allAssignments = gradesService.getAllAssignments(files);
+        AssignmentStatistics assignmentsStatistics = new AssignmentStatistics(allAssignments);
+        UserInput.displayAllAssignmentsStatistics(assignmentsStatistics);
     }
 
 }

@@ -3,30 +3,24 @@ package com.niantic.models;
 import java.util.*;
 
 public class AssignmentStatistics {
-    private final Map<String, List<Integer>> assignmentsScoresMap;
+    private final Set<String> assignmentNames;
     private final Set<Student> students;
     private final List<Assignment> assignments;
 
     public AssignmentStatistics(List<Assignment> assignments) {
         this.assignments = assignments;
-        assignmentsScoresMap = new HashMap<>();
+        assignmentNames = new HashSet<>();
         students = new HashSet<>();
-
-        List<Integer> scores;
 
         for (Assignment assignment : assignments) {
             students.add(assignment.getStudent());
             String assignmentName = assignment.getAssignmentName();
-            if (assignmentsScoresMap.containsKey(assignmentName)) {
-                assignmentsScoresMap.get(assignmentName).add(assignment.getScore());
-            } else {
-                scores = new ArrayList<>();
-                scores.add(assignment.getScore());
-                assignmentsScoresMap.put(assignmentName, scores);
-            }
+            assignmentNames.add(assignmentName);
         }
+    }
 
-        System.out.println(assignmentsScoresMap);
+    public List<String> getAssignmentNamesListSortedByName() {
+        return assignmentNames.stream().sorted().toList();
     }
 
     public int getStudentsTotalNumber() {
@@ -34,7 +28,7 @@ public class AssignmentStatistics {
     }
 
     public int getAssignmentsTotalNumber() {
-        return assignmentsScoresMap.size();
+        return assignmentNames.size();
     }
 
     public int getLowScore() {
@@ -59,6 +53,30 @@ public class AssignmentStatistics {
 
     public List<Assignment> getAverageScoreAssignments() {
         return ScoresCalculator.getAverageScoreAssignments(assignments);
+    }
+
+    public int getAssignmentLowScore(String assignmentName) {
+        return ScoresCalculator.getLowScore(
+                assignments
+                        .stream()
+                        .filter(assignment -> assignment.getAssignmentName().equals(assignmentName))
+                        .toList());
+    }
+
+    public int getAssignmentHighScore(String assignmentName) {
+        return ScoresCalculator.getHighScore(
+                assignments
+                        .stream()
+                        .filter(assignment -> assignment.getAssignmentName().equals(assignmentName))
+                        .toList());
+    }
+
+    public double getAssignmentAverageScore(String assignmentName) {
+        return ScoresCalculator.getAverageScore(
+                assignments
+                        .stream()
+                        .filter(assignment -> assignment.getAssignmentName().equals(assignmentName))
+                        .toList());
     }
 
 }

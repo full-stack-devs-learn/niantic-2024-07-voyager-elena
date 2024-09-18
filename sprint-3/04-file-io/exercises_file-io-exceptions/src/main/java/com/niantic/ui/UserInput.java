@@ -148,6 +148,24 @@ public class UserInput {
         assignmentsStatistics.getAverageScoreAssignments().forEach(assignment -> System.out.println(assignment.toStringWithStudent()));
     }
 
+    public static void displayAllAssignmentsStatistics(AssignmentStatistics assignmentsStatistics) {
+        System.out.println();
+        System.out.println("All Assignments Statistics");
+        System.out.println("=".repeat(50));
+        System.out.printf("%-27s %6s %6s %8s\n", "Assignment Name", "Low", "High", "Average");
+        System.out.println("=".repeat(50));
+        assignmentsStatistics.getAssignmentNamesListSortedByName()
+                .forEach(assignmentName ->
+                        System.out.printf("%-26s %6d %6d %8.2f\n",
+                                assignmentName,
+                                assignmentsStatistics.getAssignmentLowScore(assignmentName),
+                                assignmentsStatistics.getAssignmentHighScore(assignmentName),
+                                assignmentsStatistics.getAssignmentAverageScore(assignmentName)
+                        )
+                );
+    }
+
+
     public static void displayMessage(String message) {
         System.out.println();
         System.out.println(message);
