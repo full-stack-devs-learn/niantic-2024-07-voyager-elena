@@ -18,11 +18,14 @@ public class UserInput {
             System.out.println("-".repeat(30));
             System.out.println();
             System.out.println("  1) Display files");
+            System.out.println();
             System.out.println("  2) Student: display all scores");
             System.out.println("  3) Student: display statistics");
             System.out.println("  4) Student: create summary report");
+            System.out.println();
             System.out.println("  5) All Students: display all students statistics");
-            System.out.println("  6) All Assignments: display all assignments statistics");
+            System.out.println("  6) All Students: create all students report");
+            System.out.println("  7) All Assignments: display all assignments statistics");
             System.out.println();
             System.out.println("  0) Exit");
 
@@ -36,7 +39,7 @@ public class UserInput {
             } catch (Exception e) {
                 choice = -1;
             }
-            if (choice < 0 || choice > 6) {
+            if (choice < 0 || choice > 7) {
                 displayMessage("Invalid input, please make a valid selection");
             } else {
                 valid = true;

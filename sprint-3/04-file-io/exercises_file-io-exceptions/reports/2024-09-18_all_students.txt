@@ -1,0 +1,36 @@
+All Students Statistics
+============================================================
+Total Students                                             5
+Total Assignments                                         15
+------------------------------------------------------------
+Low Score                                                 80
+High Score                                               100
+Average Score                                          89.65
+------------------------------------------------------------
+Assignments with the lowest score
+------------------------------------------------------------
+  2    Subtraction Practice           Joshua Martin       80
+------------------------------------------------------------
+Assignments with the highest score
+------------------------------------------------------------
+  3    Multiplication Practice        David Jones        100
+ 14    Money Problems                 Laura Brown        100
+  8    Basic Algebra                  Joshua Martin      100
+ 10    Statistics Introduction        Joshua Martin      100
+------------------------------------------------------------
+Assignments with the average score
+------------------------------------------------------------
+  2    Subtraction Practice           Anna Williams       90
+  3    Multiplication Practice        Anna Williams       88
+  7    Word Problems                  Anna Williams       89
+ 11    Graphing                       Anna Williams       88
+ 12    Probability                    Anna Williams       90
+  1    Addition Practice              David Jones         88
+  5    Fractions                      David Jones         88
+  6    Decimals                       David Jones         88
+  8    Basic Algebra                  David Jones         90
+  2    Subtraction Practice           Laura Brown         88
+  2    Subtraction Practice           Eric Walker         88
+  6    Decimals                       Eric Walker         88
+  7    Word Problems                  Eric Walker         88
+ 10    Statistics Introduction        Eric Walker         90

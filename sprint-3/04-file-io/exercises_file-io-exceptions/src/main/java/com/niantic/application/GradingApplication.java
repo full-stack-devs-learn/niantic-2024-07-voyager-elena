@@ -34,6 +34,9 @@ public class GradingApplication implements Runnable {
                     displayAllStudentStatistics();
                     break;
                 case 6:
+                    createAllStudentsReport();
+                    break;
+                case 7:
                     displayAssignmentStatistics();
                     break;
                 case 0:
@@ -127,6 +130,14 @@ public class GradingApplication implements Runnable {
         List<Assignment> allAssignments = gradesService.getAllAssignments(files);
         AssignmentStatistics assignmentsStatistics = new AssignmentStatistics(allAssignments);
         UserInput.displayAllAssignmentsStatistics(assignmentsStatistics);
+    }
+
+    private void createAllStudentsReport() {
+        String[] files = gradesService.getFileNames();
+        List<Assignment> allAssignments = gradesService.getAllAssignments(files);
+        AssignmentStatistics assignmentsStatistics = new AssignmentStatistics(allAssignments);
+        String reportFileName = reportService.createAllStudentsReport(assignmentsStatistics);
+        UserInput.displayMessage("Report for all students was created: " + reportFileName);
     }
 
 }

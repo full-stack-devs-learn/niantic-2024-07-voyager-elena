@@ -1,5 +1,6 @@
 package com.niantic.services;
 
+import com.niantic.models.AssignmentStatistics;
 import com.niantic.models.Student;
 
 import java.io.File;
@@ -49,6 +50,42 @@ public class ReportService {
         return fileName;
     }
 
+    public String createAllStudentsReport(AssignmentStatistics assignmentsStatistics) {
+        createDirectory("reports");
+
+        LocalDate today = LocalDate.now();
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+        String fileName = "reports/" + today.format(formatter) + "_all_students.txt";
+        File file = new File(fileName);
+
+        try (PrintWriter out = new PrintWriter(file)) {
+            out.println("All Students Statistics");
+            out.println("=".repeat(60));
+            out.printf("%-54s %5d\n", "Total Students", assignmentsStatistics.getStudentsTotalNumber());
+            out.printf("%-54s %5d\n", "Total Assignments ", assignmentsStatistics.getAssignmentsTotalNumber());
+            out.println("-".repeat(60));
+            out.printf("%-54s %5d\n", "Low Score", assignmentsStatistics.getLowScore());
+            out.printf("%-54s %5d\n", "High Score", assignmentsStatistics.getHighScore());
+            out.printf("%-54s %3.2f\n", "Average Score", assignmentsStatistics.getAverageScore());
+            out.println("-".repeat(60));
+            out.println("Assignments with the lowest score");
+            out.println("-".repeat(60));
+            assignmentsStatistics.getLowScoreAssignments().forEach(assignment -> out.println(assignment.toStringWithStudent()));
+            out.println("-".repeat(60));
+            out.println("Assignments with the highest score");
+            out.println("-".repeat(60));
+            assignmentsStatistics.getHighScoreAssignments().forEach(assignment -> out.println(assignment.toStringWithStudent()));
+            out.println("-".repeat(60));
+            out.println("Assignments with the average score");
+            out.println("-".repeat(60));
+            assignmentsStatistics.getAverageScoreAssignments().forEach(assignment -> out.println(assignment.toStringWithStudent()));
+        } catch (FileNotFoundException e) {
+
+        }
+
+        return fileName;
+    }
+
     private void createDirectory(String dirName) {
         File directory = new File(dirName);
 
@@ -56,4 +93,5 @@ public class ReportService {
             directory.mkdir();
         }
     }
+
 }
