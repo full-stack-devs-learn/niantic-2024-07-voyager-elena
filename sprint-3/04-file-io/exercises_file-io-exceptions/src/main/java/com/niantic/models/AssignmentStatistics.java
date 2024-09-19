@@ -76,7 +76,43 @@ public class AssignmentStatistics {
                 assignments
                         .stream()
                         .filter(assignment -> assignment.getAssignmentName().equals(assignmentName))
-                        .toList());
+                        .toList()
+        );
     }
 
+    public int getAssignmentStudentsTotalNumber(String assignmentName) {
+        List<Student> assignmentStudents = assignments
+                .stream()
+                .filter(assignment -> assignment.getAssignmentName().equals(assignmentName))
+                .map(Assignment::getStudent)
+                .toList();
+        return (new HashSet<Student>(assignmentStudents)).size();
+    }
+
+    public List<Assignment> getAssignmentLowScoreAssignments(String assignmentName) {
+        return ScoresCalculator.getLowScoreAssignments(
+                assignments
+                        .stream()
+                        .filter(assignment -> assignment.getAssignmentName().equals(assignmentName))
+                        .toList()
+        );
+    }
+
+    public List<Assignment> getAssignmentHighScoreAssignments(String assignmentName) {
+        return ScoresCalculator.getHighScoreAssignments(
+                assignments
+                        .stream()
+                        .filter(assignment -> assignment.getAssignmentName().equals(assignmentName))
+                        .toList()
+        );
+    }
+
+    public List<Assignment> getAssignmentAverageScoreAssignments(String assignmentName) {
+        return ScoresCalculator.getAverageScoreAssignments(
+                assignments
+                        .stream()
+                        .filter(assignment -> assignment.getAssignmentName().equals(assignmentName))
+                        .toList()
+        );
+    }
 }

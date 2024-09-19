@@ -88,6 +88,8 @@ public class UserInput {
         for (var fileName : files) {
             System.out.println(fileName);
         }
+
+        waitForUser();
     }
 
     public static void displayStudentAssignments(Student student) {
@@ -98,6 +100,8 @@ public class UserInput {
                 + student.getLastName());
         System.out.println("=".repeat(42));
         student.getAssignments().forEach(System.out::println);
+
+        waitForUser();
     }
 
     public static void displayStudentStatistics(Student student) {
@@ -122,6 +126,8 @@ public class UserInput {
         System.out.println("Assignments with the average score");
         System.out.println("-".repeat(42));
         student.getAverageScoreAssignments().forEach(System.out::println);
+
+        waitForUser();
     }
 
     public static void displayAllStudentsStatistics(AssignmentStatistics assignmentsStatistics) {
@@ -146,6 +152,8 @@ public class UserInput {
         System.out.println("Assignments with the average score");
         System.out.println("-".repeat(60));
         assignmentsStatistics.getAverageScoreAssignments().forEach(assignment -> System.out.println(assignment.toStringWithStudent()));
+
+        waitForUser();
     }
 
     public static void displayAllAssignmentsStatistics(AssignmentStatistics assignmentsStatistics) {
@@ -162,6 +170,38 @@ public class UserInput {
                                 assignmentsStatistics.getAssignmentHighScore(assignmentName),
                                 assignmentsStatistics.getAssignmentAverageScore(assignmentName)
                         )
+                );
+        System.out.println();
+        System.out.print("Press ENTER to get details for each assignment...");
+        in.nextLine();
+        assignmentsStatistics.getAssignmentNamesListSortedByName()
+                .forEach(assignmentName -> {
+                            System.out.println();
+                            System.out.println("=".repeat(60));
+                            System.out.println(assignmentName.toUpperCase());
+                            System.out.println("=".repeat(60));
+                            System.out.printf("%-54s %5d\n", "Total Students", assignmentsStatistics.getAssignmentStudentsTotalNumber(assignmentName));
+                            System.out.println("-".repeat(60));
+                            System.out.printf("%-54s %5d\n", "Low Score", assignmentsStatistics.getAssignmentLowScore(assignmentName));
+                            System.out.printf("%-54s %5d\n", "High Score", assignmentsStatistics.getAssignmentHighScore(assignmentName));
+                            System.out.printf("%-54s %3.2f\n", "Average Score", assignmentsStatistics.getAssignmentAverageScore(assignmentName));
+                            System.out.println("-".repeat(60));
+                            System.out.println("Students with the lowest score");
+                            System.out.println("-".repeat(60));
+                            assignmentsStatistics.getAssignmentLowScoreAssignments(assignmentName)
+                                    .forEach(assignment -> System.out.println(assignment.toStringWithStudent()));
+                            System.out.println("-".repeat(60));
+                            System.out.println("Students with the highest score");
+                            System.out.println("-".repeat(60));
+                            assignmentsStatistics.getAssignmentHighScoreAssignments(assignmentName)
+                                    .forEach(assignment -> System.out.println(assignment.toStringWithStudent()));
+                            System.out.println("-".repeat(60));
+                            System.out.println("Students with the average score");
+                            System.out.println("-".repeat(60));
+                            assignmentsStatistics.getAssignmentAverageScoreAssignments(assignmentName)
+                                    .forEach(assignment -> System.out.println(assignment.toStringWithStudent()));
+                            waitForUser();
+                        }
                 );
     }
 

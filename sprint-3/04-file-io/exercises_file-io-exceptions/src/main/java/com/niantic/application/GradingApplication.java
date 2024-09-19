@@ -40,7 +40,6 @@ public class GradingApplication implements Runnable {
                 default:
                     UserInput.displayMessage("Please make a valid selection");
             }
-            UserInput.waitForUser();
         }
     }
 
