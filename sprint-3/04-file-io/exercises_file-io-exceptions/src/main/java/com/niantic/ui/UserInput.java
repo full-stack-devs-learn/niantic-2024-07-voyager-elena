@@ -2,11 +2,13 @@ package com.niantic.ui;
 
 import com.niantic.models.AssignmentStatistics;
 import com.niantic.models.Student;
+import com.niantic.services.LogService;
 
 import java.util.Scanner;
 
 public class UserInput {
     protected static Scanner in = new Scanner(System.in);
+    private static LogService errorLogger = new LogService("error");
 
     public static int homeScreenSelection() {
         boolean valid = false;
@@ -37,10 +39,12 @@ public class UserInput {
             try {
                 choice = Integer.parseInt(choiceStr);
             } catch (Exception e) {
+                errorLogger.logMessage(e.getMessage());
                 choice = -1;
             }
             if (choice < 0 || choice > 7) {
                 displayMessage("Invalid input, please make a valid selection");
+                errorLogger.logMessage("Invalid user input for the main menu");
             } else {
                 valid = true;
             }
@@ -71,9 +75,11 @@ public class UserInput {
             try {
                 choice = Integer.parseInt(choiceStr);
             } catch (Exception e) {
+                errorLogger.logMessage(e.getMessage());
                 choice = 0;
             }
             if (choice <= 0 || choice > n) {
+                errorLogger.logMessage("Invalid user input for file selection menu");
                 displayMessage("Invalid input, please select a valid option");
             } else {
                 valid = true;

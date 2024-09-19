@@ -11,6 +11,9 @@ import java.time.format.DateTimeFormatter;
 
 public class ReportService {
 
+    private final LogService errorLogger = new LogService("error");
+    private final LogService applicationLogger = new LogService("application");
+
     public String createStudentSummaryReport(Student student) {
         ensureDirectoryExists("reports");
 
@@ -44,7 +47,7 @@ public class ReportService {
             out.println("-".repeat(42));
             student.getAverageScoreAssignments().forEach(out::println);
         } catch (FileNotFoundException e) {
-
+            errorLogger.logMessage(e.getMessage());
         }
 
         return fileName;
@@ -80,7 +83,7 @@ public class ReportService {
             out.println("-".repeat(60));
             assignmentsStatistics.getAverageScoreAssignments().forEach(assignment -> out.println(assignment.toStringWithStudent()));
         } catch (FileNotFoundException e) {
-
+            errorLogger.logMessage(e.getMessage());
         }
 
         return fileName;
@@ -91,6 +94,7 @@ public class ReportService {
 
         if (!directory.exists()) {
             directory.mkdir();
+            applicationLogger.logMessage("Create directory " + dirName);
         }
     }
 

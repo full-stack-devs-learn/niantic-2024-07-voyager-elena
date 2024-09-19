@@ -18,6 +18,7 @@ public class GradingApplication implements Runnable {
 
     public void run() {
         while (true) {
+            applicationLogger.logMessage("Display main menu");
             int choice = UserInput.homeScreenSelection();
             switch (choice) {
                 case 1:
