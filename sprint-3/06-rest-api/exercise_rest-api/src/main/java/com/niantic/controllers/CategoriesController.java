@@ -1,4 +1,4 @@
-package com.niantic.controllers.apis;
+package com.niantic.controllers;
 
 import com.niantic.models.Category;
 import com.niantic.services.CategoryDao;
