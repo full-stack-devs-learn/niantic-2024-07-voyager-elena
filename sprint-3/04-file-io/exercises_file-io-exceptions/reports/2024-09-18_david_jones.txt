@@ -1,0 +1,19 @@
+Statistics for student: David Jones
+==========================================
+Low Score                               83
+High Score                             100
+Average Score                        90.40
+------------------------------------------
+Assignments with the lowest score
+------------------------------------------
+ 15    Math Review                      83
+------------------------------------------
+Assignments with the highest score
+------------------------------------------
+  3    Multiplication Practice         100
+------------------------------------------
+Assignments with the average score
+------------------------------------------
+  4    Division Practice                91
+  8    Basic Algebra                    90
+ 12    Probability                      91

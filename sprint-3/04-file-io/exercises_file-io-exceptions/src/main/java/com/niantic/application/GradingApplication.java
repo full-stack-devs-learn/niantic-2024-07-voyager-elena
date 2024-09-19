@@ -5,12 +5,14 @@ import com.niantic.models.AssignmentStatistics;
 import com.niantic.models.Student;
 import com.niantic.services.GradesFileService;
 import com.niantic.services.GradesService;
+import com.niantic.services.ReportService;
 import com.niantic.ui.UserInput;
 
 import java.util.*;
 
 public class GradingApplication implements Runnable {
     private final GradesService gradesService = new GradesFileService();
+    private final ReportService reportService = new ReportService();
 
     public void run() {
         while (true) {
@@ -89,6 +91,20 @@ public class GradingApplication implements Runnable {
     }
 
     private void createStudentSummaryReport() {
+        String[] files = gradesService.getFileNames();
+        int choice = UserInput.displayMenuToChooseFile(files);
+
+        String selectedFile = files[choice - 1];
+        UserInput.displayMessage("You selected: " + selectedFile);
+
+        Student student = gradesService.getStudentAssignments(selectedFile);
+
+        if (!student.getAssignments().isEmpty()) {
+            String reportFileName = reportService.createStudentSummaryReport(student);
+            UserInput.displayMessage("Report for " + student.getFirstName() + " " + student.getLastName() + " was created: " + reportFileName);
+        } else {
+            UserInput.displayMessage("There is no data in the selected file");
+        }
     }
 
     private void displayAllStudentStatistics() {
