@@ -5,6 +5,7 @@ import com.niantic.models.AssignmentStatistics;
 import com.niantic.models.Student;
 import com.niantic.services.GradesFileService;
 import com.niantic.services.GradesService;
+import com.niantic.services.LogService;
 import com.niantic.services.ReportService;
 import com.niantic.ui.UserInput;
 
@@ -13,6 +14,7 @@ import java.util.*;
 public class GradingApplication implements Runnable {
     private final GradesService gradesService = new GradesFileService();
     private final ReportService reportService = new ReportService();
+    private final LogService applicationLogger = new LogService("application");
 
     public void run() {
         while (true) {
@@ -41,6 +43,7 @@ public class GradingApplication implements Runnable {
                     break;
                 case 0:
                     UserInput.displayMessage("Program ending... Have a great day!");
+                    applicationLogger.logMessage("Exit program");
                     System.exit(0);
                 default:
                     UserInput.displayMessage("Please make a valid selection");
@@ -52,6 +55,7 @@ public class GradingApplication implements Runnable {
         // todo: 1 - get and display all student file names
 
         String[] files = gradesService.getFileNames();
+        applicationLogger.logMessage("Display list of all files");
         UserInput.displayAllFiles(files);
     }
 
@@ -60,6 +64,7 @@ public class GradingApplication implements Runnable {
         //      load all student assignment scores from the file - display all files
 
         String[] files = gradesService.getFileNames();
+        applicationLogger.logMessage("Display menu to chose a file");
         int choice = UserInput.displayMenuToChooseFile(files);
 
         String selectedFile = files[choice - 1];
@@ -68,8 +73,10 @@ public class GradingApplication implements Runnable {
         Student student = gradesService.getStudentAssignments(selectedFile);
 
         if (!student.getAssignments().isEmpty()) {
+            applicationLogger.logMessage("Display list of all assignments for student: " + student.getFullName());
             UserInput.displayStudentAssignments(student);
         } else {
+            applicationLogger.logMessage("Display data not found message");
             UserInput.displayMessage("There is no data in the selected file");
         }
     }
@@ -79,6 +86,7 @@ public class GradingApplication implements Runnable {
         //      load all student assignment scores from the file
         //      display student statistics (low score, high score, average score)
         String[] files = gradesService.getFileNames();
+        applicationLogger.logMessage("Display menu to chose a file");
         int choice = UserInput.displayMenuToChooseFile(files);
 
         String selectedFile = files[choice - 1];
@@ -87,14 +95,17 @@ public class GradingApplication implements Runnable {
         Student student = gradesService.getStudentAssignments(selectedFile);
 
         if (!student.getAssignments().isEmpty()) {
+            applicationLogger.logMessage("Display statistics for student: " + student.getFullName());
             UserInput.displayStudentStatistics(student);
         } else {
+            applicationLogger.logMessage("Display data not found message");
             UserInput.displayMessage("Sorry, there is no data to calculate statistics");
         }
     }
 
     private void createStudentSummaryReport() {
         String[] files = gradesService.getFileNames();
+        applicationLogger.logMessage("Display menu to chose a file");
         int choice = UserInput.displayMenuToChooseFile(files);
 
         String selectedFile = files[choice - 1];
@@ -104,8 +115,10 @@ public class GradingApplication implements Runnable {
 
         if (!student.getAssignments().isEmpty()) {
             String reportFileName = reportService.createStudentSummaryReport(student);
-            UserInput.displayMessage("Report for " + student.getFirstName() + " " + student.getLastName() + " was created: " + reportFileName);
+            applicationLogger.logMessage("Create report for student: " + student.getFullName());
+            UserInput.displayMessage("Report for " + student.getFullName() + " was created: " + reportFileName);
         } else {
+            applicationLogger.logMessage("Display data not found message");
             UserInput.displayMessage("There is no data in the selected file");
         }
     }
@@ -118,6 +131,7 @@ public class GradingApplication implements Runnable {
         String[] files = gradesService.getFileNames();
         List<Assignment> allAssignments = gradesService.getAllAssignments(files);
         AssignmentStatistics assignmentsStatistics = new AssignmentStatistics(allAssignments);
+        applicationLogger.logMessage("Display all students statistics");
         UserInput.displayAllStudentsStatistics(assignmentsStatistics);
     }
 
@@ -129,6 +143,7 @@ public class GradingApplication implements Runnable {
         String[] files = gradesService.getFileNames();
         List<Assignment> allAssignments = gradesService.getAllAssignments(files);
         AssignmentStatistics assignmentsStatistics = new AssignmentStatistics(allAssignments);
+        applicationLogger.logMessage("Display all assignments statistics");
         UserInput.displayAllAssignmentsStatistics(assignmentsStatistics);
     }
 
@@ -137,6 +152,7 @@ public class GradingApplication implements Runnable {
         List<Assignment> allAssignments = gradesService.getAllAssignments(files);
         AssignmentStatistics assignmentsStatistics = new AssignmentStatistics(allAssignments);
         String reportFileName = reportService.createAllStudentsReport(assignmentsStatistics);
+        applicationLogger.logMessage("Create all students report");
         UserInput.displayMessage("Report for all students was created: " + reportFileName);
     }
 

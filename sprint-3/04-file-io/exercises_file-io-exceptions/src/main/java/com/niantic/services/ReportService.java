@@ -12,7 +12,7 @@ import java.time.format.DateTimeFormatter;
 public class ReportService {
 
     public String createStudentSummaryReport(Student student) {
-        createDirectory("reports");
+        ensureDirectoryExists("reports");
 
         LocalDate today = LocalDate.now();
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
@@ -51,7 +51,7 @@ public class ReportService {
     }
 
     public String createAllStudentsReport(AssignmentStatistics assignmentsStatistics) {
-        createDirectory("reports");
+        ensureDirectoryExists("reports");
 
         LocalDate today = LocalDate.now();
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
@@ -86,7 +86,7 @@ public class ReportService {
         return fileName;
     }
 
-    private void createDirectory(String dirName) {
+    private void ensureDirectoryExists(String dirName) {
         File directory = new File(dirName);
 
         if (!directory.exists()) {

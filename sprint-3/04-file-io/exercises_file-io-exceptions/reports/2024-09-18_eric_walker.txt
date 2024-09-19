@@ -1,0 +1,19 @@
+Statistics for student: Eric Walker
+==========================================
+Low Score                               82
+High Score                              96
+Average Score                        87.13
+------------------------------------------
+Assignments with the lowest score
+------------------------------------------
+  9    Geometry Basics                  82
+------------------------------------------
+Assignments with the highest score
+------------------------------------------
+ 14    Money Problems                   96
+------------------------------------------
+Assignments with the average score
+------------------------------------------
+  2    Subtraction Practice             88
+  6    Decimals                         88
+  7    Word Problems                    88

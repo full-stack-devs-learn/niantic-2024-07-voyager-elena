@@ -21,6 +21,11 @@ public class Student {
         return lastName;
     }
 
+    public String getFullName() {
+        return firstName + " " + lastName;
+    }
+
+
     public List<Assignment> getAssignments() {
         return assignments;
     }
