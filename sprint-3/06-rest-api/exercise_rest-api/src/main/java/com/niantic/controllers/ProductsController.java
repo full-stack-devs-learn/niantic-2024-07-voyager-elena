@@ -7,10 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/api/products")
@@ -42,6 +39,29 @@ public class ProductsController {
         } catch (Exception e) {
             var error = new HttpError(
                     HttpStatus.INTERNAL_SERVER_ERROR.value(),
+                    HttpStatus.INTERNAL_SERVER_ERROR.toString(),
+                    "Oops something went wrong");
+
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(error);
+        }
+    }
+
+    @GetMapping("{productId}")
+    public ResponseEntity<?> getProductById(@PathVariable int productId) {
+        try {
+            var product = productDao.getProductByProductId(productId);
+
+            if (product == null) {
+                var error = new HttpError(HttpStatus.NOT_FOUND.value(),
+                        HttpStatus.NOT_FOUND.toString(),
+                        "Product " + productId + " was not found");
+
+                return ResponseEntity.status(HttpStatus.NOT_FOUND).body(error);
+            }
+
+            return ResponseEntity.ok(product);
+        } catch (Exception e) {
+            var error = new HttpError(HttpStatus.INTERNAL_SERVER_ERROR.value(),
                     HttpStatus.INTERNAL_SERVER_ERROR.toString(),
                     "Oops something went wrong");
 
