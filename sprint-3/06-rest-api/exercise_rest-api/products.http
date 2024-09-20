@@ -33,13 +33,13 @@ Content-Type: application/json
    "categoryId": 1,
    "quantityPerUnit": "5lb per pkg",
    "unitPrice": 28.98,
-   "unitsInStock": 18,
+   "unitsInStock": 17,
    "unitsOnOrder": 20,
    "reorderLevel": 15
 }
 
 ### PUT to update product (wrong product id)
-PUT http://localhost:8080/api/categories/135
+PUT http://localhost:8080/api/products/135
 Content-Type: application/json
 
 {
