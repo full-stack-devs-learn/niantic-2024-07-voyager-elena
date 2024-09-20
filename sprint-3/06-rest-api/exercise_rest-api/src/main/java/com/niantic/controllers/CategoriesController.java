@@ -1,9 +1,11 @@
 package com.niantic.controllers;
 
 import com.niantic.models.Category;
+import com.niantic.models.HttpError;
 import com.niantic.services.CategoryDao;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -19,13 +21,41 @@ public class CategoriesController {
     }
 
     @GetMapping("")
-    public List<Category> getAllCategories() {
-        return categoryDao.getCategories();
+    public ResponseEntity<?> getAllCategories() {
+        try {
+            var categories = categoryDao.getCategories();
+
+            return ResponseEntity.ok(categories);
+        } catch (Exception e) {
+            var error = new HttpError(
+                    HttpStatus.INTERNAL_SERVER_ERROR.value(),
+                    HttpStatus.INTERNAL_SERVER_ERROR.toString(),
+                    "Oops something went wrong");
+
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(error);
+        }
     }
 
     @GetMapping("{id}")
-    public Category getCategory(@PathVariable int id) {
-        return categoryDao.getCategory(id);
+    public ResponseEntity<?> getCategory(@PathVariable int id) {
+        try {
+            var category = categoryDao.getCategory(id);
+            if (category == null) {
+                var error = new HttpError(HttpStatus.NOT_FOUND.value(),
+                        HttpStatus.NOT_FOUND.toString(),
+                        "Category " + id + " is invalid");
+
+                return ResponseEntity.status(HttpStatus.NOT_FOUND).body(error);
+            }
+
+            return ResponseEntity.ok(category);
+        } catch (Exception e) {
+            var error = new HttpError(HttpStatus.INTERNAL_SERVER_ERROR.value(),
+                    HttpStatus.INTERNAL_SERVER_ERROR.toString(),
+                    "Oops something went wrong");
+
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(error);
+        }
     }
 
     @PostMapping("")
@@ -36,8 +66,26 @@ public class CategoriesController {
 
     @PutMapping("{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void updateCategory(@PathVariable int id, @RequestBody Category category) {
-        categoryDao.updateCategory(id, category);
+    public ResponseEntity<?> updateCategory(@PathVariable int id, @RequestBody Category category) {
+        try {
+            var currentCategory = categoryDao.getCategory(id);
+            if (currentCategory == null) {
+                var error = new HttpError(HttpStatus.NOT_FOUND.value(),
+                        HttpStatus.NOT_FOUND.toString(),
+                        "Category " + id + " is invalid");
+
+                return ResponseEntity.status(HttpStatus.NOT_FOUND).body(error);
+            }
+
+            categoryDao.updateCategory(id, category);
+            return ResponseEntity.noContent().build();
+        } catch (Exception e) {
+            var error = new HttpError(HttpStatus.INTERNAL_SERVER_ERROR.value(),
+                    HttpStatus.INTERNAL_SERVER_ERROR.toString(),
+                    "Oops something went wrong");
+
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(error);
+        }
     }
 
     @DeleteMapping("{id}")

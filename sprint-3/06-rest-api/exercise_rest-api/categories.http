@@ -1,0 +1,38 @@
+### GET request for all categories
+GET http://localhost:8080/api/categories
+
+### GET request for category 5
+GET http://localhost:8080/api/categories/5
+
+### GET request for category 25
+GET http://localhost:8080/api/categories/25
+
+### POST to add new category
+POST http://localhost:8080/api/categories
+Content-Type: application/json
+
+{
+   "categoryName": "cat 9",
+   "description": "New category description"
+}
+
+### PUT to update category
+PUT http://localhost:8080/api/categories/9
+Content-Type: application/json
+
+{
+   "categoryName": "Category 9",
+   "description": "Category 9 super description"
+}
+
+### PUT to update category
+PUT http://localhost:8080/api/categories/13
+Content-Type: application/json
+
+{
+   "categoryName": "Category 13",
+   "description": "Category 13 description"
+}
+
+### GET invalid resource
+GET http://localhost:8080/actors
