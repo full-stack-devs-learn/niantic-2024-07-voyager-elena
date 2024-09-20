@@ -52,5 +52,12 @@ Content-Type: application/json
    "reorderLevel": 15
 }
 
+### DELETE to delete product
+DELETE http://localhost:8080/api/products/91
+
+### DELETE to delete product (wrong product id)
+DELETE http://localhost:8080/api/products/1051
+
+
 ### GET invalid resource
 GET http://localhost:8080/actors

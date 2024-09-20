@@ -43,7 +43,7 @@ public class CategoriesController {
             if (category == null) {
                 var error = new HttpError(HttpStatus.NOT_FOUND.value(),
                         HttpStatus.NOT_FOUND.toString(),
-                        "Category " + id + " is invalid");
+                        "Category " + id + " was not found");
 
                 return ResponseEntity.status(HttpStatus.NOT_FOUND).body(error);
             }
@@ -74,14 +74,13 @@ public class CategoriesController {
     }
 
     @PutMapping("{id}")
-    @ResponseStatus(HttpStatus.NO_CONTENT)
     public ResponseEntity<?> updateCategory(@PathVariable int id, @RequestBody Category category) {
         try {
             var currentCategory = categoryDao.getCategory(id);
             if (currentCategory == null) {
                 var error = new HttpError(HttpStatus.NOT_FOUND.value(),
                         HttpStatus.NOT_FOUND.toString(),
-                        "Category " + id + " is invalid");
+                        "Category " + id + " was not found");
 
                 return ResponseEntity.status(HttpStatus.NOT_FOUND).body(error);
             }
@@ -98,9 +97,26 @@ public class CategoriesController {
     }
 
     @DeleteMapping("{id}")
-    @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void deleteCategory(@PathVariable int id) {
-        categoryDao.deleteCategory(id);
+    public ResponseEntity<?> deleteCategory(@PathVariable int id) {
+        try {
+            var category = categoryDao.getCategory(id);
+            if (category == null) {
+                var error = new HttpError(HttpStatus.NOT_FOUND.value(),
+                        HttpStatus.NOT_FOUND.toString(),
+                        "Category " + id + " was not found");
+
+                return ResponseEntity.status(HttpStatus.NOT_FOUND).body(error);
+            }
+
+            categoryDao.deleteCategory(id);
+            return ResponseEntity.noContent().build();
+        } catch (Exception e) {
+            var error = new HttpError(HttpStatus.INTERNAL_SERVER_ERROR.value(),
+                    HttpStatus.INTERNAL_SERVER_ERROR.toString(),
+                    "Oops something went wrong");
+
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(error);
+        }
     }
 
 }

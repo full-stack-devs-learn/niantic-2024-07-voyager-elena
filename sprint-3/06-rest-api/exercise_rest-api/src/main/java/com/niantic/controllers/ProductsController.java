@@ -109,4 +109,28 @@ public class ProductsController {
         }
     }
 
+    @DeleteMapping("{productId}")
+    public ResponseEntity<?> deleteProduct(@PathVariable int productId) {
+        try {
+            var product = productDao.getProductByProductId(productId);
+
+            if (product == null) {
+                var error = new HttpError(HttpStatus.NOT_FOUND.value(),
+                        HttpStatus.NOT_FOUND.toString(),
+                        "Product " + productId + " was not found");
+                return ResponseEntity.status(HttpStatus.NOT_FOUND).body(error);
+            }
+
+            productDao.deleteProduct(productId);
+
+            return ResponseEntity.noContent().build();
+        } catch (Exception e) {
+            var error = new HttpError(HttpStatus.INTERNAL_SERVER_ERROR.value(),
+                    HttpStatus.INTERNAL_SERVER_ERROR.toString(),
+                    "Oops something went wrong");
+
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(error);
+        }
+    }
+
 }
