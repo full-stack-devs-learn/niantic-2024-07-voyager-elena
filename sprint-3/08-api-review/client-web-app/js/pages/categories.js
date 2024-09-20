@@ -47,6 +47,7 @@ function cancelAdd(event)
 {
     event.preventDefault();
     addFormScreen.classList.add("d-none");
+    addForm.reset();
 }
 
 function addCategory(event)
@@ -66,6 +67,7 @@ function addCategory(event)
         }
 
         categoryService.addCategory(category).then(response => {
+            addForm.reset();
             loadCategories();
         })
 
