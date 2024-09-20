@@ -6,8 +6,6 @@ import java.util.ArrayList;
 
 public interface ProductDao {
 
-    ArrayList<Product> getAllProducts();
-
     ArrayList<Product> getProductsByCategory(int categoryId);
 
     Product getProductByProductId(int productId);

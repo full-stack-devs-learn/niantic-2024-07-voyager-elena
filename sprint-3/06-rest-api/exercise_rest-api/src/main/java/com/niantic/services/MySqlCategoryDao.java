@@ -16,6 +16,7 @@ import java.util.List;
 
 @Repository
 public class MySqlCategoryDao implements CategoryDao {
+
     private final JdbcTemplate jdbcTemplate;
 
     @Autowired
