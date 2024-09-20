@@ -1,12 +1,12 @@
 package com.niantic.controllers;
 
 import com.niantic.models.HttpError;
+import com.niantic.models.Product;
 import com.niantic.services.CategoryDao;
 import com.niantic.services.ProductDao;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -60,6 +60,21 @@ public class ProductsController {
             }
 
             return ResponseEntity.ok(product);
+        } catch (Exception e) {
+            var error = new HttpError(HttpStatus.INTERNAL_SERVER_ERROR.value(),
+                    HttpStatus.INTERNAL_SERVER_ERROR.toString(),
+                    "Oops something went wrong");
+
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(error);
+        }
+    }
+
+    @PostMapping("")
+    public ResponseEntity<?> addProduct(@RequestBody Product product) {
+        try {
+            var newProduct = productDao.addProduct(product);
+
+            return ResponseEntity.status(HttpStatus.CREATED).body(newProduct);
         } catch (Exception e) {
             var error = new HttpError(HttpStatus.INTERNAL_SERVER_ERROR.value(),
                     HttpStatus.INTERNAL_SERVER_ERROR.toString(),

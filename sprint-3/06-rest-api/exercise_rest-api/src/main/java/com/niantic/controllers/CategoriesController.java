@@ -59,9 +59,18 @@ public class CategoriesController {
     }
 
     @PostMapping("")
-    @ResponseStatus(HttpStatus.CREATED)
-    public Category addCategory(@RequestBody Category category) {
-        return categoryDao.addCategory(category);
+    public ResponseEntity<?> addCategory(@RequestBody Category category) {
+        try {
+            var newCategory = categoryDao.addCategory(category);
+
+            return ResponseEntity.status(HttpStatus.CREATED).body(newCategory);
+        } catch (Exception e) {
+            var error = new HttpError(HttpStatus.INTERNAL_SERVER_ERROR.value(),
+                    HttpStatus.INTERNAL_SERVER_ERROR.toString(),
+                    "Oops something went wrong");
+
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(error);
+        }
     }
 
     @PutMapping("{id}")

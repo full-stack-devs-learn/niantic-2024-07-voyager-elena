@@ -37,7 +37,7 @@ public class MySqlProductDao implements ProductDao {
                         , reorder_level
                     FROM products
                     WHERE category_id = ?
-                    ORDER BY product_name
+                    ORDER BY product_id
                 """;
 
         SqlRowSet row = jdbcTemplate.queryForRowSet(sql, categoryId);
@@ -110,7 +110,7 @@ public class MySqlProductDao implements ProductDao {
     }
 
     @Override
-    public int addProduct(Product product) {
+    public Product addProduct(Product product) {
         String sql = """
                 INSERT INTO products (product_name, category_id, quantity_per_unit, unit_price, units_in_stock, units_on_order, reorder_level)
                 VALUES (?, ?, ?, ?, ?, ?, ?);
@@ -135,7 +135,7 @@ public class MySqlProductDao implements ProductDao {
 
         }, generatedKeyHolder);
 
-        return generatedKeyHolder.getKey().intValue();
+        return getProductByProductId(generatedKeyHolder.getKey().intValue());
     }
 
     @Override
