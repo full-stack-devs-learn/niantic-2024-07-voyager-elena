@@ -2,11 +2,13 @@ package com.niantic.services;
 
 import com.niantic.models.Product;
 
-import java.util.ArrayList;
+import java.util.List;
 
 public interface ProductDao {
 
-    ArrayList<Product> getProductsByCategory(int categoryId);
+    List<Product> getProductsByCategory(int categoryId);
+
+    List<Product> getAllProducts();
 
     Product getProductByProductId(int productId);
 
@@ -15,4 +17,6 @@ public interface ProductDao {
     void updateProduct(Product product);
 
     void deleteProduct(int id);
+
+
 }

@@ -24,17 +24,22 @@ public class ProductsController {
     }
 
     @GetMapping("")
-    public ResponseEntity<?> getProductsByCategory(@RequestParam int catId) {
+    public ResponseEntity<?> getProductsByCategory(@RequestParam(defaultValue = "0") int catId) {
         try {
-            var category = categoryDao.getCategory(catId);
-            if (category == null) {
-                var error = new HttpError(HttpStatus.NOT_FOUND.value(),
-                        HttpStatus.NOT_FOUND.toString(),
-                        "Category with id " + catId + " was not found");
+            if (catId > 0) {
+                var category = categoryDao.getCategory(catId);
+                if (category == null) {
+                    var error = new HttpError(HttpStatus.NOT_FOUND.value(),
+                            HttpStatus.NOT_FOUND.toString(),
+                            "Category with id " + catId + " was not found");
 
-                return ResponseEntity.status(HttpStatus.NOT_FOUND).body(error);
+                    return ResponseEntity.status(HttpStatus.NOT_FOUND).body(error);
+                } else {
+                    var products = productDao.getProductsByCategory(catId);
+                    return ResponseEntity.ok(products);
+                }
             } else {
-                var products = productDao.getProductsByCategory(catId);
+                var products = productDao.getAllProducts();
                 return ResponseEntity.ok(products);
             }
         } catch (Exception e) {
