@@ -23,11 +23,12 @@ class PokemonService {
   async getPokemonDetails(url) {
     try {
       const response = await axios.get(url);
-      const { sprites, species, types } = response.data;
+      const { sprites, species, types, abilities } = response.data;
       return {
         image: sprites.front_default,
         species: species.name,
-        type: types[0].type.name
+        type: types.map(typeInfo => typeInfo.type.name).join(', '),
+        abilities: abilities.map(abilityInfo => abilityInfo.ability.name).join(', ')
       };
     } catch (error) {
       console.error('Error fetching the pokemon details:', error);
