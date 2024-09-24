@@ -8,11 +8,11 @@ export default function CategoryCard({ id, employeeFullName, employeeTitle, hand
   }
 
   return (
-    <div className="employee-row" onClick={employeeClicked}>
+    <div className="employee-card" onClick={employeeClicked}>
       <img className="employee-image" src={imageUrl} alt={`${employeeFullName} photo`} />
       <div className="employee-name">
         <h1>{employeeFullName}</h1>
-        <h6>{employeeTitle}e</h6>
+        <h6>{employeeTitle}</h6>
       </div>
     </div>
   )

@@ -1,6 +1,16 @@
-.category-card {
+.employee-card {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    border: solid 1px #ddd;
     cursor: pointer;
 }
-.category-card:hover {
-    background-color: antiquewhite;
+
+.employee-card:hover {
+    border: solid 1px #a2a2a2;
+    box-shadow: 0 0 6px #a2a2a2;
+}
+
+.employee-card img {
+    height: 100px;
 }
