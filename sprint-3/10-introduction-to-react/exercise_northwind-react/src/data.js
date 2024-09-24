@@ -1,4 +1,4 @@
-export const employees = [
+const employees = [
     {
         "employeeId": 1,
         "lastName": "Davolio",
@@ -171,3 +171,5 @@ export const employees = [
         "managerId": 5
     }
 ]
+
+export default employees
