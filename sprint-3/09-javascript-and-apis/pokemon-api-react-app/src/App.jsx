@@ -3,7 +3,7 @@ import { useEffect, useState } from 'react'
 import PokemonService from './services/pokemon-service'
 import './App.css'
 import Button from 'react-bootstrap/Button'
-import PokemonCard from './components/PokemonCard';
+import CardsContainer from './components/CardsContainer'
 import 'bootstrap/dist/css/bootstrap.min.css'
 import 'bootswatch/dist/materia/bootstrap.min.css'
 
@@ -52,13 +52,7 @@ function App() {
         <p>Loading...</p>
       ) : (
         <>
-          <div className="cards-container">
-            {console.log(pokemons)}
-            {pokemons.map((pokemon) => (
-              <PokemonCard key={pokemon.name} pokemon={pokemon} />
-            ))}
-          </div>
-
+         <CardsContainer pokemons={pokemons} />
           <Button variant="primary" onClick={handlePrevious} disabled={page === 1}>Previous</Button>
           <span> Current Page {page} </span>
           <Button variant="primary" onClick={handleNext}>Next</Button>
