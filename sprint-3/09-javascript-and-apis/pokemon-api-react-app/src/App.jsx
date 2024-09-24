@@ -2,8 +2,8 @@
 import { useEffect, useState } from 'react'
 import PokemonService from './services/pokemon-service'
 import './App.css'
-import Button from 'react-bootstrap/Button'
 import CardsContainer from './components/CardsContainer'
+import NavigationButtons from './components/NavigationButtons'
 import 'bootstrap/dist/css/bootstrap.min.css'
 import 'bootswatch/dist/materia/bootstrap.min.css'
 
@@ -52,10 +52,17 @@ function App() {
         <p>Loading...</p>
       ) : (
         <>
-         <CardsContainer pokemons={pokemons} />
-          <Button variant="primary" onClick={handlePrevious} disabled={page === 1}>Previous</Button>
-          <span> Current Page {page} </span>
-          <Button variant="primary" onClick={handleNext}>Next</Button>
+          <NavigationButtons
+            page={page}
+            handlePrevious={handlePrevious}
+            handleNext={handleNext}
+          />
+          <CardsContainer pokemons={pokemons} />
+          <NavigationButtons
+            page={page}
+            handlePrevious={handlePrevious}
+            handleNext={handleNext}
+          />
         </>
       )}
     </>

@@ -27,3 +27,12 @@
 .card_img {
     width: 160px;
 }
+
+.btns-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 3rem;
+
+    padding: 2rem;
+}

@@ -7,4 +7,4 @@ const PokemonCard = ({ pokemon }) => {
   );
 };
 
-export default PokemonCard;
+export default PokemonCard

@@ -7,7 +7,7 @@ const CardsContainer = ({ pokemons }) => {
         <PokemonCard key={pokemon.name} pokemon={pokemon} />
       ))}
     </div>
-  );
-};
+  )
+}
 
-export default CardsContainer;
+export default CardsContainer
