@@ -1,14 +1,22 @@
 import { useState } from 'react'
 import EmployeeCard from '../employee-card/EmployeeCard'
+import Modal from 'react-bootstrap/Modal';
 import './EmployeeCardsContainer.css'
 import employees from '../../../data'
 
 const EmployeeCardsContainer = () => {
-  const [selectedEmployeeId, setSelectedEmployeeId] = useState(0);
+  const [selectedEmployeeId, setSelectedEmployeeId] = useState(0)
+  const [selectedEmployee, setSelectedEmployee] = useState({})
+  const [showEmployeeDetails, setShowEmployeeDetails] = useState(false)
+
 
   const handleEmployeeSelected = (id) => {
     setSelectedEmployeeId(id)
+    setSelectedEmployee(employees.find(emp => emp.employeeId === id))
+    setShowEmployeeDetails(true)
   }
+
+  const handleCloseDetails = () => setShowEmployeeDetails(false);
 
   return (
     <>
@@ -25,6 +33,15 @@ const EmployeeCardsContainer = () => {
           ))
         }
       </main>
+
+      <Modal show={showEmployeeDetails} onHide={handleCloseDetails}>
+        <Modal.Header closeButton>
+          <Modal.Title>{selectedEmployee.firstName + ' ' + selectedEmployee.lastName}</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+          More details about this person
+        </Modal.Body>
+      </Modal>
     </>
   )
 }
