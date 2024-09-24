@@ -9,9 +9,28 @@ class PokemonService {
 
     try {
       const response = await axios.get(`${baseUrl}?offset=${offset}&limit=20`);
-      return response.data;
+      const results = response.data.results.map(pokemon => ({
+        name: pokemon.name.charAt(0).toUpperCase() + pokemon.name.slice(1),
+        url: pokemon.url
+      }));
+      return { results };
     } catch (error) {
       console.error('Error fetching the pokemon data:', error);
+      throw error;
+    }
+  }
+
+  async getPokemonDetails(url) {
+    try {
+      const response = await axios.get(url);
+      const { sprites, species, types } = response.data;
+      return {
+        image: sprites.front_default,
+        species: species.name,
+        type: types[0].type.name
+      };
+    } catch (error) {
+      console.error('Error fetching the pokemon details:', error);
       throw error;
     }
   }

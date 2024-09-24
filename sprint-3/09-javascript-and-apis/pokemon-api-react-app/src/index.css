@@ -24,12 +24,12 @@ body {
     font-size: 18px;
 }
 
-h1, h2, h3 {
+h1 {
     font-family: 'Matemasie';
     text-shadow: 2px 2px #ffffff;
 }
 
 h1 {
-    font-size: 3rem;
+    font-size: 4rem;
+    margin-bottom: 2rem;
 }
-

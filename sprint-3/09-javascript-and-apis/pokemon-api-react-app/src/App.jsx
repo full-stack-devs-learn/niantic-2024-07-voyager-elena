@@ -3,6 +3,7 @@ import { useEffect, useState } from 'react'
 import PokemonService from './services/pokemon-service'
 import './App.css'
 import Button from 'react-bootstrap/Button'
+import PokemonCard from './components/PokemonCard';
 import 'bootstrap/dist/css/bootstrap.min.css'
 import 'bootswatch/dist/materia/bootstrap.min.css'
 
@@ -15,7 +16,14 @@ function App() {
     setIsLoading(true);
     try {
       const data = await PokemonService.getData(page);
-      setPokemons(data.results);
+      const detailedPokemons = [];
+
+      for (const pokemon of data.results) {
+        const details = await PokemonService.getPokemonDetails(pokemon.url);
+        detailedPokemons.push({ ...pokemon, ...details });
+      }
+
+      setPokemons(detailedPokemons);
     } catch (error) {
       console.error('Error fetching the pokemon data:', error);
     } finally {
@@ -45,13 +53,9 @@ function App() {
       ) : (
         <>
           <div className="cards-container">
+            {console.log(pokemons)}
             {pokemons.map((pokemon) => (
-              <div className="card" key={pokemon.name}>
-                <h3 className='card-title'>{pokemon.name}</h3>
-                <a href={pokemon.url} target="_blank">
-                  {pokemon.url}
-                </a>
-              </div>
+              <PokemonCard key={pokemon.name} pokemon={pokemon} />
             ))}
           </div>
 
