@@ -11,25 +11,27 @@ function App() {
   const [pokemons, setPokemons] = useState([])
   const [isLoading, setIsLoading] = useState(true)
   const [page, setPage] = useState(1)
+  const [totalPages, setTotalPages] = useState(0)
 
   const fetchPokemons = async (page) => {
-    setIsLoading(true);
+    setIsLoading(true)
     try {
-      const data = await PokemonService.getData(page);
-      const detailedPokemons = [];
+      const data = await PokemonService.getData(page)
+      const detailedPokemons = []
 
       for (const pokemon of data.results) {
-        const details = await PokemonService.getPokemonDetails(pokemon.url);
-        detailedPokemons.push({ ...pokemon, ...details });
+        const details = await PokemonService.getPokemonDetails(pokemon.url)
+        detailedPokemons.push({ ...pokemon, ...details })
       }
 
-      setPokemons(detailedPokemons);
+      setPokemons(detailedPokemons)
+      setTotalPages(Math.ceil(data.count / 20))
     } catch (error) {
-      console.error('Error fetching the pokemon data:', error);
+      console.error('Error fetching the pokemon data:', error)
     } finally {
       setIsLoading(false);
     }
-  };
+  }
 
   useEffect(() => {
     fetchPokemons(page);
@@ -39,11 +41,19 @@ function App() {
     if (page > 1) {
       setPage(page - 1);
     }
-  };
+  }
 
   const handleNext = () => {
     setPage(page + 1);
-  };
+  }
+
+  const handleFirst = () => {
+    setPage(1);
+  }
+
+  const handleLast = () => {
+    setPage(totalPages);
+  }
 
   return (
     <>
@@ -56,12 +66,18 @@ function App() {
             page={page}
             handlePrevious={handlePrevious}
             handleNext={handleNext}
+            handleFirst={handleFirst}
+            handleLast={handleLast}
+            totalPages={totalPages}
           />
           <CardsContainer pokemons={pokemons} />
           <NavigationButtons
             page={page}
             handlePrevious={handlePrevious}
             handleNext={handleNext}
+            handleFirst={handleFirst}
+            handleLast={handleLast}
+            totalPages={totalPages}
           />
         </>
       )}

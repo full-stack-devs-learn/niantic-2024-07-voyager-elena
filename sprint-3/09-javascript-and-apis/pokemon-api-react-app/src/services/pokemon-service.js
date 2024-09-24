@@ -13,7 +13,7 @@ class PokemonService {
         name: pokemon.name.charAt(0).toUpperCase() + pokemon.name.slice(1),
         url: pokemon.url
       }));
-      return { results };
+      return { results, count: response.data.count };
     } catch (error) {
       console.error('Error fetching the pokemon data:', error);
       throw error;
