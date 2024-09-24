@@ -3,7 +3,7 @@ import EmployeeCard from '../employee-card/EmployeeCard'
 import './EmployeeCardsContainer.css'
 import employees from '../../../data'
 
-const CategoryCardsContainer = () => {
+const EmployeeCardsContainer = () => {
   const [selectedEmployeeId, setSelectedEmployeeId] = useState(0);
 
   const handleEmployeeSelected = (id) => {
@@ -29,5 +29,5 @@ const CategoryCardsContainer = () => {
   )
 }
 
-export default CategoryCardsContainer
+export default EmployeeCardsContainer
 

@@ -1,14 +1,11 @@
+import PropTypes from 'prop-types';
 import './EmployeeCard.css'
 
-export default function CategoryCard({ id, employeeFullName, employeeTitle, handleEmployeeSelected }) {
+const EmployeeCard = ({ id, employeeFullName, employeeTitle, handleEmployeeSelected }) => {
   const imageUrl = `images/employees/${id}.webp`
 
-  const employeeClicked = () => {
-    handleEmployeeSelected(id)
-  }
-
   return (
-    <div className="employee-card" onClick={employeeClicked}>
+    <div className="employee-card" onClick={() => handleEmployeeSelected(id)}>
       <img className="employee-image" src={imageUrl} alt={`${employeeFullName} photo`} />
       <div className="employee-name">
         <h1>{employeeFullName}</h1>
@@ -17,3 +14,13 @@ export default function CategoryCard({ id, employeeFullName, employeeTitle, hand
     </div>
   )
 }
+
+EmployeeCard.propTypes = {
+  id: PropTypes.number.isRequired,
+  employeeFullName: PropTypes.string.isRequired,
+  employeeTitle: PropTypes.string.isRequired,
+  handleEmployeeSelected: PropTypes.func.isRequired,
+}
+
+export default EmployeeCard
+
