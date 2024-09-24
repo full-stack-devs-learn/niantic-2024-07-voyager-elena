@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types'
 import PokemonCard from './PokemonCard'
 
 const CardsContainer = ({ pokemons }) => {
@@ -8,6 +9,10 @@ const CardsContainer = ({ pokemons }) => {
       ))}
     </div>
   )
+}
+
+CardsContainer.propTypes = {
+  pokemons: PropTypes.arrayOf(PropTypes.object).isRequired
 }
 
 export default CardsContainer

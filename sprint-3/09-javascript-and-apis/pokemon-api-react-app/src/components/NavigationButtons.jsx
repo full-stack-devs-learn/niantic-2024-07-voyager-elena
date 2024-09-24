@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types'
 import Button from 'react-bootstrap/Button'
 
 const NavigationButtons = ({ page, handlePrevious, handleNext, handleFirst, handleLast, totalPages }) => {
@@ -10,6 +11,15 @@ const NavigationButtons = ({ page, handlePrevious, handleNext, handleFirst, hand
       <Button variant="primary" onClick={handleLast} disabled={page === totalPages}>Last</Button>
     </div>
   )
+}
+
+NavigationButtons.propTypes = {
+  page: PropTypes.number.isRequired,
+  handlePrevious: PropTypes.func.isRequired,
+  handleNext: PropTypes.func.isRequired,
+  handleFirst: PropTypes.func.isRequired,
+  handleLast: PropTypes.func.isRequired,
+  totalPages: PropTypes.number.isRequired,
 }
 
 export default NavigationButtons
