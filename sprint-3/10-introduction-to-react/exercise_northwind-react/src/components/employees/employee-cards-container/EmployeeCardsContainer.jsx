@@ -1,18 +1,25 @@
 import { useState } from 'react'
 import EmployeeCard from '../employee-card/EmployeeCard'
-import Modal from 'react-bootstrap/Modal';
+import EmployeeDetails from '../employee-details/EmployeeDetails'
 import './EmployeeCardsContainer.css'
 import employees from '../../../data'
 
 const EmployeeCardsContainer = () => {
-  const [selectedEmployeeId, setSelectedEmployeeId] = useState(0)
   const [selectedEmployee, setSelectedEmployee] = useState({})
+  const [managerName, setManagerName] = useState('')
   const [showEmployeeDetails, setShowEmployeeDetails] = useState(false)
 
 
   const handleEmployeeSelected = (id) => {
-    setSelectedEmployeeId(id)
-    setSelectedEmployee(employees.find(emp => emp.employeeId === id))
+    const employee = employees.find(emp => emp.employeeId === id)
+    console.log("Selected person = ", employee)
+    setSelectedEmployee(employee)
+    if (employee.managerId > 0) {
+      const manager = employees.find(emp => emp.employeeId === employee.managerId)
+      setManagerName(manager.firstName + ' ' + manager.lastName)
+    } else {
+      setManagerName('')
+    }
     setShowEmployeeDetails(true)
   }
 
@@ -20,7 +27,6 @@ const EmployeeCardsContainer = () => {
 
   return (
     <>
-      <h5 className="container">Selected Employee Id: {selectedEmployeeId}</h5>
       <main className="container mt-4 employees-container" id="employees-container">
         {
           employees.map((employee) => (
@@ -33,18 +39,16 @@ const EmployeeCardsContainer = () => {
           ))
         }
       </main>
-
-      <Modal show={showEmployeeDetails} onHide={handleCloseDetails}>
-        <Modal.Header closeButton>
-          <Modal.Title>{selectedEmployee.firstName + ' ' + selectedEmployee.lastName}</Modal.Title>
-        </Modal.Header>
-        <Modal.Body>
-          More details about this person
-        </Modal.Body>
-      </Modal>
+      {showEmployeeDetails &&
+        <EmployeeDetails
+          show={showEmployeeDetails}
+          close={handleCloseDetails}
+          employee={selectedEmployee}
+          manager={managerName}
+        />
+      }
     </>
   )
 }
 
 export default EmployeeCardsContainer
-

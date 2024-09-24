@@ -1,0 +1,15 @@
+.employee-details-body {
+    display: flex;
+    flex-direction: column;
+    row-gap: 20px;
+    align-items: center;
+}
+
+.employee-details-image {
+    width: 80%;
+    max-width: 500px;
+}
+
+.employee-details-container {
+    width: 80%;
+}

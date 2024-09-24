@@ -1,4 +1,4 @@
-import PropTypes from 'prop-types';
+import PropTypes from 'prop-types'
 import './EmployeeCard.css'
 
 const EmployeeCard = ({ id, employeeFullName, employeeTitle, handleEmployeeSelected }) => {
