@@ -1,26 +1,25 @@
 import { useState } from "react"
 import Header from "./components/header/Header"
-import CategoriesPage from "./components/categories/cagtegories-page/CategoriesPage"
+import CategoriesPage from "./components/categories/categories-page/CategoriesPage"
 import ProductsPage from "./components/products/products-page/ProductsPage"
 
 function App() {
   const [pageName, setPageName] = useState("categories")
 
-  const pageChangeHanlder = (newPage) =>
-  {
+  const pageChangeHandler = (newPage) => {
     setPageName(newPage);
-    console.log("changing page to: " + pageName); 
+    console.log("changing page to: " + pageName);
   }
 
   console.log("page render: " + pageName)
-  
+
 
   return (
     <>
-      <Header onPageChanged={pageChangeHanlder}></Header>
+      <Header onPageChanged={pageChangeHandler}></Header>
 
-      { (pageName=="categories") ? <CategoriesPage></CategoriesPage> : null}
-      { (pageName=="products") && <ProductsPage></ProductsPage> }
+      {(pageName == "categories") ? <CategoriesPage></CategoriesPage> : null}
+      {(pageName == "products") && <ProductsPage></ProductsPage>}
     </>
   )
 }

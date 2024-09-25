@@ -38,7 +38,7 @@ export default function CategoryAdd({onCancel, onCategoryAdded})
                 <textarea className="form-control" name="description" id="description"
                     onChange={(e) => setDescription(e.target.value)} />
             </div>
-            <button className="btn btn-danger mr-3" type="submit">Add Category</button>
+            <button className="btn btn-danger me-3" type="submit">Add Category</button>
             <button className="btn btn-dark" type="cancel" onClick={onCancel}>Cancel</button>
         </form>
         </div>

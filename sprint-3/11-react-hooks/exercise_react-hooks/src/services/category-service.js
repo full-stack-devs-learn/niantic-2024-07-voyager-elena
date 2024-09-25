@@ -2,7 +2,7 @@ import axios from 'axios'
 
 class CategoryService
 {
-    baseUrl = 'http://localhost:8080/categories'
+    baseUrl = 'http://localhost:8080/api/categories'
 
     async getAllCategories()
     {
