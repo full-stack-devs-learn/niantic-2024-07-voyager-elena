@@ -1,62 +1,49 @@
 import { useState, useEffect } from 'react';
 import CategoryCard from '../category-card/CategoryCard'
 import './CategoryCardContainer.css'
-import categoryService from '../../../services/category-service';
-import ProductsList from '../../products/products-list/ProductsList';
-// import { categories } from '../../../data'
+import categoryService from '../../../services/category-service'
+import ProductsList from '../../products/products-list/ProductsList'
 
-export default function CategoryCardContainer()
-{
-    const [selectedCategory, setSelectedCategory] = useState("None Selected");
-    const [selectedCategoryId, setSelectedCategoryId] = useState(0);
-    const [categories, setCategories] = useState([]);
 
-    useEffect(() => {
+export default function CategoryCardContainer() {
+  const [selectedCategory, setSelectedCategory] = useState('None Selected')
+  const [selectedCategoryId, setSelectedCategoryId] = useState(0);
+  const [categories, setCategories] = useState([]);
 
-        categoryService.getAllCategories().then(data => {
+  useEffect(() => {
+    categoryService.getAllCategories().then(data => {
+      setCategories(data);
+    })
+  }, [])
 
-            console.log("data being returned:");            
-            console.log(data);
-            setCategories(data);   
-        })
 
-    }, 
-    // an emptry array says that I only want
-    // this code to run one time before the first render
-    [])
-   
+  const categorySelected = (name) => {
+    setSelectedCategory(name)
+    const categoryId = categories.find(cat => cat.categoryName === name).categoryId
+    setSelectedCategoryId(categoryId)
+  }
 
-    const categorySelected = (name) =>
-    {
-        setSelectedCategory(name);
+  const categoryDeleted = (categoryId) => {
+    const newList = categories.filter(category => category.categoryId !== categoryId);
+    setCategories(newList)
+  }
 
-        const categoryId = categories.filter(cat => cat.categoryName === name)[0].categoryId;
-
-        setSelectedCategoryId(categoryId);
-        console.log(name)
-    }
-
-    const categoryDeleted = (categoryId) => {
-        const newList = categories.filter(category => category.categoryId !== categoryId);
-        setCategories(newList)
-    }
-
-    return(
-        <>
-        <h5 className="container">Selected Category: {selectedCategory}</h5>
-        <main className="container mt-4 categories-container" id="categories-container">
+  return (
+    <>
+      <h5 className="container">Selected Category: {selectedCategory}</h5>
+      <main className="container categories-container p-4 mb-5" id="categories-container">
         {
-            categories.map((category) => (
-                <CategoryCard key={category.categoryId} 
-                    category={category.categoryName} 
-                    id={category.categoryId}
-                    onCategorySelected={categorySelected}
-                    onCategoryDeleted={categoryDeleted}
-                    ></CategoryCard>
-            ))
+          categories.map((category) => (
+            <CategoryCard key={category.categoryId}
+              category={category.categoryName}
+              id={category.categoryId}
+              onCategorySelected={categorySelected}
+              onCategoryDeleted={categoryDeleted}
+            ></CategoryCard>
+          ))
         }
-        </main>
-        <ProductsList categoryId={selectedCategoryId}></ProductsList>
-        </>
-    )
+      </main>
+      <ProductsList categoryId={selectedCategoryId}></ProductsList>
+    </>
+  )
 }
