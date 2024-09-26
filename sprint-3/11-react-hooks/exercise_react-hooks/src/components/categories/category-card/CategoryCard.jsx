@@ -10,11 +10,9 @@ export default function CategoryCard({ id, category, onCategorySelected, onCateg
   }
 
   async function deleteCategory(event) {
-    event.stopPropagation();
-
-    await categoryService.delete(id);
-
-    onCategoryDeleted(id);
+    event.stopPropagation()
+    await categoryService.delete(id)
+    onCategoryDeleted(id)
   }
 
   async function editCategory(event) {

@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react'
 import CategoryCard from '../category-card/CategoryCard'
 import './CategoryCardContainer.css'
 import categoryService from '../../../services/category-service'
@@ -7,8 +7,8 @@ import ProductsList from '../../products/products-list/ProductsList'
 
 export default function CategoryCardContainer() {
   const [selectedCategory, setSelectedCategory] = useState('None Selected')
-  const [selectedCategoryId, setSelectedCategoryId] = useState(0);
-  const [categories, setCategories] = useState([]);
+  const [selectedCategoryId, setSelectedCategoryId] = useState(0)
+  const [categories, setCategories] = useState([])
 
   useEffect(() => {
     categoryService.getAllCategories().then(data => {
@@ -31,7 +31,7 @@ export default function CategoryCardContainer() {
   return (
     <>
       <h5 className="container">Selected Category: {selectedCategory}</h5>
-      <main className="container categories-container p-4 mb-5" id="categories-container">
+      <main className="container categories-container p-4 mb-5">
         {
           categories.map((category) => (
             <CategoryCard key={category.categoryId}
@@ -43,7 +43,7 @@ export default function CategoryCardContainer() {
           ))
         }
       </main>
-      <ProductsList categoryId={selectedCategoryId}></ProductsList>
+      {selectedCategoryId > 0 && <ProductsList categoryId={selectedCategoryId}></ProductsList>}
     </>
   )
 }

@@ -3,8 +3,8 @@ import axios from 'axios'
 class CategoryService {
   baseUrl = 'http://localhost:8080/api/products'
 
-  async getAllProducts() {
-    const response = await axios.get(this.baseUrl)
+  async getProducts(categoryId) {
+    const response = await axios.get(`${this.baseUrl}?catId=${categoryId}`)
     return response.data
   }
 

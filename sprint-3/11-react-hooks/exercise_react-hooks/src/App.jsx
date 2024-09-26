@@ -8,10 +8,7 @@ function App() {
 
   const pageChangeHandler = (newPage) => {
     setPageName(newPage);
-    console.log("changing page to: " + pageName);
   }
-
-  console.log("page render: " + pageName)
 
 
   return (
