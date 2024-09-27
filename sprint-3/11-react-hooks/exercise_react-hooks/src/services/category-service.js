@@ -1,25 +1,26 @@
 import axios from 'axios'
 
-class CategoryService
-{
-    baseUrl = 'http://localhost:8080/api/categories'
+/*
+* I used my Northwind API server from day 06 exercise
+* https://github.com/full-stack-devs-learn/niantic-2024-07-voyager-elena/tree/main/sprint-3/06-rest-api/exercise_rest-api
+*/
 
-    async getAllCategories()
-    {
-        const response = await axios.get(this.baseUrl);
-        return response.data;
-    }
+class CategoryService {
+  baseUrl = 'http://localhost:8080/api/categories'
 
-    async add(category)
-    {
-        const response = await axios.post(this.baseUrl, category);
-        return response.data;
-    }
+  async getAllCategories() {
+    const response = await axios.get(this.baseUrl);
+    return response.data;
+  }
 
-    async delete(categoryId)
-    {
-        await axios.delete(`${this.baseUrl}/${categoryId}`)
-    }
+  async add(category) {
+    const response = await axios.post(this.baseUrl, category);
+    return response.data;
+  }
+
+  async delete(categoryId) {
+    await axios.delete(`${this.baseUrl}/${categoryId}`)
+  }
 }
 
 const categoryService = new CategoryService()

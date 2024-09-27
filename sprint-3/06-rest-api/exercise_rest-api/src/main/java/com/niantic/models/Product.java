@@ -1,16 +1,18 @@
 package com.niantic.models;
 
+import java.math.BigDecimal;
+
 public class Product {
     private int productId;
-    private int categoryId;
+    private Integer categoryId;
     private String productName;
     private String quantityPerUnit;
-    private double unitPrice;
+    private BigDecimal unitPrice;
     private int unitsInStock;
     private int unitsOnOrder;
     private int reorderLevel;
 
-    public Product(int productId, int categoryId, String productName, String quantityPerUnit, double unitPrice, int unitsInStock, int unitsOnOrder, int reorderLevel) {
+    public Product(int productId, Integer categoryId, String productName, String quantityPerUnit, BigDecimal unitPrice, int unitsInStock, int unitsOnOrder, int reorderLevel) {
         this.productId = productId;
         this.categoryId = categoryId;
         this.productName = productName;
@@ -32,11 +34,11 @@ public class Product {
         this.productId = productId;
     }
 
-    public int getCategoryId() {
+    public Integer getCategoryId() {
         return categoryId;
     }
 
-    public void setCategoryId(int categoryId) {
+    public void setCategoryId(Integer categoryId) {
         this.categoryId = categoryId;
     }
 
@@ -56,11 +58,11 @@ public class Product {
         this.quantityPerUnit = quantityPerUnit;
     }
 
-    public double getUnitPrice() {
+    public BigDecimal getUnitPrice() {
         return unitPrice;
     }
 
-    public void setUnitPrice(double unitPrice) {
+    public void setUnitPrice(BigDecimal unitPrice) {
         this.unitPrice = unitPrice;
     }
 

@@ -8,8 +8,10 @@ import org.springframework.jdbc.support.rowset.SqlRowSet;
 import org.springframework.stereotype.Repository;
 
 import javax.sql.DataSource;
+import java.math.BigDecimal;
 import java.sql.PreparedStatement;
 import java.sql.Statement;
+import java.sql.Types;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -47,7 +49,7 @@ public class MySqlProductDao implements ProductDao {
             int productId = row.getInt("product_id");
             String productName = row.getString("product_name");
             String quantityPerUnit = row.getString("quantity_per_unit");
-            double unitPrice = row.getDouble("unit_price");
+            BigDecimal unitPrice = row.getBigDecimal("unit_price");
             int unitsInStock = row.getInt("units_in_stock");
             int unitsOnOrder = row.getInt("units_on_order");
             int reorderLevel = row.getInt("reorder_level");
@@ -89,10 +91,10 @@ public class MySqlProductDao implements ProductDao {
 
         while (row.next()) {
             int productId = row.getInt("product_id");
-            int categoryId = row.getInt("category_id");
+            Integer categoryId = (Integer) row.getObject("category_id");
             String productName = row.getString("product_name");
             String quantityPerUnit = row.getString("quantity_per_unit");
-            double unitPrice = row.getDouble("unit_price");
+            BigDecimal unitPrice = row.getBigDecimal("unit_price");
             int unitsInStock = row.getInt("units_in_stock");
             int unitsOnOrder = row.getInt("units_on_order");
             int reorderLevel = row.getInt("reorder_level");
@@ -132,10 +134,10 @@ public class MySqlProductDao implements ProductDao {
         SqlRowSet row = jdbcTemplate.queryForRowSet(sql, productId);
 
         if (row.next()) {
-            int categoryId = row.getInt("category_id");
+            Integer categoryId = (Integer) row.getObject("category_id");
             String productName = row.getString("product_name");
             String quantityPerUnit = row.getString("quantity_per_unit");
-            double unitPrice = row.getDouble("unit_price");
+            BigDecimal unitPrice = row.getBigDecimal("unit_price");
             int unitsInStock = row.getInt("units_in_stock");
             int unitsOnOrder = row.getInt("units_on_order");
             int reorderLevel = row.getInt("reorder_level");
@@ -170,9 +172,17 @@ public class MySqlProductDao implements ProductDao {
 
             // Set parameters
             preparedStatement.setString(1, product.getProductName());
-            preparedStatement.setInt(2, product.getCategoryId());
+            if (product.getCategoryId() != null) {
+                preparedStatement.setInt(2, product.getCategoryId());
+            } else {
+                preparedStatement.setNull(2, Types.INTEGER);
+            }
             preparedStatement.setString(3, product.getQuantityPerUnit());
-            preparedStatement.setDouble(4, product.getUnitPrice());
+            if (product.getUnitPrice() != null) {
+                preparedStatement.setBigDecimal(4, product.getUnitPrice());
+            } else {
+                preparedStatement.setBigDecimal(4, BigDecimal.ZERO);
+            }
             preparedStatement.setInt(5, product.getUnitsInStock());
             preparedStatement.setInt(6, product.getUnitsOnOrder());
             preparedStatement.setInt(7, product.getReorderLevel());
