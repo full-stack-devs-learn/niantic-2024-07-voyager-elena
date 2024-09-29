@@ -5,7 +5,7 @@ import categoryService from '../../../services/category-service'
 import ProductsList from '../../products/products-list/ProductsList'
 
 
-export default function CategoryCardContainer() {
+const CategoryCardContainer = () => {
   const [selectedCategory, setSelectedCategory] = useState('None Selected')
   const [selectedCategoryId, setSelectedCategoryId] = useState(0)
   const [categories, setCategories] = useState([])
@@ -15,7 +15,6 @@ export default function CategoryCardContainer() {
       setCategories(data);
     })
   }, [])
-
 
   const categorySelected = (name) => {
     setSelectedCategory(name)
@@ -43,7 +42,9 @@ export default function CategoryCardContainer() {
           ))
         }
       </main>
-      {selectedCategoryId > 0 && <ProductsList categoryId={selectedCategoryId}></ProductsList>}
+      {selectedCategoryId > 0 && <ProductsList categoryId={selectedCategoryId} />}
     </>
   )
 }
+
+export default CategoryCardContainer

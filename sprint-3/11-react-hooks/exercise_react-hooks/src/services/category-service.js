@@ -13,12 +13,12 @@ class CategoryService {
     return response.data;
   }
 
-  async add(category) {
+  async addCategory(category) {
     const response = await axios.post(this.baseUrl, category);
     return response.data;
   }
 
-  async delete(categoryId) {
+  async deleteCategory(categoryId) {
     await axios.delete(`${this.baseUrl}/${categoryId}`)
   }
 }

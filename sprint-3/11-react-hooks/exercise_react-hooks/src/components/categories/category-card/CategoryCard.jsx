@@ -2,16 +2,16 @@ import categoryService from '../../../services/category-service'
 import './CategoryCard.css'
 import { Trash3, Pen } from 'react-bootstrap-icons'
 
-export default function CategoryCard({ id, category, onCategorySelected, onCategoryDeleted }) {
+const CategoryCard = ({ id, category, onCategorySelected, onCategoryDeleted }) => {
   const imageUrl = `images/categories/${id}.webp`
 
   const categoryClicked = () => {
     onCategorySelected(category)
   }
 
-  async function deleteCategory(event) {
+  const deleteCategory = async (event) => {
     event.stopPropagation()
-    await categoryService.delete(id)
+    await categoryService.deleteCategory(id)
     onCategoryDeleted(id)
   }
 
@@ -37,3 +37,5 @@ export default function CategoryCard({ id, category, onCategorySelected, onCateg
     </div>
   )
 }
+
+export default CategoryCard

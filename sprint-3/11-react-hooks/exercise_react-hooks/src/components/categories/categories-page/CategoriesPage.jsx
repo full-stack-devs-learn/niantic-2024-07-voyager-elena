@@ -1,14 +1,15 @@
 import { useState } from 'react'
 import CategoryAdd from '../category-add/CategoryAdd'
 import CategoryCardContainer from '../category-card-container/CategoryCardContainer'
-import './CategoriesPage.css'
 import { PlusSquare } from 'react-bootstrap-icons'
+import './CategoriesPage.css'
 
-export default function CategoriesPage() {
+const CategoriesPage = () => {
   const [action, setAction] = useState("list");
 
   return (
     <div className="container p-4">
+
       <h1>Categories</h1>
 
       <button
@@ -18,11 +19,16 @@ export default function CategoriesPage() {
         <PlusSquare /><span>Add New Category</span>
       </button>
 
-      {action === "list" && <CategoryCardContainer></CategoryCardContainer>}
-      {action === "add" && <CategoryAdd onCancel={() => setAction("list")}
-        onCategoryAdded={() => setAction("list")}
-      ></CategoryAdd>}
+      {action === "list" && <CategoryCardContainer />}
+      {action === "add" &&
+        <CategoryAdd
+          onCancel={() => setAction("list")}
+          onCategoryAdded={() => setAction("list")}
+        />
+      }
 
     </div>
   )
 }
+
+export default CategoriesPage
