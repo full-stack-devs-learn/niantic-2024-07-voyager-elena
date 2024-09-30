@@ -1,8 +1,8 @@
 import { useState, useEffect } from 'react'
 import CategoryCard from '../category-card/CategoryCard'
-import './CategoryCardContainer.css'
-import categoryService from '../../../services/category-service'
 import ProductsList from '../../products/products-list/ProductsList'
+import categoryService from '../../../services/category-service'
+import './CategoryCardContainer.css'
 
 
 const CategoryCardContainer = () => {

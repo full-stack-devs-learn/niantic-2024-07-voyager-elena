@@ -22,7 +22,7 @@ export default function ProductsPage() {
       {action === "add" &&
         <ProductAdd
           onCancel={() => setAction("list")}
-          onCategoryAdded={() => setAction("list")}
+          onProductAdded={() => setAction("list")}
         />}
     </div>
   )

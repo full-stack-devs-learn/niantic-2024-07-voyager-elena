@@ -17,9 +17,10 @@ const CategoryAdd = ({ onCancel, onCategoryAdded }) => {
 
   return (
     <>
-      <h2 className="mb-5">Add New Category</h2>
+      <h2 className="mb-3">Add New Category</h2>
 
       <form onSubmit={addCategoryHandler} >
+
         <div className="row">
           <label htmlFor="category-name">Category Name:</label>
           <input type="text" className="form-control" name="category-name" id="category-name"
@@ -27,14 +28,16 @@ const CategoryAdd = ({ onCancel, onCategoryAdded }) => {
           />
         </div>
 
-        <div className="row">
+        <div className="row mb-3">
           <label htmlFor="description">Description:</label>
           <textarea className="form-control" name="description" id="description"
             onChange={(e) => setDescription(e.target.value)} />
         </div>
 
-        <button className="btn btn-danger me-3" type="submit">Add Category</button>
-        <button className="btn btn-dark" type="cancel" onClick={onCancel}>Cancel</button>
+        <div className="d-flex flex-row justify-content-center align-items-center gap-3">
+          <button className="btn btn-danger" type="submit">Add Category</button>
+          <button className="btn btn-dark" type="cancel" onClick={onCancel}>Cancel</button>
+        </div>
 
       </form>
     </>
