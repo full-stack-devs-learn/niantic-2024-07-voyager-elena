@@ -2,9 +2,9 @@ import { useState } from 'react'
 import productService from '../../../services/product-service'
 import './ProductAdd.css'
 
-const ProductAdd = ({ onCancel, onProductAdded }) => {
+const ProductAdd = ({ onCancel, onProductAdded, categories }) => {
 
-  const [categoryId, setCategoryId] = useState(null)
+  const [categoryId, setCategoryId] = useState('')
   const [productName, setProductName] = useState('')
   const [quantityPerUnit, setQuantityPerUnit] = useState('')
   const [unitPrice, setUnitPrice] = useState(0)
@@ -47,6 +47,18 @@ const ProductAdd = ({ onCancel, onProductAdded }) => {
       <h2 className="mb-3">Add New Product</h2>
 
       <form onSubmit={addProductHandler} >
+
+        <div className="row mb-3">
+          <label htmlFor="category">Category:</label>
+          <select className="form-control" id="category" name="categoryId" value={categoryId} onChange={(e) => setCategoryId(e.target.value)}>
+            <option value="">Select a Category</option>
+            {categories.map((category) => (
+              <option key={category.categoryId} value={category.categoryId}>
+                {category.categoryName}
+              </option>
+            ))}
+          </select>
+        </div>
 
         <div className="row mb-3">
           <label htmlFor="product-name">Product Name:</label>

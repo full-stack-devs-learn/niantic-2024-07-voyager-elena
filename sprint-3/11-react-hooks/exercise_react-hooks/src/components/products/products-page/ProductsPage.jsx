@@ -1,11 +1,19 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import ProductAdd from '../product-add/ProductAdd'
 import ProductsList from '../products-list/ProductsList'
 import { PlusSquare } from 'react-bootstrap-icons'
+import categoryService from '../../../services/category-service'
 import './ProductsPage.css'
 
 export default function ProductsPage() {
-  const [action, setAction] = useState("list");
+  const [action, setAction] = useState("list")
+  const [categories, setCategories] = useState([])
+
+  useEffect(() => {
+    categoryService.getAllCategories().then(data => {
+      setCategories(data);
+    })
+  }, [])
 
   return (
     <div className="container p-4">
@@ -23,6 +31,7 @@ export default function ProductsPage() {
         <ProductAdd
           onCancel={() => setAction("list")}
           onProductAdded={() => setAction("list")}
+          categories={categories}
         />}
     </div>
   )
