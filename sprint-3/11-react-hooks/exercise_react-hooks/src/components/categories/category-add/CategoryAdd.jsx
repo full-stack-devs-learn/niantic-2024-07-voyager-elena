@@ -21,7 +21,7 @@ const CategoryAdd = ({ onCancel, onCategoryAdded }) => {
 
       <form onSubmit={addCategoryHandler} >
 
-        <div className="row">
+        <div className="row mb-3">
           <label htmlFor="category-name">Category Name:</label>
           <input type="text" className="form-control" name="category-name" id="category-name"
             onChange={(e) => setCategoryName(e.target.value)}
