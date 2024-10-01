@@ -5,7 +5,7 @@ import './Header.css'
 const Header = () => {
   return (
     <nav className="navbar navbar-expand-lg bg-light" data-bs-theme="light">
-      <div className="container-fluid">
+      <div className="container">
         <Link className="navbar-brand d-flex flex-row gap-2 align-items-center" to="/">
           <img src={logoImage} className="logo-img" alt="Northwind Logo" />
           <h4 className="mb-0">Northwind</h4>
