@@ -6,7 +6,7 @@ const Header = () => {
   return (
     <nav className="navbar navbar-expand-lg bg-light" data-bs-theme="light">
       <div className="container-fluid">
-        <Link className="navbar-brand d-flex flex-row gap-3 align-items-center" to="/">
+        <Link className="navbar-brand d-flex flex-row gap-2 align-items-center" to="/">
           <img src={logoImage} className="logo-img" alt="Northwind Logo" />
           <h4 className="mb-0">Northwind</h4>
         </Link>
