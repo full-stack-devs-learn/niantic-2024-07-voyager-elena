@@ -7,6 +7,11 @@ import CategoriesList from './components/categories/categories-list/CategoriesLi
 import CategoryDetails from './components/categories/category-details/CategoryDetails'
 import CategoryAdd from './components/categories/category-add/CategoryAdd'
 import CategoryEdit from './components/categories/category-edit/CategoryEdit'
+import ProductsPage from './components/products/products-page/ProductsPage'
+import ProductSearch from './components/products/product-search/ProductSearch'
+import ProductDetails from './components/products/product-details/ProductDetails'
+import ProductAdd from './components/products/product-add/ProductAdd'
+import ProductEdit from './components/products/product-edit/ProductEdit'
 
 const App = () => {
 
@@ -22,12 +27,12 @@ const App = () => {
             <Route path='add' element={<CategoryAdd />} />
             <Route path=':categoryId/edit' element={<CategoryEdit />} />
           </Route>
-          {/* <Route path='/products' element={<ProductsPage />}>
+          <Route path='/products' element={<ProductsPage />}>
             <Route path='' element={<ProductSearch />} />
             <Route path=':productId' element={<ProductDetails />} />
             <Route path='add' element={<ProductAdd />} />
-            <Route path=':productId/edit' element={<ProductAdd />} />
-          </Route> */}
+            <Route path=':productId/edit' element={<ProductEdit />} />
+          </Route>
         </Routes>
       </main>
     </BrowserRouter>

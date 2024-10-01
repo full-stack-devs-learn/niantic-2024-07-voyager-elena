@@ -1,6 +1,6 @@
 import './CategoriesList.css'
 
-const CategoriesPage = () => {
+const CategoriesList = () => {
 
   return (
     <>
@@ -9,4 +9,4 @@ const CategoriesPage = () => {
   )
 }
 
-export default CategoriesPage
+export default CategoriesList
