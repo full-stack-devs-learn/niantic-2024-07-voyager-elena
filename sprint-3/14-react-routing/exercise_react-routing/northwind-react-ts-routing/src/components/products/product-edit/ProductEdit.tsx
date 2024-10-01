@@ -1,8 +1,11 @@
+import { useParams } from 'react-router-dom'
+
 const ProductEdit = () => {
+  const { productId } = useParams()
 
   return (
     <>
-      <h3 className="mb-3">Edit Product</h3>
+      <h3 className="mb-3">Edit Product - Product Id: {productId}</h3>
     </>
   )
 }
