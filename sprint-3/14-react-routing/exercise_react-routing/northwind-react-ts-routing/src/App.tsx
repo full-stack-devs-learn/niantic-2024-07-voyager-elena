@@ -12,6 +12,7 @@ import ProductSearch from './components/products/product-search/ProductSearch'
 import ProductDetails from './components/products/product-details/ProductDetails'
 import ProductAdd from './components/products/product-add/ProductAdd'
 import ProductEdit from './components/products/product-edit/ProductEdit'
+import NotFound from './components/not-found-page/NotFound'
 
 const App = () => {
 
@@ -20,6 +21,7 @@ const App = () => {
       <Header />
       <main className="container p-4">
         <Routes>
+          <Route path="*" element={<NotFound />} />
           <Route path="/" element={<HomePage />} />
           <Route path="/categories" element={<CategoriesPage />}>
             <Route path='' element={<CategoriesList />} />
