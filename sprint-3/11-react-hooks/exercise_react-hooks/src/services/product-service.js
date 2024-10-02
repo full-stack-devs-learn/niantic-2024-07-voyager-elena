@@ -5,7 +5,7 @@ import axios from 'axios'
 * https://github.com/full-stack-devs-learn/niantic-2024-07-voyager-elena/tree/main/sprint-3/06-rest-api/exercise_rest-api
 */
 
-class CategoryService {
+class ProductService {
   baseUrl = 'http://localhost:8080/api/products'
 
   async getProducts(categoryId) {
@@ -23,4 +23,4 @@ class CategoryService {
   }
 }
 
-export default new CategoryService()
+export default new ProductService()
