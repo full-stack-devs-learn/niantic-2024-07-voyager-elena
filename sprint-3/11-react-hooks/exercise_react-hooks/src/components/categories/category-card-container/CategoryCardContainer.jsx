@@ -5,14 +5,15 @@ import categoryService from '../../../services/category-service'
 import './CategoryCardContainer.css'
 
 
-const CategoryCardContainer = () => {
+const CategoryCardContainer = ({ onCategoryEdit }) => {
   const [selectedCategory, setSelectedCategory] = useState('None Selected')
   const [selectedCategoryId, setSelectedCategoryId] = useState(0)
   const [categories, setCategories] = useState([])
 
   useEffect(() => {
     categoryService.getAllCategories().then(data => {
-      setCategories(data);
+      console.log('data:', data)
+      setCategories(data)
     })
   }, [])
 
@@ -27,6 +28,10 @@ const CategoryCardContainer = () => {
     setCategories(newList)
   }
 
+  const categoryEdit = (categoryId) => {
+    onCategoryEdit(categoryId)
+  }
+
   return (
     <>
       <h5 className="container">Selected Category: {selectedCategory}</h5>
@@ -38,6 +43,7 @@ const CategoryCardContainer = () => {
               id={category.categoryId}
               onCategorySelected={categorySelected}
               onCategoryDeleted={categoryDeleted}
+              onCategoryEdit={categoryEdit}
             ></CategoryCard>
           ))
         }

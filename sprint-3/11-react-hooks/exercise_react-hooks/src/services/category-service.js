@@ -13,8 +13,18 @@ class CategoryService {
     return response.data;
   }
 
+  async getCategoryById(categoryId) {
+    const response = await axios.get(`${this.baseUrl}/${categoryId}`);
+    return response.data;
+  }
+
   async addCategory(category) {
     const response = await axios.post(this.baseUrl, category);
+    return response.data;
+  }
+
+  async updateCategory(category) {
+    const response = await axios.put(`${this.baseUrl}/${category.categoryId}`, category);
     return response.data;
   }
 

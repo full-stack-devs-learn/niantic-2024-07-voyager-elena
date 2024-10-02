@@ -2,7 +2,7 @@ import categoryService from '../../../services/category-service'
 import './CategoryCard.css'
 import { Trash3, Pen } from 'react-bootstrap-icons'
 
-const CategoryCard = ({ id, category, onCategorySelected, onCategoryDeleted }) => {
+const CategoryCard = ({ id, category, onCategorySelected, onCategoryDeleted, onCategoryEdit }) => {
   const imageUrl = `images/categories/${id}.webp`
 
   const categoryClicked = () => {
@@ -15,10 +15,10 @@ const CategoryCard = ({ id, category, onCategorySelected, onCategoryDeleted }) =
     onCategoryDeleted(id)
   }
 
-  async function editCategory(event) {
+  const editCategory = (event) => {
     event.stopPropagation();
-    console.log('Update category with id:', id)
-    // TODO: update category
+    console.log('Edit category with id:', id)
+    onCategoryEdit(id);
   }
 
 

@@ -17,7 +17,7 @@ export default function ProductsPage() {
 
   return (
     <div className="container p-4">
-      <h1>Products</h1>
+      <h1 className="mb-3">Products</h1>
 
       <button
         className="btn btn-info d-flex flex-row justify-content-between align-items-center gap-2 mb-3"
