@@ -1,4 +1,5 @@
 import Category from '../../../models/category'
+import { Trash3, Pen } from 'react-bootstrap-icons'
 import './CategoryCard.css'
 
 interface CategoryCardProps {
@@ -11,22 +12,19 @@ const CategoryCard: React.FC<CategoryCardProps> = ({ category }) => {
     imageUrl = `images/categories/${category.categoryId}.webp`
   }
 
-
   const categoryClicked = () => {
-    console.log(category)
+    console.log('Category Details:', category)
   }
 
-  // const deleteCategory = async (event) => {
-  //   event.stopPropagation()
-  //   await categoryService.deleteCategory(id)
-  //   onCategoryDeleted(id)
-  // }
+  const deleteCategory = async (event: React.MouseEvent<SVGElement, MouseEvent>) => {
+    event.stopPropagation()
+    console.log('Delete Category:', category)
+  }
 
-  // const editCategory = (event) => {
-  //   event.stopPropagation();
-  //   console.log('Edit category with id:', id)
-  //   onCategoryEdit(id);
-  // }
+  const editCategory = (event: React.MouseEvent<SVGElement, MouseEvent>) => {
+    event.stopPropagation();
+    console.log('Edit category with id:', category.categoryId)
+  }
 
 
   return (
@@ -37,10 +35,10 @@ const CategoryCard: React.FC<CategoryCardProps> = ({ category }) => {
           {imageUrl && <img className="category-image w-100" src={imageUrl} />}
         </div>
       </div>
-      {/* <div className="card-footer d-flex flex-row justify-content-between align-items-center h4 mb-0">
+      <div className="card-footer d-flex flex-row justify-content-between align-items-center h4 mb-0">
         <Pen onClick={editCategory} className="icon hover-info " />
         <Trash3 onClick={deleteCategory} className="icon hover-danger" />
-      </div> */}
+      </div>
     </div>
   )
 }
