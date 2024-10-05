@@ -1,14 +1,11 @@
-
-// import { Link } from 'react-router-dom'
-
-// import Category from '../../../models/category'
 import { useDispatch } from 'react-redux'
 import { AppDispatch, RootState } from '../../../store/store'
 import { useSelector } from 'react-redux'
 import { useEffect } from 'react'
 import { loadCategories } from '../../../store/features/categories-slice'
+import { Link } from 'react-router-dom'
 import CategoryCard from '../category-card/CategoryCard'
-
+import { PlusSquare } from 'react-bootstrap-icons'
 import './CategoriesList.css'
 
 const CategoriesList = () => {
@@ -28,6 +25,9 @@ const CategoriesList = () => {
   return (
     <>
       <h3 className="mb-3">Categories List</h3>
+      <Link to="add" className="btn btn-info d-inline-flex flex-row align-items-center gap-2 mb-5">
+        <PlusSquare /><span>Add New Category</span>
+      </Link>
 
       <div className="container categories-container p-4 mb-5">
         {
