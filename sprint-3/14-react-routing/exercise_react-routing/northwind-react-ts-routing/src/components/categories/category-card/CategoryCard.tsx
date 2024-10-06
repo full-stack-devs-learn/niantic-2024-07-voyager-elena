@@ -21,6 +21,7 @@ const CategoryCard: React.FC<CategoryCardProps> = ({ category }) => {
 
   const categoryClicked = () => {
     console.log('Category Details:', category)
+    navigate(`${category.categoryId}`)
   }
 
   const handleDeleteCategory = async (event: React.MouseEvent<SVGElement, MouseEvent>) => {

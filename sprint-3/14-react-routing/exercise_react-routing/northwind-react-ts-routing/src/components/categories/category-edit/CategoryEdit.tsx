@@ -29,10 +29,6 @@ const CategoryEdit = () => {
     }
   }, [categories, categoryId, dispatch])
 
-
-  if (loading) return <p>Loading categories...</p>
-  if (error) return <p>Error: {error}</p>
-
   const updateCategoryHandler = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault()
     const updatedCategory = {
@@ -44,6 +40,9 @@ const CategoryEdit = () => {
     dispatch(updateCategory(updatedCategory))
     navigate('/categories')
   }
+
+  if (loading) return <p>Loading categories...</p>
+  if (error) return <p>Error: {error}</p>
 
   return (
     <>
