@@ -1,4 +1,7 @@
 import Category from '../../../models/category'
+import { useDispatch } from 'react-redux'
+import { AppDispatch } from '../../../store/store'
+import { deleteCategory } from '../../../store/features/categories-slice'
 import { Trash3, Pen } from 'react-bootstrap-icons'
 import './CategoryCard.css'
 
@@ -6,6 +9,8 @@ interface CategoryCardProps {
   category: Category;
 }
 const CategoryCard: React.FC<CategoryCardProps> = ({ category }) => {
+
+  const dispatch = useDispatch<AppDispatch>()
 
   let imageUrl
   if (category.categoryId >= 1 && category.categoryId <= 9) {
@@ -16,12 +21,13 @@ const CategoryCard: React.FC<CategoryCardProps> = ({ category }) => {
     console.log('Category Details:', category)
   }
 
-  const deleteCategory = async (event: React.MouseEvent<SVGElement, MouseEvent>) => {
+  const handleDeleteCategory = async (event: React.MouseEvent<SVGElement, MouseEvent>) => {
     event.stopPropagation()
     console.log('Delete Category:', category)
+    dispatch(deleteCategory(category.categoryId))
   }
 
-  const editCategory = (event: React.MouseEvent<SVGElement, MouseEvent>) => {
+  const handleEditCategory = (event: React.MouseEvent<SVGElement, MouseEvent>) => {
     event.stopPropagation();
     console.log('Edit category with id:', category.categoryId)
   }
@@ -36,8 +42,8 @@ const CategoryCard: React.FC<CategoryCardProps> = ({ category }) => {
         </div>
       </div>
       <div className="card-footer d-flex flex-row justify-content-between align-items-center h4 mb-0">
-        <Pen onClick={editCategory} className="icon hover-info " />
-        <Trash3 onClick={deleteCategory} className="icon hover-danger" />
+        <Pen onClick={handleEditCategory} className="icon hover-info " />
+        <Trash3 onClick={handleDeleteCategory} className="icon hover-danger" />
       </div>
     </div>
   )
