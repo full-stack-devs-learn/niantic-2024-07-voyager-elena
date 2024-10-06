@@ -1,6 +1,5 @@
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { AppDispatch, RootState } from '../../../store/store'
-import { useSelector } from 'react-redux'
 import { useEffect } from 'react'
 import { loadCategories } from '../../../store/features/categories-slice'
 import { Link } from 'react-router-dom'
@@ -19,8 +18,8 @@ const CategoriesList = () => {
   }, [dispatch])
 
 
-  if (loading) return <p>Loading categories...</p>;
-  if (error) return <p>Error: {error}</p>;
+  if (loading) return <p>Loading categories...</p>
+  if (error) return <p>Error: {error}</p>
 
   return (
     <>

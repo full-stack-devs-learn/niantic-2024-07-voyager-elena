@@ -101,7 +101,6 @@ const categoriesSlice = createSlice({
       state.loading = false;
       state.error = action.error.message || 'Failed to delete category';
     })
-    
   }
 })
 

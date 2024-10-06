@@ -1,3 +1,4 @@
+import { useNavigate } from 'react-router-dom'
 import Category from '../../../models/category'
 import { useDispatch } from 'react-redux'
 import { AppDispatch } from '../../../store/store'
@@ -11,6 +12,7 @@ interface CategoryCardProps {
 const CategoryCard: React.FC<CategoryCardProps> = ({ category }) => {
 
   const dispatch = useDispatch<AppDispatch>()
+  const navigate = useNavigate()
 
   let imageUrl
   if (category.categoryId >= 1 && category.categoryId <= 9) {
@@ -30,6 +32,7 @@ const CategoryCard: React.FC<CategoryCardProps> = ({ category }) => {
   const handleEditCategory = (event: React.MouseEvent<SVGElement, MouseEvent>) => {
     event.stopPropagation();
     console.log('Edit category with id:', category.categoryId)
+    navigate(`${category.categoryId}/edit`)
   }
 
 
