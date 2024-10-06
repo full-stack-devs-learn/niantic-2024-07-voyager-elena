@@ -7,7 +7,7 @@ import Category from '../models/category'
 */
 
 class CategoryService {
-  baseUrl = 'http://localhost:8080/api/categories'
+  baseUrl = `${import.meta.env.VITE_API_BASE_URL}/categories`
 
   async getAllCategories() {
     const response = await axios.get(this.baseUrl)
