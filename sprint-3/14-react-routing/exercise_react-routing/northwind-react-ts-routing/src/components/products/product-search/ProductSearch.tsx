@@ -1,10 +1,11 @@
-import { useLocation } from 'react-router-dom'
+import { useLocation, Link } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 import { AppDispatch, RootState } from '../../../store/store'
 import { useState, useEffect } from 'react'
 import { loadProducts } from '../../../store/features/products-slice'
 import Product from '../../../models/product'
 import ProductCard from '../product-card/ProductCard'
+import { PlusSquare } from 'react-bootstrap-icons'
 import './ProductSearch.css'
 
 
@@ -49,6 +50,10 @@ const ProductSearch = () => {
 
   return (
     <>
+      <Link to="add" className="btn btn-info d-inline-flex flex-row align-items-center gap-2 mb-5">
+        <PlusSquare /><span>Add New Product</span>
+      </Link>
+
       <h3 className="mb-3">Search Product</h3>
       <div>Search parameters:</div>
       <div>minPrice: {minPrice}</div>
