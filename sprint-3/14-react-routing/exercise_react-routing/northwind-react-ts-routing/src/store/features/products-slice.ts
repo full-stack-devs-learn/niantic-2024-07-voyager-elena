@@ -15,8 +15,8 @@ const initialState: ProductsState = {
 }
 
 
-export const loadProducts = createAsyncThunk('products/getProducts', async (categoryId: number) => {
-  const products = await productService.getProducts(categoryId)
+export const loadProducts = createAsyncThunk('products/getProducts', async () => {
+  const products = await productService.getProducts(0)
   return products
 })
 
