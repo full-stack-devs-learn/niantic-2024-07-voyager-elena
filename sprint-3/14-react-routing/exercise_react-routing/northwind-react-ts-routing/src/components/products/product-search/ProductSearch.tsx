@@ -4,7 +4,9 @@ import { AppDispatch, RootState } from '../../../store/store'
 import { useState, useEffect } from 'react'
 import { loadProducts } from '../../../store/features/products-slice'
 import Product from '../../../models/product'
+import ProductCard from '../product-card/ProductCard'
 import './ProductSearch.css'
+
 
 const ProductSearch = () => {
   const location = useLocation()
@@ -58,11 +60,10 @@ const ProductSearch = () => {
       <div className="d-flex flex-column gap-3 p-4 mb-5">
         {
           searchResult.map((product) => (
-            <div
+            <ProductCard
               key={product.productId}
-            >
-              {product.productId} {product.productName} {product.unitPrice}
-            </div>
+              product={product}
+            />
           ))
         }
       </div>

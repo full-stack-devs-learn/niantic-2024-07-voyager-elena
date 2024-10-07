@@ -7,7 +7,7 @@ import { Trash3, Pen } from 'react-bootstrap-icons'
 import './CategoryCard.css'
 
 interface CategoryCardProps {
-  category: Category;
+  category: Category
 }
 const CategoryCard: React.FC<CategoryCardProps> = ({ category }) => {
 
