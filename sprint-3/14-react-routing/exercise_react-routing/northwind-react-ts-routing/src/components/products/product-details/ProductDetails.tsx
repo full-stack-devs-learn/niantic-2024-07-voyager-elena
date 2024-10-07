@@ -1,6 +1,5 @@
 import { useState, useEffect } from 'react'
-import { useParams } from 'react-router-dom'
-import { Link } from 'react-router-dom'
+import { useParams, Link } from 'react-router-dom'
 import Product from '../../../models/product'
 import { useDispatch, useSelector } from 'react-redux'
 import { AppDispatch, RootState } from '../../../store/store'
@@ -35,7 +34,6 @@ const ProductDetails = () => {
         }
       }
     }
-
   }, [dispatch, product, productId, products, categories])
 
   if (loading) return <p>Loading products...</p>
